@@ -1,8 +1,11 @@
 
 #include <iostream>
+#include "DataLoader.h"
+#include "CardFactory.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    CardFactory f = CardFactory();
+    f.getAllRoleCards();
 
 
     return 0;

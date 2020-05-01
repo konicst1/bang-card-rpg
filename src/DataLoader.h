@@ -5,7 +5,13 @@
 #pragma once
 
 
+#include <vector>
+#include <string>
+
 class DataLoader {
+public:
+    static std::vector<std::vector<std::string>> loadAllRoleCards();
+
 
 };
 
