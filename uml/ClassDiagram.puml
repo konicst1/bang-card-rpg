@@ -1,0 +1,90 @@
+@startuml
+
+class Card{
+    String image
+    int number
+    String logo
+
+}
+
+class CardFactory{
+
+}
+
+class DataLoader{
+    getRoleCards()
+    getPlayCards()
+}
+
+class RoleCard{
+    int healthCount
+    String name
+}
+
+class ActionCard{
+    int healthEdit
+    int cardEdit
+}
+
+Card --> RoleCard : Ext
+Card --> ActionCard : Ext
+
+
+class Player{
+    String name
+    list<cards> cards
+    int health
+    removeHealth()
+    addHealth()
+}
+
+class AIPlayer{
+
+}
+
+class HumanPlayer{
+
+}
+
+Player --> AIPlayer : Ext
+Player --> HumanPlayer : Ext
+
+class GameManager{
+    queue<Card> cards
+    getCard()
+    initializeGame()
+}
+
+class GUIController{
+    startGame()
+    switchPlayers()
+    endGame()
+
+}
+
+GameManager o-- Card
+GameManager *-- Player
+
+Card ...> CardFactory : created by
+DataLoader <... CardFactory : gets data from
+Player *-- RoleCard : represents player ability
+GameManager <---> GUIController : communicates
+
+
+class Move{
+    Player leaderOfMove
+
+}
+
+class Action {
+    Player madeBy
+    Player target
+    RoleCard demand
+    process()
+}
+
+Move o-- Action : is performed in
+GameManager <... Move : initiated by
+GameManager ..> Player : edit health / involves in actions
+
+@enduml

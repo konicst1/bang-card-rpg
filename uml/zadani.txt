@@ -1,0 +1,20 @@
+Zadání:
+
+Engine pro hraní karetního RPG - Bang!
+
+Engine bude mít následující funkcionality:
+
+1. Ze souboru nahraje definici karet (jejich typ, atributy, efekty) a balíček (seznam karet v balíčku). Karty mohou reprezentovat postavu, za kterou může hráč hrát (postava má jméno, počet životů a speciální schopnost).
+   Ostatní karty jsou hrací - mají název a akci, která se při jejich zahrání provede. Karty mají také své označení jako klasické karty (číslo a symbol).
+   Implementované karty z originální hry Bang! budou: Bang, Vedle, Barel, Dostavníky, Duel, Indiáni, Cat Balou, Hokynářství, Pivo.
+
+2. Umožní hráčům zvolit si postavu, za kterou budou hrát a umožní hrát samotnou hru. Hra probíhá, tak, že dva hráči střídají tahy, při kterých se snaží zabít jeden druhého.
+   V jednotlivých tazích používají karty, pomocí nichž se provádí akce (např. přičíst/odebrat život) dokud jeden z nich nezemře a hra skončí. Akce zahrané karty může být podmíněná speciální vlastností karty nebo postavy.
+
+3. Implementuje variantu pro jednoho hráče proti počítači - engine bude reagovat podle předdefinovaných reakcí na protihráčovy tahy.
+
+4. Implementuje variantu pro dva hráče - po ukončení tahu se karty jednoho skryjí a po potvrzení se odkryjí karty druhého hráče.
+
+5. Umožňuje ukládat a načítat rozehrané hry. Při ukládání se uloží do souboru karty držené oběma hráči a stavy jejich postav. Tato konfigurace lze pak opětovně načíst.
+
+6. Uživatel si bude moci přidat novou kartu postavy a nadefinovat její vlastnosti (počet životů, schopnost, jméno).
