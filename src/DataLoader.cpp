@@ -28,3 +28,7 @@ std::vector< std::vector<std::string>> DataLoader::loadAllRoleCards() {
 
     return res;
 }
+
+std::vector<std::vector<std::string>> DataLoader::loadAllPlayCards() {
+    todo
+}

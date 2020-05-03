@@ -6,7 +6,7 @@ Engine bude mít následující funkcionality:
 
 1. Ze souboru nahraje definici karet (jejich typ, atributy, efekty) a balíček (seznam karet v balíčku). Karty mohou reprezentovat postavu, za kterou může hráč hrát (postava má jméno, počet životů a speciální schopnost).
    Ostatní karty jsou hrací - mají název a akci, která se při jejich zahrání provede. Karty mají také své označení jako klasické karty (číslo a symbol).
-   Implementované karty z originální hry Bang! budou: Bang, Vedle, Barel, Dostavníky, Duel, Indiáni, Cat Balou, Hokynářství, Pivo.
+   Implementované karty z originální hry Bang! budou: Bang, Vedle, Barel, Dostavníky, Indiáni, Cat Balou, Hokynářství, Pivo.
 
 2. Umožní hráčům zvolit si postavu, za kterou budou hrát a umožní hrát samotnou hru. Hra probíhá, tak, že dva hráči střídají tahy, při kterých se snaží zabít jeden druhého.
    V jednotlivých tazích používají karty, pomocí nichž se provádí akce (např. přičíst/odebrat život) dokud jeden z nich nezemře a hra skončí. Akce zahrané karty může být podmíněná speciální vlastností karty nebo postavy.

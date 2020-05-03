@@ -12,8 +12,7 @@ std::vector<RoleCard> CardFactory::getAllRoleCards() {
     /*Format of role card in the file
      * image path
      * name
-     * health count
-     *
+     * health count     *
      * */
 
     for(auto a : data){
@@ -21,6 +20,12 @@ std::vector<RoleCard> CardFactory::getAllRoleCards() {
         cards.push_back(role);
     }
 
-
     return cards;
+}
+
+std::vector<PlayCard> CardFactory::getNewStackOfCards() {
+    std::vector<PlayCard> cards;
+    std::vector< std::vector<std::string>> data = dataLoader.loadAllPlayCards();
+
+
 }

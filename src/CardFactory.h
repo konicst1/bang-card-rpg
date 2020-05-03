@@ -9,6 +9,7 @@
 #include <vector>
 #include "RoleCard.h"
 #include "DataLoader.h"
+#include "PlayCard.h"
 
 class CardFactory {
     DataLoader dataLoader = DataLoader();
@@ -16,6 +17,8 @@ class CardFactory {
 public:
 
     std::vector<RoleCard> getAllRoleCards();
+
+    std::vector<PlayCard> getNewStackOfCards();
 
 
 
