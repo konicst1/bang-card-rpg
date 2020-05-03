@@ -5,7 +5,7 @@
 
 int main() {
     CardFactory f = CardFactory();
-    f.getAllRoleCards();
+    f.getNewStackOfCards();
 
 
     return 0;

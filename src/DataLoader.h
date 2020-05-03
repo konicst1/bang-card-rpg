@@ -12,7 +12,6 @@ class DataLoader {
 public:
     static std::vector<std::vector<std::string>> loadAllRoleCards();
 
-
     static std::vector<std::vector<std::string>> loadAllPlayCards();
 
 

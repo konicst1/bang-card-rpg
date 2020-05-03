@@ -8,23 +8,20 @@
 #include "Card.h"
 
 class PlayCard : Card {
-    int cardEdit;
-    int healthEdit;
-
-    PlayCard(const std::string &image, const std::string &logo, const std::string &name, int number, int cardEdit, int healthEdit) : Card(image, logo, name, number) {
-        this->cardEdit = cardEdit;
-        this->healthEdit = healthEdit;
-    }
+//    int cardEdit;
+//    int healthEdit;
+    std::string symbol;
+    int number;
 
 public:
-    int getCardEdit() const {
-        return cardEdit;
-    }
 
-    int getHealthEdit() const {
-        return healthEdit;
-    }
 
+    PlayCard(const std::string &image, const std::string &symbol, const std::string &name, int number, Action &action)  : Card(image, name, action) {
+//        this->cardEdit = cardEdit;
+//        this->healthEdit = healthEdit;
+        this->number = number;
+        this->symbol = symbol;
+    }
 };
 
 

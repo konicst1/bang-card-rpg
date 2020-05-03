@@ -7,16 +7,16 @@
 
 #include <queue>
 #include "PlayCard.h"
-#include "Player.h"
 #include "CardFactory.h"
 
 class GameManager {
     std::queue<PlayCard *> cardStack;
-    Player playerA;
-    Player playerB;
+    RoleCard playerA;
+    RoleCard playerB;
 
     CardFactory cardFactory = CardFactory();
 
+    //std::map<std::string, std::function> instructionTranslator
 
 
 public:
@@ -24,7 +24,15 @@ public:
 
     Card getCardFromStack();
 
-    Card getCardFromPLayer(Player & player);
+    Card getCardFromPlayer(RoleCard & player);
+
+    bool givePlayerCardFromStack(RoleCard & player);
+
+    bool givePlayerCardFromPlayer(RoleCard & donor, RoleCard & acceptor);
+
+
+
+    void nextMove();
 
 
 

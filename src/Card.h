@@ -6,19 +6,17 @@
 
 
 #include <string>
+#include "Action.h"
 
 class Card {
     std::string image;
-    std::string logo;
     std::string name;
-    int number;
+    Action action;
 
 public:
 
-    Card(const std::string& image, const std::string& logo, const std::string& name, int number) {
+    Card(const std::string& image, const std::string& name, Action & action) : action(action) {
         this->image = image;
-        this->logo = logo;
-        this->number = number;
         this->name = name;
     }
 
@@ -31,13 +29,7 @@ public:
         return image;
     }
 
-    const std::string &getLogo() const {
-        return logo;
-    }
 
-    int getNumber() const {
-        return number;
-    }
 };
 
 
