@@ -7,12 +7,16 @@
 
 #include "Card.h"
 
-class RoleCard : Card{
+class RoleCard : public Card{
     int healthCount;
 
 public:
     RoleCard(const std::string &image, const std::string &name, int healthCount, Action & action) : Card(image, name, action) {
         this->healthCount = healthCount;
+    }
+
+    int getHealthCount() override {
+        return healthCount;
     }
 };
 

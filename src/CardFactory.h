@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "RoleCard.h"
 #include "DataLoader.h"
 #include "PlayCard.h"
@@ -16,9 +17,9 @@ class CardFactory {
 
 public:
 
-    std::vector<RoleCard> getAllRoleCards();
+    std::vector< std::shared_ptr<Card> > getAllRoleCards();
 
-    std::vector<PlayCard> getNewStackOfCards();
+    static std::vector< std::shared_ptr<Card> > getNewStackOfCards();
 
 
 

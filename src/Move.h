@@ -5,8 +5,18 @@
 #pragma once
 
 
-class Move {
+#include "Player.h"
 
+class Move {
+    std::shared_ptr<Player> leader;
+    std::shared_ptr<Player> target;
+
+
+public:
+
+    Move(std::shared_ptr<Player> target, std::shared_ptr<Player> leader) : leader(leader), target(target)  {
+
+    }
 };
 
 

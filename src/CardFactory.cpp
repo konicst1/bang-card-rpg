@@ -3,10 +3,13 @@
 //
 
 #include <iostream>
+#include <algorithm>
+#include <memory>
+#include <random>
 #include "CardFactory.h"
 
-std::vector<RoleCard> CardFactory::getAllRoleCards() {
-    std::vector<RoleCard> cards;
+std::vector< std::shared_ptr<Card> > CardFactory::getAllRoleCards() {
+    std::vector<std::shared_ptr<Card>> cards;
     std::vector<std::vector<std::string>> data = dataLoader.loadAllRoleCards();
 
     /*Format of role card in the file
@@ -18,20 +21,20 @@ std::vector<RoleCard> CardFactory::getAllRoleCards() {
 
     for (auto a : data) {
         std::vector<std::string> ins;
-        for(int i = 3; i < a.size(); i++) {
+        for(unsigned int i = 3; i < a.size(); i++) {
             ins.push_back(a[i]);
         }
         Action b = Action(ins);
-        RoleCard role = RoleCard(/*image*/ a[0], /*name*/ a[1],/*health count*/ std::stoi(a[2]), b);
-        cards.push_back(role);
+        Card role = RoleCard(/*image*/ a[0], /*name*/ a[1],/*health count*/ std::stoi(a[2]), b);
+        cards.push_back(std::make_shared<Card>(role));
     }
 
     return cards;
 }
 
-std::vector<PlayCard> CardFactory::getNewStackOfCards() {
-    std::vector<PlayCard> cards;
-    std::vector<std::vector<std::string>> data = dataLoader.loadAllPlayCards();
+std::vector< std::shared_ptr<Card>> CardFactory::getNewStackOfCards() {
+    std::vector< std::shared_ptr<Card> > cards;
+    std::vector<std::vector<std::string>> data = DataLoader::loadAllPlayCards();
 
     /*Format of role card in the file
  * image path
@@ -41,20 +44,25 @@ std::vector<PlayCard> CardFactory::getNewStackOfCards() {
 
     for (auto a : data) {
         std::vector<std::string> ins;
-        for(int i = 2; i < a.size(); i++) {
+        for(unsigned int i = 2; i < a.size(); i++) {
             ins.push_back(a[i]);
         }
         Action b = Action(ins);
-        PlayCard card = PlayCard(a[0], "spades" ,a[1],9, b);
-        PlayCard card1 = PlayCard(a[0], "heart" ,a[1],9, b);
-        PlayCard card2 = PlayCard(a[0], "diamond" ,a[1],9, b);
-        PlayCard card3 = PlayCard(a[0], "club" ,a[1],9, b);
-        cards.push_back(card);
-        cards.push_back(card1);
-        cards.push_back(card2);
-        cards.push_back(card3);
+
+        Card card =  PlayCard( a[0], "spades" ,a[1],9, b);
+        Card card1 = PlayCard( a[0], "heart" ,a[1],9, b);
+        Card card2 = PlayCard( a[0], "diamond" ,a[1],9, b);
+        Card card3 = PlayCard( a[0], "club" ,a[1],9, b);
+
+        cards.push_back(std::make_shared<Card>(card));
+        cards.push_back(std::make_shared<Card>(card1));
+        cards.push_back(std::make_shared<Card>(card2));
+        cards.push_back(std::make_shared<Card>(card3));
 
     }
+    //shuffle
+    srand(unsigned(time(nullptr)));
+    std::shuffle(cards.begin(), cards.end(), std::mt19937(std::random_device()()));
     return cards;
 
 }

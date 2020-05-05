@@ -20,16 +20,17 @@ public:
         this->name = name;
     }
 
+    virtual int getHealthCount(){return -100;} ;
 
-    const std::string &getName() const {
-        return name;
-    }
 
     const std::string &getImage() const {
         return image;
     }
 
 
+    std::string getName() const {
+        return name;
+    }
 };
 
 

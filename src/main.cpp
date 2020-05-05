@@ -1,11 +1,11 @@
 
 #include <iostream>
-#include "DataLoader.h"
-#include "CardFactory.h"
+#include "GameManager.h"
 
 int main() {
-    CardFactory f = CardFactory();
-    f.getNewStackOfCards();
+    GameManager gm;
+    gm.selectPlayersAndInitNewGame();
+
 
 
     return 0;

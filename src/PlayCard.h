@@ -7,7 +7,7 @@
 
 #include "Card.h"
 
-class PlayCard : Card {
+class PlayCard : public Card {
 //    int cardEdit;
 //    int healthEdit;
     std::string symbol;
@@ -22,6 +22,8 @@ public:
         this->number = number;
         this->symbol = symbol;
     }
+
+
 };
 
 
