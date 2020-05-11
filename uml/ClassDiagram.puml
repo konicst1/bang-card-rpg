@@ -1,6 +1,6 @@
 @startuml
 
-class Card{
+class PlayCard{
     String image
     int number
     String logo
@@ -26,8 +26,8 @@ class ActionCard{
     int cardEdit
 }
 
-Card --> RoleCard : Ext
-Card --> ActionCard : Ext
+PlayCard --> RoleCard : Ext
+PlayCard --> ActionCard : Ext
 
 
 class Player{
@@ -50,7 +50,7 @@ Player --> AIPlayer : Ext
 Player --> HumanPlayer : Ext
 
 class GameManager{
-    queue<Card> cards
+    queue<PlayCard> cards
     getCard()
     initializeGame()
 }
@@ -62,10 +62,10 @@ class GUIController{
 
 }
 
-GameManager o-- Card
+GameManager o-- PlayCard
 GameManager *-- Player
 
-Card ...> CardFactory : created by
+PlayCard ...> CardFactory : created by
 DataLoader <... CardFactory : gets data from
 Player *-- RoleCard : represents player ability
 GameManager <---> GUIController : communicates

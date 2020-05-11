@@ -6,18 +6,24 @@
 
 
 #include <string>
+#include <memory>
 #include "Action.h"
 
 class Card {
     std::string image;
     std::string name;
-    Action action;
+    std::shared_ptr<Action> action;
 
 public:
 
-    Card(const std::string& image, const std::string& name, Action & action) : action(action) {
+    Card(const std::string& image, const std::string& name, Action & action)  {
         this->image = image;
         this->name = name;
+        this->action = std::make_shared<Action>(action);
+    }
+
+    const std::shared_ptr<Action> &getAction() const {
+        return action;
     }
 
     virtual int getHealthCount(){return -100;} ;

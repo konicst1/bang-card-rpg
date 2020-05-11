@@ -17,6 +17,16 @@ public:
     Move(std::shared_ptr<Player> target, std::shared_ptr<Player> leader) : leader(leader), target(target)  {
 
     }
+
+    void init();
+
+    const std::shared_ptr<Player> &getLeader() const;
+
+    const std::shared_ptr<Player> &getTarget() const;
+
+    void startMoveCycle();
+
+
 };
 
 

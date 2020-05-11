@@ -19,7 +19,7 @@ public:
 
     std::vector< std::shared_ptr<Card> > getAllRoleCards();
 
-    static std::vector< std::shared_ptr<Card> > getNewStackOfCards();
+    static std::vector< std::shared_ptr<PlayCard> > getNewStackOfCards();
 
 
 

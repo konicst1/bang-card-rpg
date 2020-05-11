@@ -34,7 +34,7 @@ void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player
 
 }
 
-std::shared_ptr<Card> GameManager::getCardFromStack() {
+std::shared_ptr<PlayCard> GameManager::getCardFromStack() {
     auto r = this->cardStack.front();
     this->cardStack.pop();
     return r;
@@ -54,7 +54,8 @@ void GameManager::startGame() {
     ui.startGame();
     while (true) {
         Move move = nextMove();
-
+        move.init();
+        move.startMoveCycle();
 
         if ((playerA->getHealth() == 0) || (playerB->getHealth() == 0)) {
             break;
@@ -85,11 +86,20 @@ void GameManager::selectPlayersAndInitNewGame() {
     int roleA = ui.selectRoleA(roles[0]->getName(), roles[1]->getName(), roles[2]->getName());
     int roleB = ui.selectRoleB(roles[3]->getName(), roles[4]->getName(), roles[5]->getName());
 
-    Player a = Player(roles[roleA]);
-    Player b = Player(roles[roleB]);
+    Player a = Player(roles[roleA-1]);
+    Player b = Player(roles[roleB+2 ]);
 
     initNewGame(std::make_shared<Player>(a), std::make_shared<Player>(b));
 
 
+
+}
+
+//std::string player1Name, int player1Health, std::string player1Image, std::vector<std::string> player1Instructions, std::vector<std::shared_ptr<PlayCard>> player1Cards,
+//std::string player2Name, int player2Health, std::string player2Image, std::vector<std::string> player2Instructions,  std::vector<std::shared_ptr<PlayCard>> player2Cards
+
+void GameManager::saveGame() {
+    DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(), this->playerA->getRole()->getAction()->getInstructions(), this->playerA->getCards(),
+                         this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(), this->playerB->getRole()->getAction()->getInstructions(), this->playerB->getCards());
 
 }

@@ -32,8 +32,8 @@ std::vector< std::shared_ptr<Card> > CardFactory::getAllRoleCards() {
     return cards;
 }
 
-std::vector< std::shared_ptr<Card>> CardFactory::getNewStackOfCards() {
-    std::vector< std::shared_ptr<Card> > cards;
+std::vector< std::shared_ptr<PlayCard>> CardFactory::getNewStackOfCards() {
+    std::vector< std::shared_ptr<PlayCard> > cards;
     std::vector<std::vector<std::string>> data = DataLoader::loadAllPlayCards();
 
     /*Format of role card in the file
@@ -49,15 +49,15 @@ std::vector< std::shared_ptr<Card>> CardFactory::getNewStackOfCards() {
         }
         Action b = Action(ins);
 
-        Card card =  PlayCard( a[0], "spades" ,a[1],9, b);
-        Card card1 = PlayCard( a[0], "heart" ,a[1],9, b);
-        Card card2 = PlayCard( a[0], "diamond" ,a[1],9, b);
-        Card card3 = PlayCard( a[0], "club" ,a[1],9, b);
+        PlayCard card =  PlayCard(a[0], "spades" , a[1], 9, b);
+        PlayCard card1 = PlayCard(a[0], "heart" , a[1], 9, b);
+        PlayCard card2 = PlayCard(a[0], "diamond" , a[1], 9, b);
+        PlayCard card3 = PlayCard(a[0], "club" , a[1], 9, b);
 
-        cards.push_back(std::make_shared<Card>(card));
-        cards.push_back(std::make_shared<Card>(card1));
-        cards.push_back(std::make_shared<Card>(card2));
-        cards.push_back(std::make_shared<Card>(card3));
+        cards.push_back(std::make_shared<PlayCard>(card));
+        cards.push_back(std::make_shared<PlayCard>(card1));
+        cards.push_back(std::make_shared<PlayCard>(card2));
+        cards.push_back(std::make_shared<PlayCard>(card3));
 
     }
     //shuffle

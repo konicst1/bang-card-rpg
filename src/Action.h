@@ -12,11 +12,13 @@ class Action {
     std::vector<std::string> instructions;
 
 public:
-    Action(std::vector<std::string> instructions){
+    Action(std::vector<std::string> instructions) {
         this->instructions = instructions;
     }
 
     void perform();
+
+    const std::vector<std::string> &getInstructions() const { return instructions; }
 };
 
 

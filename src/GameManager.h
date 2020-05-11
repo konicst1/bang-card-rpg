@@ -13,7 +13,7 @@
 #include "Move.h"
 
 class GameManager {
-    std::queue<std::shared_ptr<Card> > cardStack;
+    std::queue<std::shared_ptr<PlayCard> > cardStack;
     std::shared_ptr<Player> playerA;
     std::shared_ptr<Player> playerB;
 
@@ -33,9 +33,9 @@ public:
 
     void loadSavedGameAndPlay();
 
-    std::shared_ptr<Card> getCardFromStack();
+    std::shared_ptr<PlayCard> getCardFromStack();
 
-    Card getCardFromPlayer(std::shared_ptr<Player> player);
+
 
     bool givePlayerCardFromStack(std::shared_ptr<Player> player);
 
@@ -44,6 +44,8 @@ public:
     void startGame();
 
     Move nextMove();
+
+    void saveGame();
 
 
 };

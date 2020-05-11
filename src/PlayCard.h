@@ -23,7 +23,13 @@ public:
         this->symbol = symbol;
     }
 
+    const std::string &getSymbol() const {
+        return symbol;
+    }
 
+    int getNumber() const {
+        return number;
+    }
 };
 
 
