@@ -8,8 +8,9 @@
 #include <random>
 #include "CardFactory.h"
 
-std::vector< std::shared_ptr<Card> > CardFactory::getAllRoleCards() {
-    std::vector<std::shared_ptr<Card>> cards;
+
+std::vector< std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
+    std::vector<std::shared_ptr<RoleCard>> cards;
     std::vector<std::vector<std::string>> data = dataLoader.loadAllRoleCards();
 
     /*Format of role card in the file
@@ -25,13 +26,14 @@ std::vector< std::shared_ptr<Card> > CardFactory::getAllRoleCards() {
             ins.push_back(a[i]);
         }
         Action b = Action(ins);
-        Card role = RoleCard(/*image*/ a[0], /*name*/ a[1],/*health count*/ std::stoi(a[2]), b);
-        cards.push_back(std::make_shared<Card>(role));
+        int health = std::stoi(a[2]);
+        RoleCard role = RoleCard(/*image*/ a[0], /*name*/ a[1],/*health count*/ health, b);
+
+        cards.push_back(std::make_shared<RoleCard>(role));
     }
 
     return cards;
 }
-
 std::vector< std::shared_ptr<PlayCard>> CardFactory::getNewStackOfCards() {
     std::vector< std::shared_ptr<PlayCard> > cards;
     std::vector<std::vector<std::string>> data = DataLoader::loadAllPlayCards();

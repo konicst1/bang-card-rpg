@@ -21,6 +21,3 @@ public:
     const std::vector<std::string> &getInstructions() const { return instructions; }
 };
 
-
-
-

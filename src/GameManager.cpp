@@ -75,7 +75,7 @@ Move GameManager::nextMove() {
 
 void GameManager::selectPlayersAndInitNewGame() {
     //select roles
-    std::vector< std::shared_ptr<Card> > roles = cardFactory.getAllRoleCards();
+    std::vector< std::shared_ptr<RoleCard> > roles = cardFactory.getAllRoleCards();
     srand(unsigned(time(nullptr)));
     //shuffle roles
     std::shuffle(roles.begin(), roles.end(), std::mt19937(std::random_device()()));

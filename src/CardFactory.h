@@ -17,7 +17,7 @@ class CardFactory {
 
 public:
 
-    std::vector< std::shared_ptr<Card> > getAllRoleCards();
+    std::vector< std::shared_ptr<RoleCard> > getAllRoleCards();
 
     static std::vector< std::shared_ptr<PlayCard> > getNewStackOfCards();
 

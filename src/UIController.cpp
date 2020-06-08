@@ -79,10 +79,16 @@ int UIController::getChoice(int range) {
     std::cout << std::endl << "What card would ya like to play?" << std::endl;
     int r;
     while (true) {
+        std::cin.ignore(10000, '\n');
+        std::cin.clear();
         std::cin >> r;
+
         if ((r >= 1) && (r <= range)) {
             return r;
         }
+
+        std::cin.ignore(10000, '\n');
+        std::cin.clear();
         std::cout << "Not valid, enter value in range <1;" << range << ">" << std::endl;
     }
 
