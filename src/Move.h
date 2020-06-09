@@ -14,7 +14,7 @@ class Move {
 
 public:
 
-    Move(std::shared_ptr<Player> target, std::shared_ptr<Player> leader) : leader(leader), target(target)  {
+    Move(std::shared_ptr<Player> target, std::shared_ptr<Player> leader) : leader(leader), target(target) {
 
     }
 

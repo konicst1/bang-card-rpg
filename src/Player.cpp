@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-void Player::giveCard(std::shared_ptr<PlayCard> card) {
+void Player::giveCard(const std::shared_ptr<PlayCard>& card) {
     this->cards.push_back(card);
 }
 
@@ -31,6 +31,10 @@ const std::vector<std::shared_ptr<PlayCard>> &Player::getCards() const {
     return cards;
 }
 
-const std::shared_ptr<Card> &Player::getRole() const {
+const std::shared_ptr<RoleCard> &Player::getRole() const {
     return role;
+}
+
+void Player::decreaseHealth(int h) {
+    this->health -= h;
 }

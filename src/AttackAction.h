@@ -9,17 +9,20 @@
 #include "Action.h"
 
 class AttackAction : public Action {
-    int decreaseHealth;
-    int decreaseMana;
+    int decreaseHealthLeader;
+    int decreaseManaLeader;
+    int decreaseHealthTarget;
+    int decreaseManaTarget;
 
 public:
-    AttackAction(const std::vector<std::string> &instructions, int decreaseHealth, int decreaseMana) : Action(instructions), decreaseHealth(decreaseHealth), decreaseMana(decreaseMana) {
+    AttackAction(const std::vector<std::string> &instructions, int decreaseHealthLeader, int decreaseManaLeader,
+                 int decreaseHealthTarget, int decreaseManaTarget) : Action(instructions),
+                                                                     decreaseHealthLeader(decreaseHealthLeader),
+                                                                     decreaseManaLeader(decreaseManaLeader),
+                                                                     decreaseHealthTarget(decreaseHealthTarget),
+                                                                     decreaseManaTarget(decreaseManaTarget) {}
 
-    }
-
-    void perform(std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override {
-
-    }
+    void perform(std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override ;
 
     virtual ~AttackAction() {
 

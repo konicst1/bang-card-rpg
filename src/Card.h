@@ -7,6 +7,7 @@
 
 #include <string>
 #include <memory>
+#include <utility>
 #include "Action.h"
 
 class Card {
@@ -16,10 +17,10 @@ class Card {
 
 public:
 
-    Card(const std::string& image, const std::string& name, Action & action)  {
+    Card(const std::string& image, const std::string& name, std::shared_ptr<Action> action)  {
         this->image = image;
         this->name = name;
-        this->action = std::make_shared<Action>(action);
+        this->action = std::move(action);
     }
 
     const std::shared_ptr<Action> &getAction() const {

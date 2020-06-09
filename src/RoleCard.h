@@ -11,7 +11,7 @@ class RoleCard : public Card{
     int healthCount;
 
 public:
-    RoleCard(const std::string &image, const std::string &name, int healthCount, Action & action) : Card(image, name, action) {
+    RoleCard(const std::string &image, const std::string &name, int healthCount, std::shared_ptr<Action> action) : Card(image, name, action) {
         this->healthCount = healthCount;
     }
 

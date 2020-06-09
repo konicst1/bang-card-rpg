@@ -7,6 +7,8 @@
 
 #include "Card.h"
 
+#include <utility>
+
 class PlayCard : public Card {
 //    int cardEdit;
 //    int healthEdit;
@@ -16,7 +18,7 @@ class PlayCard : public Card {
 public:
 
 
-    PlayCard(const std::string &image, const std::string &symbol, const std::string &name, int number, Action &action)  : Card(image, name, action) {
+    PlayCard(const std::string &image, const std::string &symbol, const std::string &name, int number, std::shared_ptr<Action> action)  : Card(image, name, std::move(action)) {
 //        this->cardEdit = cardEdit;
 //        this->healthEdit = healthEdit;
         this->number = number;

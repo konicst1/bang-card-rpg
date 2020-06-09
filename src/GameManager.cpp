@@ -17,13 +17,13 @@ void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player
 
 
     //get new shuffled stack of cards
-    for (const auto& card : CardFactory::getNewStackOfCards()) {
+    for (const auto &card : CardFactory::getNewStackOfCards()) {
         cardStack.push(card);
     }
 
 
     //give each player 6 cards for start
-    for(int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i) {
         this->givePlayerCardFromStack(playerA);
         this->givePlayerCardFromStack(playerB);
     }
@@ -75,7 +75,7 @@ Move GameManager::nextMove() {
 
 void GameManager::selectPlayersAndInitNewGame() {
     //select roles
-    std::vector< std::shared_ptr<RoleCard> > roles = cardFactory.getAllRoleCards();
+    std::vector<std::shared_ptr<RoleCard> > roles = cardFactory.getAllRoleCards();
     srand(unsigned(time(nullptr)));
     //shuffle roles
     std::shuffle(roles.begin(), roles.end(), std::mt19937(std::random_device()()));
@@ -86,11 +86,13 @@ void GameManager::selectPlayersAndInitNewGame() {
     int roleA = ui.selectRoleA(roles[0]->getName(), roles[1]->getName(), roles[2]->getName());
     int roleB = ui.selectRoleB(roles[3]->getName(), roles[4]->getName(), roles[5]->getName());
 
-    Player a = Player(roles[roleA-1]);
-    Player b = Player(roles[roleB+2 ]);
+    Player a = Player(roles[roleA - 1]);
+    Player b = Player(roles[roleB + 2]);
+
+    std::shared_ptr<Player> rt = std::make_shared<Player>(a);
+
 
     initNewGame(std::make_shared<Player>(a), std::make_shared<Player>(b));
-
 
 
 }
@@ -99,7 +101,9 @@ void GameManager::selectPlayersAndInitNewGame() {
 //std::string player2Name, int player2Health, std::string player2Image, std::vector<std::string> player2Instructions,  std::vector<std::shared_ptr<PlayCard>> player2Cards
 
 void GameManager::saveGame() {
-    DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(), this->playerA->getRole()->getAction()->getInstructions(), this->playerA->getCards(),
-                         this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(), this->playerB->getRole()->getAction()->getInstructions(), this->playerB->getCards());
+    DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
+                         this->playerA->getRole()->getAction()->getInstructions(), this->playerA->getCards(),
+                         this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(),
+                         this->playerB->getRole()->getAction()->getInstructions(), this->playerB->getCards());
 
 }

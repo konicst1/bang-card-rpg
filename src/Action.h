@@ -4,11 +4,13 @@
 
 #pragma once
 
+
 class Player;
 
 #include <string>
 #include <vector>
 #include <memory>
+
 
 
 class Action {
@@ -19,9 +21,16 @@ public:
         this->instructions = instructions;
     }
 
-    virtual void perform(std::shared_ptr<Player> leader, std::shared_ptr<Player> target) {
+    Action() {
 
     }
 
+    virtual void perform(std::shared_ptr<Player> leader, std::shared_ptr<Player> target) {
+        leader.get();
+        target.get();
+    }
+
     const std::vector<std::string> &getInstructions() const { return instructions; }
+
+
 };

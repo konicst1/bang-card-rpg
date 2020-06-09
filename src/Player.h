@@ -12,19 +12,19 @@
 class Player {
     int health;
     std::string name;
-    std::vector< std::shared_ptr<PlayCard>> cards;
-    std::shared_ptr<Card> role;
+    std::vector<std::shared_ptr<PlayCard>> cards;
+    std::shared_ptr<RoleCard> role;
 public:
 
-    Player(std::vector<std::shared_ptr<PlayCard>> cards, std::shared_ptr<Card> role){
+    Player(std::vector<std::shared_ptr<PlayCard>> cards, std::shared_ptr<RoleCard> role) {
         this->cards = cards;
         this->health = role->getHealthCount();
         this->name = role->getName();
     }
 
-    const std::shared_ptr<Card> &getRole() const;
+    const std::shared_ptr<RoleCard> &getRole() const;
 
-    Player(std::shared_ptr<Card> role){
+    Player(std::shared_ptr<RoleCard> role) {
         this->cards = std::vector<std::shared_ptr<PlayCard>>();
         this->health = role->getHealthCount();
         this->name = role->getName();
@@ -36,9 +36,11 @@ public:
 
     const std::vector<std::shared_ptr<PlayCard>> &getCards() const;
 
-    void giveCard( std::shared_ptr<PlayCard> );
+    void giveCard(const std::shared_ptr<PlayCard>&);
 
     std::shared_ptr<PlayCard> getRandomCard();
+
+    void decreaseHealth(int h);
 };
 
 

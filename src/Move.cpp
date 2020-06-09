@@ -22,7 +22,7 @@ void Move::startMoveCycle() {
     while(true){
         UIController::presentCards(this->leader->getCards());
         int cardNumber = UIController::getChoice(this->leader->getCards().size());
-
+        leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
 
         break;
     }
