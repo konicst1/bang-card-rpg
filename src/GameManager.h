@@ -35,7 +35,7 @@ public:
 
     std::shared_ptr<PlayCard> getCardFromStack();
 
-
+    void putCardInStack(std::shared_ptr<PlayCard> card);
 
     bool givePlayerCardFromStack(std::shared_ptr<Player> player);
 
@@ -44,6 +44,7 @@ public:
     void startGame();
 
     Move nextMove();
+
 
     void saveGame();
 

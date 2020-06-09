@@ -55,7 +55,7 @@ void GameManager::startGame() {
     while (true) {
         Move move = nextMove();
         move.init();
-        move.startMoveCycle();
+        move.startMoveCycle(*this);
 
         if ((playerA->getHealth() == 0) || (playerB->getHealth() == 0)) {
             break;
@@ -106,4 +106,8 @@ void GameManager::saveGame() {
                          this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(),
                          this->playerB->getRole()->getAction()->getInstructions(), this->playerB->getCards());
 
+}
+
+void GameManager::putCardInStack(std::shared_ptr<PlayCard> card) {
+    this->cardStack.push(card);
 }

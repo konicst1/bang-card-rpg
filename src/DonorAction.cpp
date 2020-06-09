@@ -5,5 +5,10 @@
 #include "DonorAction.h"
 
 void DonorAction::perform(std::shared_ptr<Player> leader, std::shared_ptr<Player> target) {
+    bool continueFlag = true;
+    for(std::string instruction : this->getInstructions()){
+        if(instruction.compare("")){
 
+        }
+    }
 }

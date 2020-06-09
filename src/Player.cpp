@@ -38,3 +38,7 @@ const std::shared_ptr<RoleCard> &Player::getRole() const {
 void Player::decreaseHealth(int h) {
     this->health -= h;
 }
+
+void Player::removeCard(int index) {
+    cards.erase(cards.begin() + index);
+}

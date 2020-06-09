@@ -28,7 +28,7 @@ public:
 
     void switchPlayers();
 
-    void startMove(Player & player);
+   // void startMove(Player & player);
 
     void print(std::string a);
 

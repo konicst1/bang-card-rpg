@@ -40,6 +40,8 @@ public:
 
     std::shared_ptr<PlayCard> getRandomCard();
 
+    void removeCard(int index);
+
     void decreaseHealth(int h);
 };
 
