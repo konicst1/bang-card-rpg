@@ -45,6 +45,8 @@ public:
 
     Move nextMove();
 
+    int getDefenseFromPlayer(std::shared_ptr<Player> leader,std::shared_ptr<Player> target, int attack);
+
 
     void saveGame();
 

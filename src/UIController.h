@@ -26,13 +26,13 @@ public:
 
     static void clearScreen();
 
-    void switchPlayers();
+    static void switchPlayers(std::shared_ptr<Player> player);
 
    // void startMove(Player & player);
 
-    void print(std::string a);
+    static void print(std::string a);
 
-    void println(std:: string b);
+    static void println(std:: string b);
 
     static void prepareMove();
 
@@ -40,7 +40,7 @@ public:
 
     static void presentCards(std::vector<std::shared_ptr<PlayCard>> cards);
 
-    static int getChoice(int range);
+    static int getChoice(int range, int lower = 1);
 
 };
 

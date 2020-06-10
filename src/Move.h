@@ -11,21 +11,21 @@ class GameManager;
 
 class Move {
 
+protected:
     std::shared_ptr<Player> leader;
     std::shared_ptr<Player> target;
 
-
 public:
     Move(std::shared_ptr<Player> &leader, std::shared_ptr<Player> &target) : leader(leader),
-                                                                                         target(target) {}
+                                                                             target(target) {}
 
-    void init();
+    virtual void init();
 
     const std::shared_ptr<Player> &getLeader() const;
 
     const std::shared_ptr<Player> &getTarget() const;
 
-    void startMoveCycle(GameManager & m);
+    virtual void startMove(GameManager &m);
 
 
 };

@@ -60,9 +60,10 @@ void UIController::startMove(Move &move) {
     clearScreen();
 
 
-    std::cout << "You:         " << std::setw(20) << move.getLeader()->getName() << "         " << move.getLeader()->getHealth() << "hp" << std::endl;
-    std::cout << "Your oponent:" << std::setw(20) << move.getTarget()->getName() << "         " << move.getTarget()->getHealth() << "hp" << std::endl << std::endl;
-
+    std::cout << "You:         " << std::setw(20) << move.getLeader()->getName() << "         "
+              << move.getLeader()->getHealth() << "hp" << std::endl;
+    std::cout << "Your oponent:" << std::setw(20) << move.getTarget()->getName() << "         "
+              << move.getTarget()->getHealth() << "hp" << std::endl << std::endl;
 
 
 }
@@ -75,7 +76,7 @@ void UIController::presentCards(std::vector<std::shared_ptr<PlayCard>> cards) {
 
 }
 
-int UIController::getChoice(int range) {
+int UIController::getChoice(int range, int lower) {
     std::cout << std::endl << "What card would ya like to play?" << std::endl;
     int r;
     while (true) {
@@ -83,7 +84,7 @@ int UIController::getChoice(int range) {
         std::cin.clear();
         std::cin >> r;
 
-        if ((r >= 1) && (r <= range)) {
+        if ((r >= lower) && (r <= range)) {
             return r;
         }
 
@@ -95,7 +96,21 @@ int UIController::getChoice(int range) {
 }
 
 void UIController::clearScreen() {
-    std::cout << std::string( 100, '\n' );
+    std::cout << std::string(100, '\n');
+}
+
+void UIController::switchPlayers(std::shared_ptr<Player> player) {
+    clearScreen();
+    std::cout << "Switching to: " << player->getName() << std::endl;
+    std::cout << "Enter any value to start switch." << std::endl;
+
+    std::string a;
+    std::cin >> a;
+    clearScreen();
+
+
+    std::cout << "You:         " << std::setw(20) << player->getName() << "         " << player->getHealth() << "hp" << std::endl;
+
 }
 
 

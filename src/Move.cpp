@@ -19,18 +19,25 @@ const std::shared_ptr<Player> &Move::getTarget() const {
     return target;
 }
 
-void Move::startMoveCycle(GameManager & manager) {
-    std::vector<PlayCard> trash;
-    while(true){
+void Move::startMove(GameManager & m) {
+
         UIController::presentCards(this->leader->getCards());
         int cardNumber = UIController::getChoice(this->leader->getCards().size());
-        leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
-        manager.putCardInStack(leader->getCards()[cardNumber - 1]);
-        leader->removeCard(cardNumber - 1);
+        cardNumber--; //make it an index
+    //  leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
+        for(std::string ins : leader->getCards()[cardNumber]->getAction()->getInstructions()){
+            if(!ins.compare("decreaseTargetHealth")){
+                int def = m.getDefenseFromPlayer(target, leader, 1);
+                //todo attackpower
+                if(/*attack power*/ (1 - def) > 0){
+                    target->decreaseHealth(1 - def);
+                }
+            }
+        }
+        //put card back to stack
+        m.putCardInStack(leader->getCards()[cardNumber]);
+        leader->removeCard(cardNumber);
 
-
-        break;
-    }
 
 }
 

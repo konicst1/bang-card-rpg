@@ -28,6 +28,14 @@ public:
 
     }
 
+    int getDecreaseHealthLeader() const;
+
+    int getDecreaseManaLeader() const;
+
+    int getDecreaseHealthTarget() const;
+
+    int getDecreaseManaTarget() const;
+
 };
 
 

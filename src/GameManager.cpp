@@ -8,6 +8,7 @@
 #include <utility>
 #include "GameManager.h"
 #include "Move.h"
+#include "SubMove.h"
 
 
 void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player> p2) {
@@ -55,7 +56,7 @@ void GameManager::startGame() {
     while (true) {
         Move move = nextMove();
         move.init();
-        move.startMoveCycle(*this);
+        move.startMove(*this);
 
         if ((playerA->getHealth() == 0) || (playerB->getHealth() == 0)) {
             break;
@@ -110,4 +111,11 @@ void GameManager::saveGame() {
 
 void GameManager::putCardInStack(std::shared_ptr<PlayCard> card) {
     this->cardStack.push(card);
+}
+
+int GameManager::getDefenseFromPlayer(std::shared_ptr<Player> leader,std::shared_ptr<Player> target, int attack) {
+    UIController::switchPlayers(leader);
+    SubMove s = SubMove(leader, target, attack);
+    s.init();
+    return s.getDefenseValue(*this);
 }

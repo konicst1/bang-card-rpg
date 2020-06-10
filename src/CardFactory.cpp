@@ -8,6 +8,7 @@
 #include <random>
 #include "CardFactory.h"
 #include "AttackAction.h"
+#include "DefenseAction.h"
 
 
 std::vector<std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
@@ -45,6 +46,7 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::getNewStackOfCards() {
  * name
      * type (attack/defense/donor)
      * attack - decreaseHealthLeader, decreaseManaLeader, decreaseHealthTarget, decreaseManaTarget
+     * defense - healthDefensePower, manaDefensePower
  * instructions
  * */
 
@@ -58,6 +60,11 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::getNewStackOfCards() {
                 ins.push_back(a[i]);
             }
             b = std::make_shared<AttackAction>(AttackAction(ins, std::stoi(a[3]), std::stoi(a[4]), std::stoi(a[5]), std::stoi(a[6])));
+        }else if(!a[2].compare("defense")){
+            for (unsigned int i = 5; i < a.size(); i++) {
+                ins.push_back(a[i]);
+            }
+            b = std::make_shared<DefenseAction>(DefenseAction(ins, std::stoi(a[3]), std::stoi(a[4])));
         }
 
         PlayCard card = PlayCard(a[0], "spades", a[1], 9, b);

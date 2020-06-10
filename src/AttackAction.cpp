@@ -11,3 +11,19 @@ void AttackAction::perform(std::shared_ptr<Player> leader, std::shared_ptr<Playe
     target->decreaseHealth(decreaseHealthTarget);
     leader->decreaseHealth(decreaseHealthLeader);
 }
+
+int AttackAction::getDecreaseHealthLeader() const {
+    return decreaseHealthLeader;
+}
+
+int AttackAction::getDecreaseManaLeader() const {
+    return decreaseManaLeader;
+}
+
+int AttackAction::getDecreaseHealthTarget() const {
+    return decreaseHealthTarget;
+}
+
+int AttackAction::getDecreaseManaTarget() const {
+    return decreaseManaTarget;
+}
