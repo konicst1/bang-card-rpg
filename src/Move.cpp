@@ -27,8 +27,8 @@ void Move::startMove(GameManager & m) {
     //  leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
 
         int continueFlag  = 1;
-        auto inss = leader->getCards()[cardNumber]->getAction()->getInstructions();
-        for(std::string ins : inss){
+
+        for(std::string ins : leader->getCards()[cardNumber]->getAction()->getInstructions()){
             if(!ins.compare("decreaseTargetHealth")){
                 int def = m.getDefenseFromPlayer(target, leader, 1);
                 //todo attackpower
