@@ -119,3 +119,12 @@ int GameManager::getDefenseFromPlayer(std::shared_ptr<Player> leader,std::shared
     s.init();
     return s.getDefenseValue(*this);
 }
+
+int GameManager::getAttackDefenseFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<Player> target, int attack) {
+    UIController::switchPlayers(leader);
+    SubMove s = SubMove(leader, target, attack);
+    s.init();
+    return s.getAttackValue(*this);
+}
+
+

@@ -17,6 +17,8 @@ public:
     void init() override;
 
     int getDefenseValue(GameManager & m);
+
+    int getAttackValue(GameManager & m);
 };
 
 

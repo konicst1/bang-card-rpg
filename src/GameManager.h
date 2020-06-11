@@ -47,6 +47,7 @@ public:
 
     int getDefenseFromPlayer(std::shared_ptr<Player> leader,std::shared_ptr<Player> target, int attack);
 
+    int getAttackDefenseFromPlayer(std::shared_ptr<Player> leader,std::shared_ptr<Player> target, int attack);
 
     void saveGame();
 

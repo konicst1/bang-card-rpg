@@ -34,7 +34,7 @@ std::vector<std::vector<std::string>> DataLoader::loadAllRoleCards() {
 std::vector<std::vector<std::string>> DataLoader::loadAllPlayCards() {
     std::vector<std::vector<std::string> > res;
 
-    for (int i = 1; i <= 3/*tady to bude chtit zmenit pak*/; i++) {
+    for (int i = 1; i <= 4/*todo tady to bude chtit zmenit pak*/; i++) {
         std::vector<std::string> role;
         std::ifstream file = std::ifstream("../data/playcards/" + std::to_string(i));
         if (file.is_open()) {
