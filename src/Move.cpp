@@ -25,12 +25,19 @@ void Move::startMove(GameManager & m) {
         int cardNumber = UIController::getChoice(this->leader->getCards().size());
         cardNumber--; //make it an index
     //  leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
-        for(std::string ins : leader->getCards()[cardNumber]->getAction()->getInstructions()){
+
+        int continueFlag  = 1;
+        auto inss = leader->getCards()[cardNumber]->getAction()->getInstructions();
+        for(std::string ins : inss){
             if(!ins.compare("decreaseTargetHealth")){
                 int def = m.getDefenseFromPlayer(target, leader, 1);
                 //todo attackpower
                 if(/*attack power*/ (1 - def) > 0){
                     target->decreaseHealth(1 - def);
+                }
+            }else if (!ins.compare("giveLeaderCardFromStack")){
+                if(continueFlag){
+                    m.givePlayerCardFromStack(leader); //todo nefunguje
                 }
             }
         }

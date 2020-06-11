@@ -9,6 +9,7 @@
 #include "CardFactory.h"
 #include "AttackAction.h"
 #include "DefenseAction.h"
+#include "DonorAction.h"
 
 
 std::vector<std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
@@ -65,6 +66,11 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::getNewStackOfCards() {
                 ins.push_back(a[i]);
             }
             b = std::make_shared<DefenseAction>(DefenseAction(ins, std::stoi(a[3]), std::stoi(a[4])));
+        }else if(!a[2].compare("donor")){
+            for (unsigned int i = 3; i < a.size(); i++) {
+                ins.push_back(a[i]);
+            }
+            b = std::make_shared<Action>(Action(ins));
         }
 
         PlayCard card = PlayCard(a[0], "spades", a[1], 9, b);
