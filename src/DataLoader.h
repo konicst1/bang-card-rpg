@@ -23,6 +23,8 @@ public:
      * */
     static std::vector<std::vector<std::string>> loadSavedGameData();
 
+    static std::vector<std::string> loadCard(std::ifstream & file);
+
 };
 
 
