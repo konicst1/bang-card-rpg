@@ -19,9 +19,11 @@ public:
                         std::string player2Name, int player2Health, std::string player2Image, std::vector<std::string> player2Instructions,  std::vector<std::shared_ptr<PlayCard>> player2Cards);
 
     /**
-     * Player1, Player2, Player1stack, Player2Stack, GameStack?
+     * Player, PlayerStack, accept player1 or player2
      * */
-    static std::vector<std::vector<std::string>> loadSavedGameData();
+    static std::vector<std::vector<std::string>> loadSavedPlayer(std::string player);
+
+    static std::vector<std::vector<std::string>> loadGameStack();
 
     static std::vector<std::string> loadCard(std::ifstream & file);
 

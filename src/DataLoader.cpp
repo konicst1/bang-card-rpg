@@ -90,8 +90,12 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
      * instructions
      * */
 
-    f = std::ofstream("../data/save/player1Cards");
-    for (auto s : player1Cards) {
+    f = std::ofstream("../data/save/player1Cards/cardsTotal");
+    f << player1Cards.size();
+    f.close();
+    for (int i = 0; i < player1Cards.size(); i++) {
+        f = std::ofstream("../data/save/player1Cards/" + std::to_string(i));
+        auto s = player1Cards[i];
         f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
           << std::endl;
         for (auto i : s->getAction()->getInstructions()) {
@@ -103,8 +107,12 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
         return 0;
     }
 
-    f = std::ofstream("../data/save/player2Cards");
-    for (auto s : player2Cards) {
+    f = std::ofstream("../data/save/player2Cards/cardsTotal");
+    f << player2Cards.size();
+    f.close();
+    for (int i = 0; i < player2Cards.size(); i++) {
+        auto s = player2Cards[i];
+        f = std::ofstream("../data/save/player2Cards/" + std::to_string(i));
         f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
           << std::endl;
         for (auto i : s->getAction()->getInstructions()) {
@@ -120,12 +128,19 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
     return 1;
 }
 
-std::vector<std::vector<std::string>> DataLoader::loadSavedGameData() {
+std::vector<std::vector<std::string>> DataLoader::loadSavedPlayer(std::string player) {
     std::vector<std::vector<std::string> > res;
-    std::ifstream file = std::ifstream("../data/save/player1");
+    std::ifstream file = std::ifstream("../data/save/" + player);
     res.push_back(loadCard(file));
-    file = std::ifstream("../data/save/player2");
-    res.push_back(loadCard(file));
+
+    std::ifstream f = std::ifstream("../data/save/" + player + "Cards");
+    int n;
+    f >> n;
+
+    for (int i = 1; i <= n; i++) {
+        std::ifstream file = std::ifstream("../data/save/" + player + "Cards" + "/" + std::to_string(i));
+        res.push_back(loadCard(file));
+    }
 
 
 }
@@ -141,5 +156,19 @@ std::vector<std::string> DataLoader::loadCard(std::ifstream &file) {
     }
 
     return card;
+}
+
+std::vector<std::vector<std::string>> DataLoader::loadGameStack() {
+    std::vector<std::vector<std::string> > res;
+    std::ifstream f = std::ifstream("../data/save/gameStack/cardsTotal");
+    int n;
+    f >> n;
+
+    for (int i = 1; i <= n; i++) {
+        std::ifstream file = std::ifstream("../data/save/gameStack" + std::to_string(i));
+        res.push_back(loadCard(file));
+    }
+
+    return res;
 }
 
