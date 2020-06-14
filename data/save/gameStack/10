@@ -1,6 +1,13 @@
 playdef.png
-spades
-Birra
+diamond
+Indiani!
 9
-other
-addHealthLeader
+attack
+1
+0
+1
+0
+targetAttackDefense
+decreaseTargetHealth
+leaderAttackDefense
+decreaseLeaderHealth

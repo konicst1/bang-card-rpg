@@ -1,11 +1,6 @@
 playdef.png
-diamond
-Gatling
+spades
+Cat Balou
 9
-attack
-0
-0
-3
-3
-targetDefendDefense
-decreaseTargetHealth
+other
+takeCardFromTarget

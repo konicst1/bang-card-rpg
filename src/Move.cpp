@@ -87,19 +87,24 @@ void Move::startMove(GameManager &m) {
                 continueFlag = 1;
             }
             power = attackPower - def;
-        } else if(!ins.compare("addHealthTarget")){
-            if(continueFlag){
+        } else if (!ins.compare("addHealthTarget")) {
+            if (continueFlag) {
                 target->increaseHealth(1);
             }
             continueFlag = 1;
-        }else if(!ins.compare("addHealthLeader")){
-            if(continueFlag){
+        } else if (!ins.compare("addHealthLeader")) {
+            if (continueFlag) {
                 leader->increaseHealth(1);
             }
             continueFlag = 1;
-        }else if(!ins.compare("takeCardFromTarget")){
-            if(continueFlag){
+        } else if (!ins.compare("takeCardFromTarget")) {
+            if (continueFlag) {
                 m.putCardInStack(m.getCardFromPlayer(target, leader));
+            }
+            continueFlag = 1;
+        } else if (!ins.compare("robCardFromTarget")) {
+            if (continueFlag) {
+                leader->giveCard(m.getCardFromPlayer(target, leader));
             }
             continueFlag = 1;
         }

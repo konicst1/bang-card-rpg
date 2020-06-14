@@ -1,8 +1,11 @@
 playdef.png
-club
-Wells Fargo (3)
+spades
+Bang!
 9
-other
-giveLeaderCardFromStack
-giveLeaderCardFromStack
-giveLeaderCardFromStack
+attack
+0
+0
+1
+0
+targetDefendDefense
+decreaseTargetHealth

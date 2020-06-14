@@ -1,6 +1,11 @@
 playdef.png
-club
-Cat Balou
+diamond
+Bang!
 9
-other
-takeCardFromTarget
+attack
+0
+0
+1
+0
+targetDefendDefense
+decreaseTargetHealth

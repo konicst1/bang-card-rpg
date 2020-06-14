@@ -1,11 +1,7 @@
 playdef.png
-diamond
-Gatling
+spades
+Diligenza (2)
 9
-attack
-0
-0
-3
-3
-targetDefendDefense
-decreaseTargetHealth
+other
+giveLeaderCardFromStack
+giveLeaderCardFromStack

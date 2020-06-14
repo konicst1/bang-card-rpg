@@ -1,7 +1,7 @@
 playdef.png
-club
-Saloon
+heart
+Diligenza (2)
 9
 other
-addHealthTarget
-addHealthLeader
+giveLeaderCardFromStack
+giveLeaderCardFromStack
