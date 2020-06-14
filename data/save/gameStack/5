@@ -1,11 +1,13 @@
 playdef.png
-heart
-Bang!
+club
+Indiani!
 9
 attack
-0
+1
 0
 1
 0
-targetDefendDefense
+targetAttackDefense
 decreaseTargetHealth
+leaderAttackDefense
+decreaseLeaderHealth

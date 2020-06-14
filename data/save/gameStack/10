@@ -1,5 +1,5 @@
 playdef.png
-club
+heart
 Indiani!
 9
 attack
@@ -10,4 +10,4 @@ attack
 targetAttackDefense
 decreaseTargetHealth
 leaderAttackDefense
-decreaseLeaderHealth6
+decreaseLeaderHealth

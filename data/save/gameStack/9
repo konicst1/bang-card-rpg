@@ -1,13 +1,8 @@
 playdef.png
 spades
-Indiani!
+Wells Fargo (3)
 9
-attack
-1
-0
-1
-0
-targetAttackDefense
-decreaseTargetHealth
-leaderAttackDefense
-decreaseLeaderHealth6
+other
+giveLeaderCardFromStack
+giveLeaderCardFromStack
+giveLeaderCardFromStack

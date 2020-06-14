@@ -1,7 +1,11 @@
 playdef.png
-heart
-Vedle
+club
+Bang!
 9
-defense
+attack
+0
+0
 1
 0
+targetDefendDefense
+decreaseTargetHealth
