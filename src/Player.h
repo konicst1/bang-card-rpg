@@ -51,6 +51,8 @@ public:
     virtual int getDefenseChoice(int attackStrength);
 
     virtual int getAttackChoice(int attackStrength);
+
+    virtual int getCardChoice();
 };
 
 

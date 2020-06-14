@@ -1,7 +1,11 @@
 playdef.png
-spades
-Saloon
+diamond
+Bang!
 9
-other
-addHealthTarget
-addHealthLeader
+attack
+0
+0
+1
+0
+targetDefendDefense
+decreaseTargetHealth

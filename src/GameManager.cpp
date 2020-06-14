@@ -129,6 +129,16 @@ int GameManager::getAttackDefenseFromPlayer(std::shared_ptr<Player> leader, std:
     return s.getAttackValue(*this);
 }
 
+
+std::shared_ptr<PlayCard> GameManager::getCardFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<Player> target) {
+    UIController::switchPlayers(leader);
+    SubMove s = SubMove(leader, target, 1);
+    s.init();
+    return s.getCardFromLeader();
+}
+
+
+
 void GameManager::loadSavedGameAndPlay() {
     auto x = cardFactory.getSavedPlayers();
 
@@ -142,5 +152,6 @@ void GameManager::loadSavedGameAndPlay() {
 
     startGame();
 }
+
 
 

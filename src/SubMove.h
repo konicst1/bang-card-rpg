@@ -19,6 +19,8 @@ public:
     int getDefenseValue(GameManager & m);
 
     int getAttackValue(GameManager & m);
+
+    std::shared_ptr<PlayCard> getCardFromLeader();
 };
 
 

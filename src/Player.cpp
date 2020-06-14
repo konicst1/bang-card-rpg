@@ -57,3 +57,7 @@ int Player::getDefenseChoice(int attackStrength) {
 int Player::getAttackChoice(int attackStrength) {
     return UIController::getChoice(this->cards.size(), 0);
 }
+
+int Player::getCardChoice() {
+    return UIController::getChoice(this->cards.size(), 0);
+}

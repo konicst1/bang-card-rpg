@@ -54,13 +54,19 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadPlayCards(std::vector<st
             for (unsigned int i = 7; i < a.size(); i++) {
                 ins.push_back(a[i]);
             }
-            b = std::make_shared<AttackAction>(AttackAction(ins, std::stoi(a[3]), std::stoi(a[4]), std::stoi(a[5]), std::stoi(a[6])));
-        }else if(!a[2].compare("defense")){
+            b = std::make_shared<AttackAction>(
+                    AttackAction(ins, std::stoi(a[3]), std::stoi(a[4]), std::stoi(a[5]), std::stoi(a[6])));
+        } else if (!a[2].compare("defense")) {
             for (unsigned int i = 5; i < a.size(); i++) {
                 ins.push_back(a[i]);
             }
             b = std::make_shared<DefenseAction>(DefenseAction(ins, std::stoi(a[3]), std::stoi(a[4])));
-        }else if(!a[2].compare("donor")){
+        } else if (!a[2].compare("donor")) {
+            for (unsigned int i = 3; i < a.size(); i++) {
+                ins.push_back(a[i]);
+            }
+            b = std::make_shared<Action>(Action(ins));
+        } else {
             for (unsigned int i = 3; i < a.size(); i++) {
                 ins.push_back(a[i]);
             }
@@ -100,7 +106,7 @@ std::vector<std::shared_ptr<Player> > CardFactory::getSavedPlayers() {
     std::vector<std::vector<std::string>> ins2;
     ins.push_back(data[0]);
 
-    for(unsigned int i = 1; i < data.size(); i++){
+    for (unsigned int i = 1; i < data.size(); i++) {
         ins2.push_back(data[i]);
     }
     Player p1 = Player(loadSavedPlayCards(ins2), loadRoleCards(ins)[0]);
@@ -111,7 +117,7 @@ std::vector<std::shared_ptr<Player> > CardFactory::getSavedPlayers() {
 
     ins.push_back(data[0]);
 
-    for(unsigned int i = 1; i < data.size(); i++){
+    for (unsigned int i = 1; i < data.size(); i++) {
         ins2.push_back(data[i]);
     }
     Player p2 = Player(loadSavedPlayCards(ins2), loadRoleCards(ins)[0]);
@@ -169,18 +175,19 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadSavedPlayCards(std::vect
             for (unsigned int i = 9; i < a.size(); i++) {
                 ins.push_back(a[i]);
             }
-            b = std::make_shared<AttackAction>(AttackAction(ins, std::stoi(a[5]), std::stoi(a[6]), std::stoi(a[7]), std::stoi(a[8])));
-        }else if(!a[4].compare("defense")){
+            b = std::make_shared<AttackAction>(
+                    AttackAction(ins, std::stoi(a[5]), std::stoi(a[6]), std::stoi(a[7]), std::stoi(a[8])));
+        } else if (!a[4].compare("defense")) {
             for (unsigned int i = 7; i < a.size(); i++) {
                 ins.push_back(a[i]);
             }
             b = std::make_shared<DefenseAction>(DefenseAction(ins, std::stoi(a[5]), std::stoi(a[6])));
-        }else if(!a[4].compare("donor")){
+        } else if (!a[4].compare("donor")) {
             for (unsigned int i = 5; i < a.size(); i++) {
                 ins.push_back(a[i]);
             }
             b = std::make_shared<Action>(Action(ins));
-        }else{
+        } else {
             for (unsigned int i = 5; i < a.size(); i++) {
                 ins.push_back(a[i]);
             }

@@ -97,6 +97,11 @@ void Move::startMove(GameManager &m) {
                 leader->increaseHealth(1);
             }
             continueFlag = 1;
+        }else if(!ins.compare("takeCardFromTarget")){
+            if(continueFlag){
+                m.putCardInStack(m.getCardFromPlayer(target, leader));
+            }
+            continueFlag = 1;
         }
     }
     //put card back to stack

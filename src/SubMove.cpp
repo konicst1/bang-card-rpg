@@ -56,6 +56,18 @@ int SubMove::getAttackValue(GameManager &m) {
     }
 }
 
+std::shared_ptr<PlayCard> SubMove::getCardFromLeader() {
+    UIController::presentCards(this->leader->getCards());
+    UIController::println("You need to give up one of your cards..choose which one will it be.");
+    int cardNumber = leader->getCardChoice();
+    cardNumber--; //make it an index
+
+    std::shared_ptr<PlayCard> res = leader->getCards()[cardNumber];
+    leader->removeCard(cardNumber);
+    return res;
+
+}
+
 
 
 

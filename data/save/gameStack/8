@@ -1,7 +1,11 @@
 playdef.png
-club
-Saloon
+diamond
+Gatling
 9
-other
-addHealthTarget
-addHealthLeader
+attack
+0
+0
+3
+3
+targetDefendDefense
+decreaseTargetHealth

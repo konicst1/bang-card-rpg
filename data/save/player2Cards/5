@@ -1,7 +1,11 @@
 playdef.png
 diamond
-Diligenza (2)
+Bang!
 9
-other
-giveLeaderCardFromStack
-giveLeaderCardFromStack
+attack
+0
+0
+1
+0
+targetDefendDefense
+decreaseTargetHealth

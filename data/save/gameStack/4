@@ -1,7 +1,13 @@
 playdef.png
-club
-Vedle
+heart
+Indiani!
 9
-defense
+attack
 1
 0
+1
+0
+targetAttackDefense
+decreaseTargetHealth
+leaderAttackDefense
+decreaseLeaderHealth

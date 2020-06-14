@@ -1,7 +1,11 @@
 playdef.png
-heart
-Diligenza (2)
+diamond
+Bang!
 9
-other
-giveLeaderCardFromStack
-giveLeaderCardFromStack
+attack
+0
+0
+1
+0
+targetDefendDefense
+decreaseTargetHealth
