@@ -78,7 +78,7 @@ void Move::startMove(GameManager &m) {
                 continueFlag = 1;
             }
             power = attackPower - def;
-        } else if (ins.compare("leaderDefendDefense")) {
+        } else if (!ins.compare("leaderDefendDefense")) {
             int attackPower = dynamic_cast<AttackAction *>(leader->getCards()[cardNumber]->getAction().get())->getDecreaseHealthTarget();
             int def = m.getDefenseFromPlayer(leader, target, attackPower);
             if (def >= attackPower) {
@@ -87,6 +87,16 @@ void Move::startMove(GameManager &m) {
                 continueFlag = 1;
             }
             power = attackPower - def;
+        } else if(!ins.compare("addHealthTarget")){
+            if(continueFlag){
+                target->increaseHealth(1);
+            }
+            continueFlag = 1;
+        }else if(!ins.compare("addHealthLeader")){
+            if(continueFlag){
+                leader->increaseHealth(1);
+            }
+            continueFlag = 1;
         }
     }
     //put card back to stack

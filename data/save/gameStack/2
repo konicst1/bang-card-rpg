@@ -1,7 +1,7 @@
 playdef.png
 diamond
-Vedle
+Saloon
 9
-defense
-1
-0
+other
+addHealthTarget
+addHealthLeader

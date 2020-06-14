@@ -1,13 +1,6 @@
 playdef.png
-spades
-Indiani!
+heart
+Birra
 9
-attack
-1
-0
-1
-0
-targetAttackDefense
-decreaseTargetHealth
-leaderAttackDefense
-decreaseLeaderHealth
+other
+addHealthLeader

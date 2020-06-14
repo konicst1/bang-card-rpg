@@ -45,6 +45,8 @@ public:
     void removeCard(int index);
 
     void decreaseHealth(int h);
+
+    void increaseHealth(int h);
 };
 
 
