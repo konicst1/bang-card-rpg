@@ -33,6 +33,8 @@ public:
 private:
     static std::vector<std::string> loadCard(std::ifstream &file);
 
+    static std::string getPlayCardType(std::shared_ptr<PlayCard> card);
+
 };
 
 

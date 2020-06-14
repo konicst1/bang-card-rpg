@@ -100,7 +100,7 @@ std::vector<std::shared_ptr<Player> > CardFactory::getSavedPlayers() {
     std::vector<std::vector<std::string>> ins2;
     ins.push_back(data[0]);
 
-    for(unsigned int i = 1; i < ins.size(); i++){
+    for(unsigned int i = 1; i < data.size(); i++){
         ins2.push_back(data[i]);
     }
     Player p1 = Player(loadPlayCards(ins2), loadRoleCards(ins)[0]);

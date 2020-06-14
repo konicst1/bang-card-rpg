@@ -7,7 +7,10 @@
 #include <vector>
 #include <memory>
 #include "DataLoader.h"
+#include "AttackAction.h"
 #include "PlayCard.h"
+#include "DefenseAction.h"
+#include "DonorAction.h"
 
 std::vector<std::vector<std::string>> DataLoader::loadAllRoleCards() {
     std::vector<std::vector<std::string> > res;
@@ -88,6 +91,10 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
      * symbol
      * name
      * number
+     * type
+     *
+     * action values
+     *
      * instructions
      * */
 
@@ -98,7 +105,15 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
         f = std::ofstream("../data/save/player1Cards/" + std::to_string(i + 1));
         auto s = player1Cards[i];
         f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
-          << std::endl;
+          << std::endl << getPlayCardType(s) << std::endl;
+        if (!getPlayCardType(s).compare("attack")) {
+            auto a = dynamic_cast<AttackAction *>(s->getAction().get());
+            f << a->getDecreaseHealthLeader() << std::endl << a->getDecreaseManaLeader() << std::endl
+              << a->getDecreaseHealthTarget() << std::endl << a->getDecreaseManaTarget() << std::endl;
+        }else if(!getPlayCardType(s).compare("defense")){
+            auto a = dynamic_cast<DefenseAction *>(s->getAction().get());
+            f << a->getHealthDefensePower() << std::endl << a->getManaDefensePower() << std::endl;
+        }
         for (auto i : s->getAction()->getInstructions()) {
             f << i << std::endl;
         }
@@ -115,7 +130,17 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
         auto s = player2Cards[i];
         f = std::ofstream("../data/save/player2Cards/" + std::to_string(i + 1));
         f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
-          << std::endl;
+                << std::endl << getPlayCardType(s) << std::endl;
+
+        if (!getPlayCardType(s).compare("attack")) {
+            auto a = dynamic_cast<AttackAction *>(s->getAction().get());
+            f << a->getDecreaseHealthLeader() << std::endl << a->getDecreaseManaLeader() << std::endl
+              << a->getDecreaseHealthTarget() << std::endl << a->getDecreaseManaTarget() << std::endl;
+        }else if(!getPlayCardType(s).compare("defense")){
+            auto a = dynamic_cast<DefenseAction *>(s->getAction().get());
+            f << a->getHealthDefensePower() << std::endl << a->getManaDefensePower() << std::endl;
+        }
+
         for (auto i : s->getAction()->getInstructions()) {
             f << i << std::endl;
         }
@@ -124,7 +149,6 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
     if (!f.good()) {
         return 0;
     }
-
 
 
     f = std::ofstream("../data/save/gameStack/cardsTotal");
@@ -145,8 +169,6 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
     }
 
 
-
-
     return 1;
 }
 
@@ -155,7 +177,7 @@ std::vector<std::vector<std::string>> DataLoader::loadSavedPlayer(std::string pl
     std::ifstream file = std::ifstream("../data/save/" + player);
     res.push_back(loadCard(file));
 
-    std::ifstream f = std::ifstream("../data/save/" + player + "Cards");
+    std::ifstream f = std::ifstream("../data/save/" + player + "Cards/cardsTotal");
     int n;
     f >> n;
 
@@ -193,5 +215,18 @@ std::vector<std::vector<std::string>> DataLoader::loadGameStack() {
     }
 
     return res;
+}
+
+std::string DataLoader::getPlayCardType(std::shared_ptr<PlayCard> card) {
+    if (typeid(*card->getAction()) == typeid(AttackAction)) {
+        return "attack";
+    } else if (typeid(*card->getAction()) == typeid(DefenseAction)) {
+        return "defense";
+    } else if (typeid(*card->getAction()) == typeid(DonorAction)) {
+        return "donor";
+    } else {
+        return "other";
+    }
+
 }
 
