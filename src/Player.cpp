@@ -3,6 +3,7 @@
 //
 
 #include "Player.h"
+#include "UIController.h"
 
 void Player::giveCard(const std::shared_ptr<PlayCard>& card) {
     this->cards.push_back(card);
@@ -47,4 +48,12 @@ void Player::removeCard(int index) {
 
 void Player::increaseHealth(int h) {
     this->health += 1;
+}
+
+int Player::getDefenseChoice(int attackStrength) {
+    return UIController::getChoice(this->cards.size(), 0);
+}
+
+int Player::getAttackChoice(int attackStrength) {
+    return UIController::getChoice(this->cards.size(), 0);
 }

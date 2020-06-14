@@ -1,7 +1,7 @@
 playdef.png
 diamond
-Diligenza (2)
+Saloon
 9
 other
-giveLeaderCardFromStack
-giveLeaderCardFromStack
+addHealthTarget
+addHealthLeader

@@ -1,13 +1,7 @@
 playdef.png
 heart
-Indiani!
+Diligenza (2)
 9
-attack
-1
-0
-1
-0
-targetAttackDefense
-decreaseTargetHealth
-leaderAttackDefense
-decreaseLeaderHealth
+other
+giveLeaderCardFromStack
+giveLeaderCardFromStack

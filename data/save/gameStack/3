@@ -1,8 +1,11 @@
 playdef.png
 spades
-Wells Fargo (3)
+Gatling
 9
-other
-giveLeaderCardFromStack
-giveLeaderCardFromStack
-giveLeaderCardFromStack
+attack
+0
+0
+3
+3
+targetDefendDefense
+decreaseTargetHealth

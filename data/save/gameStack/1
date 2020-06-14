@@ -1,11 +1,7 @@
 playdef.png
-heart
-Gatling
+spades
+Vedle
 9
-attack
+defense
+1
 0
-0
-3
-3
-targetDefendDefense
-decreaseTargetHealth

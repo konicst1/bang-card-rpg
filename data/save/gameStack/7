@@ -1,11 +1,8 @@
 playdef.png
-diamond
-Gatling
+heart
+Wells Fargo (3)
 9
-attack
-0
-0
-3
-3
-targetDefendDefense
-decreaseTargetHealth
+other
+giveLeaderCardFromStack
+giveLeaderCardFromStack
+giveLeaderCardFromStack

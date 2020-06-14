@@ -47,6 +47,10 @@ public:
     void decreaseHealth(int h);
 
     void increaseHealth(int h);
+
+    virtual int getDefenseChoice(int attackStrength);
+
+    virtual int getAttackChoice(int attackStrength);
 };
 
 

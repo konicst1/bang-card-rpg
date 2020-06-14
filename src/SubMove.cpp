@@ -22,7 +22,7 @@ SubMove::SubMove(std::shared_ptr<Player> &leader, std::shared_ptr<Player> &targe
 int SubMove::getDefenseValue(GameManager &m) {
     UIController::presentCards(this->leader->getCards());
     UIController::println("Play a defensive card to defend yourself!");
-    int cardNumber = UIController::getChoice(this->leader->getCards().size(), 0);
+    int cardNumber = leader->getDefenseChoice(attackStr);
     cardNumber--; //make it an index
     //  leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
     if (cardNumber == -1) {
@@ -41,7 +41,7 @@ int SubMove::getDefenseValue(GameManager &m) {
 int SubMove::getAttackValue(GameManager &m) {
     UIController::presentCards(this->leader->getCards());
     UIController::println("Play an attack card to defend yourself!");
-    int cardNumber = UIController::getChoice(this->leader->getCards().size(), 0);
+    int cardNumber = leader->getAttackChoice(attackStr);
     cardNumber--; //make it an index
     if (cardNumber == -1) {
         return 0;
