@@ -157,8 +157,17 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
     for (unsigned int i = 0; i < gameStack.size(); i++) {
         auto s = gameStack[i];
         f = std::ofstream("../data/save/gameStack/" + std::to_string(i + 1));
-        f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
-          << std::endl;
+        f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber() << std::endl << getPlayCardType(s) << std::endl;
+
+        if (!getPlayCardType(s).compare("attack")) {
+            auto a = dynamic_cast<AttackAction *>(s->getAction().get());
+            f << a->getDecreaseHealthLeader() << std::endl << a->getDecreaseManaLeader() << std::endl
+              << a->getDecreaseHealthTarget() << std::endl << a->getDecreaseManaTarget() << std::endl;
+        }else if(!getPlayCardType(s).compare("defense")){
+            auto a = dynamic_cast<DefenseAction *>(s->getAction().get());
+            f << a->getHealthDefensePower() << std::endl << a->getManaDefensePower() << std::endl;
+        }
+
         for (auto i : s->getAction()->getInstructions()) {
             f << i << std::endl;
         }
@@ -210,7 +219,7 @@ std::vector<std::vector<std::string>> DataLoader::loadGameStack() {
     f >> n;
 
     for (int i = 1; i <= n; i++) {
-        std::ifstream file = std::ifstream("../data/save/gameStack" + std::to_string(i));
+        std::ifstream file = std::ifstream("../data/save/gameStack/" + std::to_string(i));
         res.push_back(loadCard(file));
     }
 
@@ -225,7 +234,7 @@ std::string DataLoader::getPlayCardType(std::shared_ptr<PlayCard> card) {
     } else if (typeid(*card->getAction()) == typeid(DonorAction)) {
         return "donor";
     } else {
-        return "other";
+        return "other";  //todo asi bude treba zmenit
     }
 
 }

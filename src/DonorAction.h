@@ -9,7 +9,7 @@
 
 class DonorAction : Action{
 public:
-    DonorAction(const std::vector<std::string> &instructions);
+    DonorAction(const std::vector<std::string> &instructions){}
 
 private:
 

@@ -36,7 +36,7 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::getNewStackOfCards() {
 std::vector<std::shared_ptr<PlayCard>> CardFactory::loadPlayCards(std::vector<std::vector<std::string>> &data) {
     std::vector<std::shared_ptr<PlayCard> > cards;
 
-    /*Format of role card in the file
+    /*Format of play card in the file
  * image path
  * name
      * type (attack/defense/donor)
@@ -88,7 +88,7 @@ std::vector<std::shared_ptr<PlayCard> > CardFactory::getSavedStack() {
     std::vector<std::shared_ptr<PlayCard> > cards;
     std::vector<std::vector<std::string>> data = DataLoader::loadGameStack();
 
-    cards = loadPlayCards(data);
+    cards = loadSavedPlayCards(data);
 
     return cards;
 }
@@ -103,7 +103,7 @@ std::vector<std::shared_ptr<Player> > CardFactory::getSavedPlayers() {
     for(unsigned int i = 1; i < data.size(); i++){
         ins2.push_back(data[i]);
     }
-    Player p1 = Player(loadPlayCards(ins2), loadRoleCards(ins)[0]);
+    Player p1 = Player(loadSavedPlayCards(ins2), loadRoleCards(ins)[0]);
 
     data = DataLoader::loadSavedPlayer("player2");
     ins.clear();
@@ -111,10 +111,10 @@ std::vector<std::shared_ptr<Player> > CardFactory::getSavedPlayers() {
 
     ins.push_back(data[0]);
 
-    for(unsigned int i = 1; i < ins.size(); i++){
+    for(unsigned int i = 1; i < data.size(); i++){
         ins2.push_back(data[i]);
     }
-    Player p2 = Player(loadPlayCards(ins2), loadRoleCards(ins)[0]);
+    Player p2 = Player(loadSavedPlayCards(ins2), loadRoleCards(ins)[0]);
 
     result.push_back(std::make_shared<Player>(p1));
     result.push_back(std::make_shared<Player>(p2));
@@ -143,6 +143,57 @@ std::vector<std::shared_ptr<RoleCard> > CardFactory::loadRoleCards(std::vector<s
 
         cards.push_back(std::make_shared<RoleCard>(role));
     }
+
+    return cards;
+}
+
+std::vector<std::shared_ptr<PlayCard>> CardFactory::loadSavedPlayCards(std::vector<std::vector<std::string>> &data) {
+    std::vector<std::shared_ptr<PlayCard> > cards;
+/*Format of play card in the file
+ * image path  0
+ * symbol  1
+ * name  2
+ * number  3
+     * type (attack/defense/donor)  4
+     * attack - decreaseHealthLeader, decreaseManaLeader, decreaseHealthTarget, decreaseManaTarget
+     * defense - healthDefensePower, manaDefensePower
+ * instructions
+ * */
+
+    for (auto a : data) {
+        std::vector<std::string> ins;
+
+        std::shared_ptr<Action> b;
+
+        if (!a[4].compare("attack")) {
+            for (unsigned int i = 9; i < a.size(); i++) {
+                ins.push_back(a[i]);
+            }
+            b = std::make_shared<AttackAction>(AttackAction(ins, std::stoi(a[5]), std::stoi(a[6]), std::stoi(a[7]), std::stoi(a[8])));
+        }else if(!a[4].compare("defense")){
+            for (unsigned int i = 7; i < a.size(); i++) {
+                ins.push_back(a[i]);
+            }
+            b = std::make_shared<DefenseAction>(DefenseAction(ins, std::stoi(a[5]), std::stoi(a[6])));
+        }else if(!a[4].compare("donor")){
+            for (unsigned int i = 5; i < a.size(); i++) {
+                ins.push_back(a[i]);
+            }
+            b = std::make_shared<Action>(Action(ins));
+        }else{
+            for (unsigned int i = 5; i < a.size(); i++) {
+                ins.push_back(a[i]);
+            }
+            b = std::make_shared<Action>(Action(ins));
+        }
+
+        PlayCard card = PlayCard(a[0], a[1], a[2], std::stoi(a[3]), b);
+
+        cards.push_back(std::make_shared<PlayCard>(card));
+
+
+    }
+
 
     return cards;
 }

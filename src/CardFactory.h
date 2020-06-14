@@ -30,4 +30,8 @@ private:
 
     static std::vector<std::shared_ptr<RoleCard> > loadRoleCards(std::vector<std::vector<std::string>> &data) ;
 
+
+    /**Need separate function due to different store format.*/
+    static std::vector<std::shared_ptr<PlayCard>>  loadSavedPlayCards(std::vector<std::vector<std::string>> &data);
+
 };
