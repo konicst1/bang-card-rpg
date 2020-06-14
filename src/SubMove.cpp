@@ -28,11 +28,49 @@ int SubMove::getDefenseValue(GameManager &m) {
     if (cardNumber == -1) {
         return 0;
     } else if (typeid(*leader->getCards()[cardNumber]->getAction()) == typeid(DefenseAction)) {
+        int continueFlag = 1;
         int r = dynamic_cast<DefenseAction *>(leader->getCards()[cardNumber]->getAction().get())->getHealthDefensePower();
+
+        for (auto ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
+            if (!ins.compare("nextCardIsHeart")) {
+                std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+                if (nCard->getSymbol().compare("heart")) {
+                    continueFlag = 0;
+                }
+                m.putCardInStack(nCard);
+            }else if(ins.compare("nextCardIsSpades")){
+                std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+                if (nCard->getSymbol().compare("spades")) {
+                    continueFlag = 0;
+                }
+                m.putCardInStack(nCard);
+            }else if(ins.compare("nextCardIsClub")){
+                std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+                if (nCard->getSymbol().compare("club")) {
+                    continueFlag = 0;
+                }
+                m.putCardInStack(nCard);
+            }else if(ins.compare("nextCardIsDiamond")){
+                std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+                if (nCard->getSymbol().compare("diamond")) {
+                    continueFlag = 0;
+                }
+                m.putCardInStack(nCard);
+            }
+        }
+
         //put card back to stack
         m.putCardInStack(leader->getCards()[cardNumber]);
+
         leader->removeCard(cardNumber);
-        return r;
+        if (continueFlag) {
+            UIController::println("Next card symbol was the correct type, you are being protected.");
+            return r;
+        } else {
+            UIController::println("Next card symbol was the bad type, you are not protected.");
+            return 0;
+        }
+
     } else {
         return getDefenseValue(m);
     }

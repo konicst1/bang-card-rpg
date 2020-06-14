@@ -1,8 +1,11 @@
 playdef.png
-diamond
-Wells Fargo (3)
+club
+Gatling
 9
-other
-giveLeaderCardFromStack
-giveLeaderCardFromStack
-giveLeaderCardFromStack
+attack
+0
+0
+3
+3
+targetDefendDefense
+decreaseTargetHealth

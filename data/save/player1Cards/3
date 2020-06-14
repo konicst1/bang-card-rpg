@@ -1,6 +1,7 @@
 playdef.png
 heart
-Cat Balou
+Saloon
 9
 other
-takeCardFromTarget
+addHealthTarget
+addHealthLeader
