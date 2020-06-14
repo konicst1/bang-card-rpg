@@ -92,7 +92,7 @@ void Move::startMove(GameManager &m) {
     //put card back to stack
     m.putCardInStack(leader->getCards()[cardNumber]);
     leader->removeCard(cardNumber);
-
+    m.saveGame();
 
 }
 

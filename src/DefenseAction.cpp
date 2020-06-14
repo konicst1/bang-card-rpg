@@ -5,7 +5,8 @@
 #include "DefenseAction.h"
 
 void DefenseAction::perform(std::shared_ptr<Player> leader, std::shared_ptr<Player> target) {
-
+    leader.get();
+    target.get();
 }
 
 int DefenseAction::getHealthDefensePower() const {

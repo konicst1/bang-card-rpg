@@ -13,7 +13,7 @@
 #include "Move.h"
 
 class GameManager {
-    std::queue<std::shared_ptr<PlayCard> > cardStack;
+    std::deque<std::shared_ptr<PlayCard> > cardStack;
     std::shared_ptr<Player> playerA;
     std::shared_ptr<Player> playerB;
 

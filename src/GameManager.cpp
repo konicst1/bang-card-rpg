@@ -4,6 +4,7 @@
 
 #include <memory>
 #include <algorithm>
+#include <queue>
 #include <random>
 #include <utility>
 #include "GameManager.h"
@@ -19,7 +20,7 @@ void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player
 
     //get new shuffled stack of cards
     for (const auto &card : CardFactory::getNewStackOfCards()) {
-        cardStack.push(card);
+        cardStack.push_back(card);
     }
 
 
@@ -37,7 +38,7 @@ void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player
 
 std::shared_ptr<PlayCard> GameManager::getCardFromStack() {
     auto r = this->cardStack.front();
-    this->cardStack.pop();
+    this->cardStack.pop_front();
     return r;
 }
 
@@ -102,15 +103,16 @@ void GameManager::selectPlayersAndInitNewGame() {
 //std::string player2Name, int player2Health, std::string player2Image, std::vector<std::string> player2Instructions,  std::vector<std::shared_ptr<PlayCard>> player2Cards
 
 void GameManager::saveGame() {
+    std::vector<std::shared_ptr<PlayCard>> stack = std::vector<std::shared_ptr<PlayCard>>(cardStack.begin(), cardStack.end());
     DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
                          this->playerA->getRole()->getAction()->getInstructions(), this->playerA->getCards(),
                          this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(),
-                         this->playerB->getRole()->getAction()->getInstructions(), this->playerB->getCards());
+                         this->playerB.get()->getRole()->getAction()->getInstructions(), this->playerB->getCards(), stack);
 
 }
 
 void GameManager::putCardInStack(std::shared_ptr<PlayCard> card) {
-    this->cardStack.push(card);
+    this->cardStack.push_back(card);
 }
 
 int GameManager::getDefenseFromPlayer(std::shared_ptr<Player> leader,std::shared_ptr<Player> target, int attack) {
@@ -125,6 +127,20 @@ int GameManager::getAttackDefenseFromPlayer(std::shared_ptr<Player> leader, std:
     SubMove s = SubMove(leader, target, attack);
     s.init();
     return s.getAttackValue(*this);
+}
+
+void GameManager::loadSavedGameAndPlay() {
+    auto x = cardFactory.getSavedPlayers();
+
+    this->playerA = x[0];
+    this->playerB = x[1];
+
+    cardStack.clear();
+    for(auto c : cardFactory.getSavedStack()){
+        cardStack.push_back(c);
+    }
+
+    startGame();
 }
 
 

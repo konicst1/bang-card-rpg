@@ -40,7 +40,8 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
                          std::vector<std::shared_ptr<PlayCard>> player1Cards,
                          std::string player2Name, int player2Health, std::string player2Image,
                          std::vector<std::string> player2Instructions,
-                         std::vector<std::shared_ptr<PlayCard>> player2Cards) {
+                         std::vector<std::shared_ptr<PlayCard>> player2Cards,
+                         std::vector<std::shared_ptr<PlayCard>> gameStack) {
     std::ofstream f = std::ofstream("../data/save/player1");
 
     /*
@@ -93,8 +94,8 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
     f = std::ofstream("../data/save/player1Cards/cardsTotal");
     f << player1Cards.size();
     f.close();
-    for (int i = 0; i < player1Cards.size(); i++) {
-        f = std::ofstream("../data/save/player1Cards/" + std::to_string(i));
+    for (unsigned int i = 0; i < player1Cards.size(); i++) {
+        f = std::ofstream("../data/save/player1Cards/" + std::to_string(i + 1));
         auto s = player1Cards[i];
         f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
           << std::endl;
@@ -110,9 +111,9 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
     f = std::ofstream("../data/save/player2Cards/cardsTotal");
     f << player2Cards.size();
     f.close();
-    for (int i = 0; i < player2Cards.size(); i++) {
+    for (unsigned int i = 0; i < player2Cards.size(); i++) {
         auto s = player2Cards[i];
-        f = std::ofstream("../data/save/player2Cards/" + std::to_string(i));
+        f = std::ofstream("../data/save/player2Cards/" + std::to_string(i + 1));
         f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
           << std::endl;
         for (auto i : s->getAction()->getInstructions()) {
@@ -123,6 +124,27 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
     if (!f.good()) {
         return 0;
     }
+
+
+
+    f = std::ofstream("../data/save/gameStack/cardsTotal");
+    f << gameStack.size();
+    f.close();
+    for (unsigned int i = 0; i < gameStack.size(); i++) {
+        auto s = gameStack[i];
+        f = std::ofstream("../data/save/gameStack/" + std::to_string(i + 1));
+        f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
+          << std::endl;
+        for (auto i : s->getAction()->getInstructions()) {
+            f << i << std::endl;
+        }
+    }
+    f.close();
+    if (!f.good()) {
+        return 0;
+    }
+
+
 
 
     return 1;
@@ -142,6 +164,7 @@ std::vector<std::vector<std::string>> DataLoader::loadSavedPlayer(std::string pl
         res.push_back(loadCard(file));
     }
 
+    return res;
 
 }
 

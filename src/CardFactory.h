@@ -17,14 +17,17 @@ class CardFactory {
 
 public:
 
-    std::vector< std::shared_ptr<RoleCard> > getAllRoleCards();
+    static std::vector< std::shared_ptr<RoleCard> > getAllRoleCards();
 
     static std::vector< std::shared_ptr<PlayCard> > getNewStackOfCards();
 
+    std::vector< std::shared_ptr<PlayCard> > getSavedStack();
 
+    std::vector< std::shared_ptr<Player> > getSavedPlayers();
+
+private:
+    static std::vector<std::shared_ptr<PlayCard>>  loadPlayCards(std::vector<std::vector<std::string>> &data);
+
+    static std::vector<std::shared_ptr<RoleCard> > loadRoleCards(std::vector<std::vector<std::string>> &data) ;
 
 };
-
-
-
-

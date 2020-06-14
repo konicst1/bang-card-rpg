@@ -30,7 +30,7 @@ public:
         target.get();
     }
 
-    const std::vector<std::string> &getInstructions() const { return instructions; }
+    std::vector<std::string> getInstructions() const { return instructions; }
 
 
 };

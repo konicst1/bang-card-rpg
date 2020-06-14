@@ -20,6 +20,7 @@ public:
         this->cards = cards;
         this->health = role->getHealthCount();
         this->name = role->getName();
+        this->role = role;
     }
 
     const std::shared_ptr<RoleCard> &getRole() const;
@@ -28,6 +29,7 @@ public:
         this->cards = std::vector<std::shared_ptr<PlayCard>>();
         this->health = role->getHealthCount();
         this->name = role->getName();
+        this->role = role;
     }
 
     int getHealth() const;
