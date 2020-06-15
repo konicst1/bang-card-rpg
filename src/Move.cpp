@@ -8,9 +8,10 @@
 #include "AttackAction.h"
 #include "DefenseAction.h"
 
-void Move::init() {
-
-    UIController::startMove(*this);
+int Move::init() {
+    UIController::println("Now it is " + leader->getName() + "'s turn.");
+    UIController::presentOptions(menuOptions);
+    return UIController::getChoice(INT32_MAX, 0);
 }
 
 const std::shared_ptr<Player> &Move::getLeader() const {
@@ -22,7 +23,7 @@ const std::shared_ptr<Player> &Move::getTarget() const {
 }
 
 void Move::startMove(GameManager &m) {
-
+    UIController::startMove(*this);
     UIController::presentCards(this->leader->getCards());
     int cardNumber = UIController::getChoice(this->leader->getCards().size());
     cardNumber--; //make it an index

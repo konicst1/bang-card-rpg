@@ -8,10 +8,11 @@
 #include "GameManager.h"
 #include "AttackAction.h"
 
-void SubMove::init() {
+int SubMove::init() {
     UIController::print("Your opponent made move that requires your response. You are being attacked with power of ");
     UIController::println(std::to_string(attackStr).append("."));
     UIController::println("If you want to skip, enter 0.");
+    return 0;
 }
 
 SubMove::SubMove(std::shared_ptr<Player> &leader, std::shared_ptr<Player> &target, int attackStr) : Move(leader,
@@ -33,7 +34,7 @@ int SubMove::getDefenseValue(GameManager &m) {
             int continueFlag = 1;
             int r = dynamic_cast<DefenseAction *>(leader->getCards()[cardNumber]->getAction().get())->getHealthDefensePower();
 
-            for (auto ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
+            for (const auto& ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
                 if (!ins.compare("nextCardIsHeart")) {
                     std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
                     if (nCard->getSymbol().compare("heart")) {

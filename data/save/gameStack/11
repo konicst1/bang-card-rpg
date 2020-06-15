@@ -1,6 +1,7 @@
 playdef.png
-club
-Panico!
+spades
+Saloon
 9
 other
-robCardFromTarget
+addHealthTarget
+addHealthLeader

@@ -1,6 +1,13 @@
 playdef.png
 spades
-Panico!
+Indiani!
 9
-other
-robCardFromTarget
+attack
+1
+0
+1
+0
+targetAttackDefense
+decreaseTargetHealth
+leaderAttackDefense
+decreaseLeaderHealth

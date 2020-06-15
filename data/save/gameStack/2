@@ -1,7 +1,11 @@
 playdef.png
-diamond
-Diligenza (2)
+club
+Dinamite
 9
-other
-giveLeaderCardFromStack
-giveLeaderCardFromStack
+attack
+0
+0
+4
+4
+nextCardIsSpades
+decreaseTargetHealth

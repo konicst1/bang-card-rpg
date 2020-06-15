@@ -9,6 +9,7 @@
 #include "PlayCard.h"
 #include "CardFactory.h"
 #include "Player.h"
+#include <map>
 #include "UIController.h"
 #include "Move.h"
 
@@ -20,12 +21,17 @@ class GameManager {
     CardFactory cardFactory = CardFactory();
     UIController ui = UIController();
 
-    int turn = 1;
 
-    //std::map<std::string, std::function> instructionTranslator
+    int turn = 1;
 
 
 public:
+
+    GameManager() {
+
+    }
+
+    ~GameManager() = default;
 
     void initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player> p2);
 

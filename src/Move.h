@@ -10,6 +10,7 @@ class GameManager;
 
 
 class Move {
+    std::vector<std::string> menuOptions {"Start move", "Save and Exit" ,"Exit", "Any other input will start the move..."};
 
 protected:
     std::shared_ptr<Player> leader;
@@ -19,7 +20,7 @@ public:
     Move(std::shared_ptr<Player> &leader, std::shared_ptr<Player> &target) : leader(leader),
                                                                              target(target) {}
 
-    virtual void init();
+    virtual int init();
 
     const std::shared_ptr<Player> &getLeader() const;
 

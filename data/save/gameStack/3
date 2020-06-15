@@ -1,6 +1,7 @@
 playdef.png
-diamond
-Panico!
+heart
+Emporio
 9
 other
-robCardFromTarget
+giveLeaderCardFromStack
+giveTargetCardFromStack

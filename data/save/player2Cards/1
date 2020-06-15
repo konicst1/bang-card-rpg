@@ -1,13 +1,11 @@
 playdef.png
-spades
-Indiani!
+club
+Bang!
 9
 attack
-1
+0
 0
 1
 0
-targetAttackDefense
+targetDefendDefense
 decreaseTargetHealth
-leaderAttackDefense
-decreaseLeaderHealth

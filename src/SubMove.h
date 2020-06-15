@@ -14,7 +14,7 @@ class SubMove : public Move{
 public:
     SubMove(std::shared_ptr<Player> &leader, std::shared_ptr<Player> &target, int attackStr);
 
-    void init() override;
+    int init() override;
 
     int getDefenseValue(GameManager & m);
 

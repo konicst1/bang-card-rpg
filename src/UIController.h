@@ -17,12 +17,9 @@ public:
     /**
      * @returns int in range {1 - 3} that stands for index+1 of name of selected role offered to player
      * */
-    int selectRoleA(std::string a, std::string b, std::string c);
+    int selectRole(std::string a, std::string b, std::string c);
 
-    /**
-    * @returns int in range {1 - 3} that stands for index+1 of name of selected role offered to player
-    * */
-    int selectRoleB(std::string a, std::string b, std::string c);
+
 
     static void clearScreen();
 
@@ -34,13 +31,15 @@ public:
 
     static void println(std:: string b);
 
-    static void prepareMove();
+    static void presentOptions(std::vector<std::string> options);
 
     static void startMove(Move & move);
 
     static void presentCards(std::vector<std::shared_ptr<PlayCard>> cards);
 
     static int getChoice(int range, int lower = 1);
+
+    static void endGame(std::string winner);
 
 };
 
