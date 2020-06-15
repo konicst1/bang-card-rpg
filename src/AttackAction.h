@@ -9,10 +9,10 @@
 #include "Action.h"
 
 class AttackAction : public Action {
-    int decreaseHealthLeader;
-    int decreaseManaLeader;
-    int decreaseHealthTarget;
-    int decreaseManaTarget;
+    int decreaseHealthLeader;       //lethal power of card against leader of the move
+    int decreaseManaLeader;         //mana power of card against leader of the move
+    int decreaseHealthTarget;       //lethal power of card against target of the move
+    int decreaseManaTarget;         //mana power of card against target of the move
 
 public:
     AttackAction(const std::vector<std::string> &instructions, int decreaseHealthLeader, int decreaseManaLeader,
@@ -27,6 +27,7 @@ public:
     virtual ~AttackAction() {
 
     }
+    //getters
 
     int getDecreaseHealthLeader() const;
 

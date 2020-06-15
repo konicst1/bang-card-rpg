@@ -48,11 +48,6 @@ bool GameManager::givePlayerCardFromStack(std::shared_ptr<Player> player) {
     return true;
 }
 
-bool GameManager::givePlayerCardFromPlayer(std::shared_ptr<Player> donor, std::shared_ptr<Player> acceptor) {
-    acceptor->giveCard(donor->getRandomCard());
-    return true;
-}
-
 void GameManager::startGame() {
     ui.startGame();
     while (true) {
@@ -154,7 +149,7 @@ GameManager::getCardFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<P
     UIController::switchPlayers(leader);
     SubMove s = SubMove(leader, target, 0);
     s.init();
-    return s.getCardFromLeader();2
+    return s.getCardFromLeader();
 
 }
 

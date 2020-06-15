@@ -10,10 +10,14 @@
 #include <utility>
 #include "Action.h"
 
+
+/**
+ * Parent class that represents both PlayCards and RoleCards
+ * */
 class Card {
-    std::string image;
-    std::string name;
-    std::shared_ptr<Action> action;
+    std::string image;                  //path to graphics for the card
+    std::string name;                   //name of the card
+    std::shared_ptr<Action> action;     //special power of the card
 
 public:
 
@@ -26,8 +30,6 @@ public:
     const std::shared_ptr<Action> &getAction() const {
         return action;
     }
-
-    virtual int getHealthCount(){return -100;} ;
 
 
     const std::string &getImage() const {

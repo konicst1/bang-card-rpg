@@ -8,13 +8,14 @@
 #include "Action.h"
 
 class DefenseAction : public Action{
-    int healthDefensePower;
-    int manaDefensePower;
+    int healthDefensePower;     //defense power for health
+    int manaDefensePower;       //defense power for mana
 
 public:
     DefenseAction(const std::vector<std::string> &instructions, int healthDefensePower, int manaDefensePower) : Action(
             instructions), healthDefensePower(healthDefensePower), manaDefensePower(manaDefensePower) {}
 
+    //getters
     int getHealthDefensePower() const;
 
     int getManaDefensePower() const;

@@ -9,22 +9,22 @@
 
 #include <utility>
 
+/**
+ * Class that represents the card that can be played by player.
+ * */
 class PlayCard : public Card {
-//    int cardEdit;
-//    int healthEdit;
-    std::string symbol;
-    int number;
+    std::string symbol;     //symbol of the cards (heart/spades/club/diamond)
+    int number;             //number of the card..not really used yet
 
 public:
 
 
     PlayCard(const std::string &image, const std::string &symbol, const std::string &name, int number, std::shared_ptr<Action> action)  : Card(image, name, std::move(action)) {
-//        this->cardEdit = cardEdit;
-//        this->healthEdit = healthEdit;
         this->number = number;
         this->symbol = symbol;
     }
 
+    //getters
     const std::string &getSymbol() const {
         return symbol;
     }

@@ -15,7 +15,7 @@ public:
         this->healthCount = healthCount;
     }
 
-    int getHealthCount() override {
+    int getHealthCount() {
         return healthCount;
     }
 };

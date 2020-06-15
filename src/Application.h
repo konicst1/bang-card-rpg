@@ -8,7 +8,9 @@
 #include <vector>
 #include <string>
 #include "GameManager.h"
-
+/**
+ * Class that manages the outer application. (Not the game). Provides basic start menu functions.
+ * */
 class Application {
     GameManager manager = GameManager();
 
@@ -23,6 +25,9 @@ public:
 
     ~Application () = default;
 
+    /**
+     * Runs the whole application. Shows the menu and manages the basic functions.
+     * */
     int start();
 
 };
