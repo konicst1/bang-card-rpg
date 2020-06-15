@@ -108,11 +108,47 @@ void Move::startMove(GameManager &m) {
             }
             continueFlag = 1;
         }
+        if (!ins.compare("nextCardIsHeart")) {
+            std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+            if (!nCard->getSymbol().compare("heart")) {
+                continueFlag = 1;
+            }else{
+                continueFlag = 0;
+            }
+            m.putCardInStack(nCard);
+        } else if (!ins.compare("nextCardIsSpades")) {
+            std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+            if (!nCard->getSymbol().compare("spades")) {
+                continueFlag = 1;
+            }else{
+                continueFlag = 0;
+            }
+            m.putCardInStack(nCard);
+        } else if (!ins.compare("nextCardIsClub")) {
+            std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+            if (!nCard->getSymbol().compare("club")) {
+                continueFlag = 1;
+            }else{
+                continueFlag = 0;
+            }
+            m.putCardInStack(nCard);
+        } else if (!ins.compare("nextCardIsDiamond")) {
+            std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+            if (!nCard->getSymbol().compare("diamond")) {
+                continueFlag = 1;
+            }else{
+                continueFlag = 0;
+            }
+            m.putCardInStack(nCard);
+        }
     }
     //put card back to stack
     m.putCardInStack(leader->getCards()[cardNumber]);
     leader->removeCard(cardNumber);
-    m.saveGame();
+
+
+    m.givePlayerCardFromStack(leader);
+
 
 }
 

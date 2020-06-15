@@ -1,8 +1,6 @@
 playdef.png
 club
-Barile
+Cat Balou
 9
-defense
-1
-0
-nextCardIsHeart
+other
+takeCardFromTarget

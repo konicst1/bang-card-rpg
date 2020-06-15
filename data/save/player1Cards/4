@@ -1,7 +1,11 @@
 playdef.png
-diamond
-Vedle
+spades
+Gatling
 9
-defense
-1
+attack
 0
+0
+3
+3
+targetDefendDefense
+decreaseTargetHealth

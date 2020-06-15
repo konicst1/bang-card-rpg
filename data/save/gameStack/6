@@ -1,8 +1,8 @@
 playdef.png
 heart
-Barile
+Wells Fargo (3)
 9
-defense
-1
-0
-nextCardIsHeart
+other
+giveLeaderCardFromStack
+giveLeaderCardFromStack
+giveLeaderCardFromStack

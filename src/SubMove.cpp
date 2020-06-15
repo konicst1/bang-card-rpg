@@ -38,19 +38,19 @@ int SubMove::getDefenseValue(GameManager &m) {
                     continueFlag = 0;
                 }
                 m.putCardInStack(nCard);
-            }else if(ins.compare("nextCardIsSpades")){
+            }else if(!ins.compare("nextCardIsSpades")){
                 std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
                 if (nCard->getSymbol().compare("spades")) {
                     continueFlag = 0;
                 }
                 m.putCardInStack(nCard);
-            }else if(ins.compare("nextCardIsClub")){
+            }else if(!ins.compare("nextCardIsClub")){
                 std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
                 if (nCard->getSymbol().compare("club")) {
                     continueFlag = 0;
                 }
                 m.putCardInStack(nCard);
-            }else if(ins.compare("nextCardIsDiamond")){
+            }else if(!ins.compare("nextCardIsDiamond")){
                 std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
                 if (nCard->getSymbol().compare("diamond")) {
                     continueFlag = 0;

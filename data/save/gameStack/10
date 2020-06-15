@@ -1,6 +1,11 @@
 playdef.png
-spades
-Cat Balou
+heart
+Bang!
 9
-other
-takeCardFromTarget
+attack
+0
+0
+1
+0
+targetDefendDefense
+decreaseTargetHealth

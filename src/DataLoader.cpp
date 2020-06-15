@@ -29,7 +29,12 @@ std::vector<std::vector<std::string>> DataLoader::loadAllRoleCards() {
 std::vector<std::vector<std::string>> DataLoader::loadAllPlayCards() {
     std::vector<std::vector<std::string> > res;
 
-    for (int i = 1; i <= 11/*todo tady to bude chtit zmenit pak*/; i++) {
+    std::ifstream f = std::ifstream("../data/playcards/cardsTotal");
+    int n;
+    f >> n;
+    f.close();
+
+    for (int i = 1; i <= n; i++) {
         std::ifstream file = std::ifstream("../data/playcards/" + std::to_string(i));
         res.push_back(loadCard(file));
     }
