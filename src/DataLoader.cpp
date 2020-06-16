@@ -115,7 +115,7 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
             auto a = dynamic_cast<AttackAction *>(s->getAction().get());
             f << a->getDecreaseHealthLeader() << std::endl << a->getDecreaseManaLeader() << std::endl
               << a->getDecreaseHealthTarget() << std::endl << a->getDecreaseManaTarget() << std::endl;
-        }else if(!getPlayCardType(s).compare("defense")){
+        } else if (!getPlayCardType(s).compare("defense")) {
             auto a = dynamic_cast<DefenseAction *>(s->getAction().get());
             f << a->getHealthDefensePower() << std::endl << a->getManaDefensePower() << std::endl;
         }
@@ -135,13 +135,13 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
         auto s = player2Cards[i];
         f = std::ofstream("../data/save/player2Cards/" + std::to_string(i + 1));
         f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
-                << std::endl << getPlayCardType(s) << std::endl;
+          << std::endl << getPlayCardType(s) << std::endl;
 
         if (!getPlayCardType(s).compare("attack")) {
             auto a = dynamic_cast<AttackAction *>(s->getAction().get());
             f << a->getDecreaseHealthLeader() << std::endl << a->getDecreaseManaLeader() << std::endl
               << a->getDecreaseHealthTarget() << std::endl << a->getDecreaseManaTarget() << std::endl;
-        }else if(!getPlayCardType(s).compare("defense")){
+        } else if (!getPlayCardType(s).compare("defense")) {
             auto a = dynamic_cast<DefenseAction *>(s->getAction().get());
             f << a->getHealthDefensePower() << std::endl << a->getManaDefensePower() << std::endl;
         }
@@ -162,13 +162,14 @@ int DataLoader::saveGame(std::string player1Name, int player1Health, std::string
     for (unsigned int i = 0; i < gameStack.size(); i++) {
         auto s = gameStack[i];
         f = std::ofstream("../data/save/gameStack/" + std::to_string(i + 1));
-        f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber() << std::endl << getPlayCardType(s) << std::endl;
+        f << s->getImage() << std::endl << s->getSymbol() << std::endl << s->getName() << std::endl << s->getNumber()
+          << std::endl << getPlayCardType(s) << std::endl;
 
         if (!getPlayCardType(s).compare("attack")) {
             auto a = dynamic_cast<AttackAction *>(s->getAction().get());
             f << a->getDecreaseHealthLeader() << std::endl << a->getDecreaseManaLeader() << std::endl
               << a->getDecreaseHealthTarget() << std::endl << a->getDecreaseManaTarget() << std::endl;
-        }else if(!getPlayCardType(s).compare("defense")){
+        } else if (!getPlayCardType(s).compare("defense")) {
             auto a = dynamic_cast<DefenseAction *>(s->getAction().get());
             f << a->getHealthDefensePower() << std::endl << a->getManaDefensePower() << std::endl;
         }
@@ -241,6 +242,83 @@ std::string DataLoader::getPlayCardType(std::shared_ptr<PlayCard> card) {
     } else {
         return "other";  //todo asi bude treba zmenit
     }
+
+}
+
+void
+DataLoader::persistRoleCard(std::string image, std::string name, int health, std::vector<std::string> instructions) {
+    std::ifstream f = std::ifstream("../data/rolecards/rolesTotal");
+    int n;
+    f >> n;
+    n += 1;
+    f.close();
+
+    std::ofstream o = std::ofstream("../data/rolecards/rolesTotal");
+    o << n;
+    o = std::ofstream("../data/rolecards/" + std::to_string(n));
+
+    o << image << std::endl << name << std::endl << health << std::endl;
+    for (auto i : instructions) {
+        o << i << std::endl;
+    }
+    o.close();
+
+}
+
+void
+DataLoader::persistAttackCard(std::string image, std::string name, int leaderHealth, int leaderMana, int targetHealth,
+                              int targetMana, std::vector<std::string> instructions) {
+
+    int n = persistPlayCard();
+    std::ofstream o = std::ofstream("../data/playcards/" + std::to_string(n));
+
+    o << image << std::endl << name << std::endl << "attack" << std::endl << leaderHealth << std::endl << leaderMana
+      << std::endl << targetHealth
+      << std::endl << targetMana << std::endl;
+    for (auto i : instructions) {
+        o << i << std::endl;
+    }
+    o.close();
+
+
+}
+
+int DataLoader::persistPlayCard() {
+    std::ifstream f = std::ifstream("../data/playcards/cardsTotal");
+    int n;
+    f >> n;
+    n += 1;
+    f.close();
+
+    std::ofstream o = std::ofstream("../data/playcards/cardsTotal");
+    o << n;
+
+    return n;
+}
+
+void DataLoader::persistDefenseCard(std::string image, std::string name, int healthDefense, int manaDefense,
+                                    std::vector<std::string> instructions) {
+    int n = persistPlayCard();
+    std::ofstream o = std::ofstream("../data/playcards/" + std::to_string(n));
+
+    o << image << std::endl << name << std::endl << "defense" << std::endl
+     << healthDefense << std::endl << manaDefense << std::endl;
+    for (auto i : instructions) {
+        o << i << std::endl;
+    }
+    o.close();
+
+}
+
+void DataLoader::persistOtherPlayCard(std::string image, std::string name, std::vector<std::string> instructions) {
+    int n = persistPlayCard();
+    std::ofstream o = std::ofstream("../data/playcards/" + std::to_string(n));
+
+    o << image << std::endl << name << std::endl << "other" << std::endl;
+    for (auto i : instructions) {
+        o << i << std::endl;
+    }
+    o.close();
 
 }
 

@@ -1,7 +1,8 @@
 playdef.png
-spades
-Emporio
+heart
+Barile
 9
-other
-giveLeaderCardFromStack
-giveTargetCardFromStack
+defense
+1
+0
+nextCardIsHeart

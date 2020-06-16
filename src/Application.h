@@ -8,13 +8,16 @@
 #include <vector>
 #include <string>
 #include "GameManager.h"
+#include "CardBuilderPersister.h"
+
 /**
  * Class that manages the outer application. (Not the game). Provides basic start menu functions.
  * */
 class Application {
     GameManager manager = GameManager();
+    CardBuilderPersister cBuilder = CardBuilderPersister();
+    std::vector<std::string> menuOptions {"New Game - One Player", "New Game - Two Players", "Load Game", "Add Card", "Exit"};
 
-    std::vector<std::string> menuOptions {"New Game", "Load Game", "Add Card", "Remove Card", "Exit"};
 
 public:
     Application() = default;

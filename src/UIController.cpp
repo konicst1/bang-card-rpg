@@ -112,9 +112,29 @@ void UIController::presentOptions(std::vector<std::string> options) {
     }
 }
 
-void UIController::endGame(std::string winner) {
+void UIController::endGame(const std::string& winner) {
     println("Game over.");
     println(winner + " won!\n\n");
+}
+
+std::string UIController::getStringInput() {
+    std::string res;
+    std::cin >> res;
+    return res;
+}
+
+int UIController::getIntInput() {
+    while (true) {
+        int r;
+        std::cin >> r;
+
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }else {
+            return r;
+        }
+    }
 }
 
 

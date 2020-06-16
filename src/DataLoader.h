@@ -53,6 +53,22 @@ public:
      */
     static std::vector<std::vector<std::string>> loadGameStack();
 
+    /**Persists role card by given information. */
+    static void persistRoleCard(std::string image, std::string name, int health, std::vector<std::string> instructions);
+
+    /**Persists play attack card by given information. */
+    static void
+    persistAttackCard(std::string image, std::string name, int leaderHealth, int leaderMana, int targetHealth,
+                      int targetMana, std::vector<std::string> instructions);
+
+    /**Persists play defense card by given information. */
+    static void persistDefenseCard(std::string image, std::string name, int healthDefense, int manaDefense,
+                                   std::vector<std::string> instructions);
+
+    /**Persists play card of other type by given information. */
+    static void persistOtherPlayCard(std::string image, std::string name,
+                                     std::vector<std::string> instructions);
+
 private:
     /**
      * Helper function that loads single card.
@@ -66,6 +82,12 @@ private:
      * @returns attack/defense/donor/other
      * */
     static std::string getPlayCardType(std::shared_ptr<PlayCard> card);
+
+
+    /**
+     * @returns name of the new file for tha play card
+     * */
+    static int persistPlayCard();
 
 };
 

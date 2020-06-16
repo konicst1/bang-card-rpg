@@ -1,6 +1,11 @@
 playdef.png
-heart
-Birra
+diamond
+Bang!
 9
-other
-addHealthLeader
+attack
+0
+0
+1
+0
+targetDefendDefense
+decreaseTargetHealth

@@ -1,11 +1,11 @@
 playdef.png
-club
-Bang!
+diamond
+Dinamite
 9
 attack
 0
 0
-1
-0
-targetDefendDefense
+4
+4
+nextCardIsSpades
 decreaseTargetHealth

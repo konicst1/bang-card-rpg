@@ -16,15 +16,15 @@ int Application::start() {
 
 
         if(choice == menuOptions[0]){
-            manager.selectPlayersAndInitNewGame();
+            break;                                      //new game single player
         }else if(choice == menuOptions[1]){
-            manager.loadSavedGameAndPlay();
+            manager.selectPlayersAndInitNewGame();      //new game multi player
         } else if (choice == menuOptions[2]){
-
+            manager.loadSavedGameAndPlay();             // load game
         } else if (choice == menuOptions[3]){
-
+            cBuilder.createCard();                      // add card
         }else if(choice == menuOptions[4]){
-            break;
+            break;                                      //remove card
         }
     }
 

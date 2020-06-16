@@ -1,8 +1,7 @@
 playdef.png
-club
-Wells Fargo (3)
+spades
+Emporio
 9
 other
 giveLeaderCardFromStack
-giveLeaderCardFromStack
-giveLeaderCardFromStack
+giveTargetCardFromStack

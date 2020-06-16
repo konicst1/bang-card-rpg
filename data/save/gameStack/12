@@ -1,11 +1,7 @@
 playdef.png
-heart
-Gatling
+spades
+Saloon
 9
-attack
-0
-0
-3
-3
-targetDefendDefense
-decreaseTargetHealth
+other
+addHealthTarget
+addHealthLeader

@@ -64,7 +64,13 @@ public:
     static int getChoice(int range, int lower = 1);
 
     /** Show end game message and announce the winner.*/
-    static void endGame(std::string winner);
+    static void endGame(const std::string& winner);
+
+    /**Get string from input */
+    static std::string getStringInput();
+
+    /**Get int from input*/
+    static int getIntInput();
 
 };
 

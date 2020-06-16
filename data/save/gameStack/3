@@ -1,7 +1,6 @@
 playdef.png
-heart
-Emporio
+diamond
+Birra
 9
 other
-giveLeaderCardFromStack
-giveTargetCardFromStack
+addHealthLeader

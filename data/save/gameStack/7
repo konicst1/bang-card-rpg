@@ -1,11 +1,7 @@
 playdef.png
 diamond
-Bang!
+Emporio
 9
-attack
-0
-0
-1
-0
-targetDefendDefense
-decreaseTargetHealth
+other
+giveLeaderCardFromStack
+giveTargetCardFromStack

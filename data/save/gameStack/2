@@ -1,11 +1,8 @@
 playdef.png
-club
-Dinamite
+spades
+Barile
 9
-attack
+defense
+1
 0
-0
-4
-4
-nextCardIsSpades
-decreaseTargetHealth
+nextCardIsHeart

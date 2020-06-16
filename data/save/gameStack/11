@@ -1,7 +1,8 @@
 playdef.png
 spades
-Saloon
+Wells Fargo (3)
 9
 other
-addHealthTarget
-addHealthLeader
+giveLeaderCardFromStack
+giveLeaderCardFromStack
+giveLeaderCardFromStack

@@ -1,6 +1,11 @@
 playdef.png
-club
-Cat Balou
+spades
+Dinamite
 9
-other
-takeCardFromTarget
+attack
+0
+0
+4
+4
+nextCardIsSpades
+decreaseTargetHealth
