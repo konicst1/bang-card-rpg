@@ -68,9 +68,9 @@ void GameManager::startGame() {
     }
 
     if (playerA->getHealth() <= 0) {
-        UIController::endGame(playerA->getName());
-    } else if (playerB->getHealth() <= 0) {
         UIController::endGame(playerB->getName());
+    } else if (playerB->getHealth() <= 0) {
+        UIController::endGame(playerA->getName());
     }
 
 }
