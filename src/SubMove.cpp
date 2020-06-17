@@ -44,61 +44,28 @@ int SubMove::getDefenseValue(GameManager &m) {
 
 int SubMove::getAttackValue(GameManager &m) {
     int attack = 0;
-  /*  while (true) {
-        UIController::presentCards(this->leader->getCards());
+    while (true) {
+        UIController::presentCards(this->target->getCards());
         UIController::println("Play attack cards to defend yourself! Enter 0 when done.");
-        int cardNumber = leader->getAttackChoice(attackStr);
+        int cardNumber = target->getAttackChoice(attackStr);
         cardNumber--; //make it an index
         if (cardNumber == -1) {
             return attack;
-        } else if (typeid(*leader->getCards()[cardNumber]->getAction()) == typeid(AttackAction)) {
-            int continueFlag = 1;
-            int r = dynamic_cast<AttackAction *>(leader->getCards()[cardNumber]->getAction().get())->getDecreaseHealthTarget();
+        } else {
+            InstructionResponse res = target->getCards()[cardNumber]->getResponse();
 
-            for (auto ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
-                if (!ins.compare("nextCardIsHeart")) {
-                    std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
-                    if (nCard->getSymbol().compare("heart")) {
-                        continueFlag = 0;
-                    }
-                    m.putCardInStack(nCard);
-                } else if (!ins.compare("nextCardIsSpades")) {
-                    std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
-                    if (nCard->getSymbol().compare("spades")) {
-                        continueFlag = 0;
-                    }
-                    m.putCardInStack(nCard);
-                } else if (!ins.compare("nextCardIsClub")) {
-                    std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
-                    if (nCard->getSymbol().compare("club")) {
-                        continueFlag = 0;
-                    }
-                    m.putCardInStack(nCard);
-                } else if (!ins.compare("nextCardIsDiamond")) {
-                    std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
-                    if (nCard->getSymbol().compare("diamond")) {
-                        continueFlag = 0;
-                    }
-                    m.putCardInStack(nCard);
-                }
+            if(res.getAttackPower() < 0){
+                UIController::println("Not an attack card.");
+                continue;
             }
 
             //put card back to stack
-            m.putCardInStack(leader->getCards()[cardNumber]);
-            leader->removeCard(cardNumber);
-            if (continueFlag) {
-                attack += r;
-                UIController::println("Next card symbol was the correct type, you are being protected by power of " +
-                                      std::to_string(attack) + ".");
+            m.putCardInStack(target->getCards()[cardNumber]);
+            target->removeCard(cardNumber);
 
-            } else {
-                UIController::println("Next card symbol was the bad type, you are being protected by power of " +
-                                      std::to_string(attack) + ".");
-            }
-
+            attack += res.getAttackPower();
         }
-    }*/
-return 0;
+    }
 }
 
 std::shared_ptr<PlayCard> SubMove::getCardFromLeader() {

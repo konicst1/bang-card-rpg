@@ -21,7 +21,7 @@ public:
     void perform(GameManager &, std::shared_ptr<Player> , std::shared_ptr<Player> ) override {}
 
     InstructionResponse getResponse() override {
-        return InstructionResponse(0, defensePower, 1);
+        return InstructionResponse(-1, defensePower, 1);
     }
 };
 

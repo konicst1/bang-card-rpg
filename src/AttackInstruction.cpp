@@ -19,8 +19,10 @@ void AttackInstruction::perform(GameManager &m, std::shared_ptr<Player> leader, 
     } else if (defenseType == DefenseType::ATTACK) {
         defensePower = m.getAttackDefenseFromPlayer(victim, attackPower);
     }
+    if ((attackPower - defensePower) > 0) {
+        victim->decreaseHealth(attackPower - defensePower);
+    }
 
-    leader->decreaseHealth(attackPower - defensePower);
 }
 
 AttackInstruction::AttackInstruction(const std::string &instructionRepresentation, int attackPower,
@@ -29,7 +31,7 @@ AttackInstruction::AttackInstruction(const std::string &instructionRepresentatio
         defenseType) {}
 
 InstructionResponse AttackInstruction::getResponse() {
-    return {attackPower, -1,1};
+    return {attackPower, -1, 1};
 }
 
 
