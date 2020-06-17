@@ -18,7 +18,7 @@ public:
         this->defensePower = defensePower;
     }
 
-    void perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override {}
+    void perform(GameManager &, std::shared_ptr<Player> , std::shared_ptr<Player> ) override {}
 
     InstructionResponse getResponse() override {
         return InstructionResponse(0, defensePower, 1);

@@ -7,10 +7,6 @@
 #include <vector>
 #include <memory>
 #include "DataLoader.h"
-#include "AttackAction.h"
-#include "PlayCard.h"
-#include "DefenseAction.h"
-#include "DonorAction.h"
 
 std::vector<std::vector<std::string>> DataLoader::loadAllRoleCards() {
     std::vector<std::vector<std::string> > res;

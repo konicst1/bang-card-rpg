@@ -5,8 +5,6 @@
 #include "Move.h"
 #include "UIController.h"
 #include "GameManager.h"
-#include "AttackAction.h"
-#include "DefenseAction.h"
 
 int Move::init() {
     UIController::println("Now it is " + leader->getName() + "'s turn.");

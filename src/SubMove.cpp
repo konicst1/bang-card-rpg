@@ -4,9 +4,7 @@
 
 #include "SubMove.h"
 #include "UIController.h"
-#include "DefenseAction.h"
 #include "GameManager.h"
-#include "AttackAction.h"
 
 int SubMove::init() {
     UIController::print("Your opponent made move that requires your response. You are being attacked with power of ");

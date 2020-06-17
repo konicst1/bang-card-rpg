@@ -24,7 +24,7 @@ public:
         }else{
             this->continueFlag = 1;
         }
-
+        return *this;
     }
 
     int getAttackPower() const {

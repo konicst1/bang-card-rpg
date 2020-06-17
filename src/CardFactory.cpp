@@ -8,12 +8,10 @@
 #include <random>
 #include <sstream>
 #include "CardFactory.h"
-#include "AttackAction.h"
-#include "DefenseAction.h"
-#include "DonorAction.h"
 #include "Player.h"
 #include "AttackInstruction.h"
 #include "DefenseInstruction.h"
+#include "GiveCardInstruction.h"
 
 
 std::vector<std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
@@ -179,24 +177,16 @@ std::shared_ptr<Instruction> CardFactory::buildInstruction(const std::string &in
         AttackInstruction::AffectedPlayer affectedPlayer;
         AttackInstruction::DefenseType defenseType;
 
-        if (segList[2] == "leader") {
-            affectedPlayer = AttackInstruction::AffectedPlayer::LEADER;
-        } else if (segList[2] == "target") {
-            affectedPlayer = AttackInstruction::AffectedPlayer::TARGET;
-        }
-
-        if (segList[3] == "defense") {
-            defenseType = AttackInstruction::DefenseType::DEFENSE;
-        } else if (segList[3] == "attack") {
-            defenseType = AttackInstruction::DefenseType::ATTACK;
-        } else if (segList[3] == "none") {
-            defenseType = AttackInstruction::DefenseType::NONE;
-        }
+        affectedPlayer = AttackInstruction::getAffectedPlayerByName(segList[2]);
+        defenseType = AttackInstruction::getDefenseTypeByName(segList[3]);
 
         i = std::make_shared<AttackInstruction>(
                 AttackInstruction(ins, std::stoi(segList[1]), affectedPlayer, defenseType));
     } else if (segList[0] == "defense") {
         i = std::make_shared<DefenseInstruction>(DefenseInstruction(ins, std::stoi(segList[1])));
+    }else if(segList[0] == "giveCard"){
+        GiveCardInstruction::AffectedPlayer affectedPlayer = GiveCardInstruction::getAffectedPlayerByName(segList[1]);
+        i = std::make_shared<GiveCardInstruction>(GiveCardInstruction(ins, affectedPlayer));
     }
 
     return i;
