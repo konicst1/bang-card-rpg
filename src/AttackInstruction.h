@@ -19,6 +19,8 @@ public:
 
     void perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override;
 
+    InstructionResponse getResponse() override;
+
 };
 
 

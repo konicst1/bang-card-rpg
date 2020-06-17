@@ -26,7 +26,7 @@ void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player
 
 
     //give each player 6 cards for start
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 2; ++i) {
         this->givePlayerCardFromStack(playerA);
         this->givePlayerCardFromStack(playerB);
     }

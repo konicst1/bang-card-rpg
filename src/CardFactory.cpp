@@ -13,6 +13,7 @@
 #include "DonorAction.h"
 #include "Player.h"
 #include "AttackInstruction.h"
+#include "DefenseInstruction.h"
 
 
 std::vector<std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
@@ -192,8 +193,12 @@ std::shared_ptr<Instruction> CardFactory::buildInstruction(const std::string &in
             defenseType = AttackInstruction::DefenseType::NONE;
         }
 
-        i = std::make_shared<AttackInstruction>(AttackInstruction(ins, std::stoi(segList[1]), affectedPlayer, defenseType));
-        return i;
+        i = std::make_shared<AttackInstruction>(
+                AttackInstruction(ins, std::stoi(segList[1]), affectedPlayer, defenseType));
+    } else if (segList[0] == "defense") {
+        i = std::make_shared<DefenseInstruction>(DefenseInstruction(ins, std::stoi(segList[1])));
     }
+
+    return i;
 
 }

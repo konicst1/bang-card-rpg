@@ -42,6 +42,16 @@ public:
     std::string getName() const {
         return name;
     }
+
+    InstructionResponse getResponse() {
+        InstructionResponse res = InstructionResponse(0, 0, 1);
+        for(auto i : instructions){
+            res = res + i->getResponse();
+        }
+        return res;
+    }
+
+
 };
 
 

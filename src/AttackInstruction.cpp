@@ -28,4 +28,8 @@ AttackInstruction::AttackInstruction(const std::string &instructionRepresentatio
         instructionRepresentation), attackPower(attackPower), playerAffected(playerAffected), defenseType(
         defenseType) {}
 
+InstructionResponse AttackInstruction::getResponse() {
+    return {attackPower, -1,1};
+}
+
 
