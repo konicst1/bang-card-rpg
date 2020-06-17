@@ -10,17 +10,22 @@ class GameManager;
 /**
  * Submove class used for getting response from the second player in the main move.
  * */
-class SubMove : public Move{
+class SubMove{
+
+
 
     int attackStr;      //attack strength to react to
+    std::shared_ptr<Player> target;
 
 public:
-    SubMove(std::shared_ptr<Player> &leader, std::shared_ptr<Player> &target, int attackStr);
+    SubMove(std::shared_ptr<Player> target, int attackStr);
+
+    SubMove(int attackStr);
 
     /**
      * Switch players and introduce move to the player
      * */
-    int init() override;
+    int init();
 
     /**
      * Get defense power from the player.

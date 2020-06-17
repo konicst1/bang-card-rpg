@@ -15,14 +15,10 @@ int SubMove::init() {
     return 0;
 }
 
-SubMove::SubMove(std::shared_ptr<Player> &leader, std::shared_ptr<Player> &target, int attackStr) : Move(leader,
-                                                                                                         target),
-                                                                                                    attackStr(
-                                                                                                            attackStr) {}
 
 int SubMove::getDefenseValue(GameManager &m) {
     int defense = 0;
-    while (true) {
+   /* while (true) {
         UIController::presentCards(this->leader->getCards());
         UIController::println("Play defensive cards to defend yourself! Enter 0 when done.");
         int cardNumber = leader->getDefenseChoice(attackStr);
@@ -34,7 +30,7 @@ int SubMove::getDefenseValue(GameManager &m) {
             int continueFlag = 1;
             int r = dynamic_cast<DefenseAction *>(leader->getCards()[cardNumber]->getAction().get())->getHealthDefensePower();
 
-            for (const auto& ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
+            for (const auto &ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
                 if (!ins.compare("nextCardIsHeart")) {
                     std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
                     if (nCard->getSymbol().compare("heart")) {
@@ -77,14 +73,14 @@ int SubMove::getDefenseValue(GameManager &m) {
             }
 
         }
-    }
+    }*/
 
-
+return 0; //todo
 }
 
 int SubMove::getAttackValue(GameManager &m) {
     int attack = 0;
-    while (true) {
+   /* while (true) {
         UIController::presentCards(this->leader->getCards());
         UIController::println("Play attack cards to defend yourself! Enter 0 when done.");
         int cardNumber = leader->getAttackChoice(attackStr);
@@ -137,23 +133,30 @@ int SubMove::getAttackValue(GameManager &m) {
             }
 
         }
-    }
+    }*/
 
 }
 
 std::shared_ptr<PlayCard> SubMove::getCardFromLeader() {
-    UIController::presentCards(this->leader->getCards());
-    UIController::println("You need to give up one of your cards..choose which one will it be.");
-    int cardNumber = leader->getCardChoice();
-    cardNumber--; //make it an index
+  //  UIController::presentCards(this->leader->getCards());
+  //  UIController::println("You need to give up one of your cards..choose which one will it be.");
+  //  int cardNumber = leader->getCardChoice();
+ //   cardNumber--; //make it an index
 
-    std::shared_ptr<PlayCard> res = leader->getCards()[cardNumber];
-    leader->removeCard(cardNumber);
-    return res;
+  //  std::shared_ptr<PlayCard> res = leader->getCards()[cardNumber];
+  //  leader->removeCard(cardNumber);
+    return nullptr;
 
 }
 
+SubMove::SubMove(std::shared_ptr<Player> target, int attackStr) {
+    this->target = target;
+    this->attackStr = attackStr;
+}
 
+SubMove::SubMove(int attackStr) {
+    this->attackStr = attackStr;
+}
 
 
 

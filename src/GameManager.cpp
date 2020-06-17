@@ -114,13 +114,13 @@ void GameManager::selectPlayersAndInitNewGame() {
 
 
 void GameManager::saveGame() {
-    std::vector<std::shared_ptr<PlayCard>> stack = std::vector<std::shared_ptr<PlayCard>>(cardStack.begin(),
-                                                                                          cardStack.end());
-    DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
-                         this->playerA->getRole()->getAction()->getInstructions(), this->playerA->getCards(),
+    std::vector<std::shared_ptr<PlayCard>> stack = std::vector<std::shared_ptr<PlayCard>>(cardStack.begin(),cardStack.end());
+                    //todo
+  /*  DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
+                         this->playerA->getRole()->getInstructions(), this->playerA->getCards(),
                          this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(),
-                         this->playerB.get()->getRole()->getAction()->getInstructions(), this->playerB->getCards(),
-                         stack);
+                         this->playerB.get()->getRole()->getInstructions(), this->playerB->getCards(),
+                         stack);*/
 
 }
 
@@ -128,26 +128,26 @@ void GameManager::putCardInStack(std::shared_ptr<PlayCard> card) {
     this->cardStack.push_back(card);
 }
 
-int GameManager::getDefenseFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<Player> target, int attack) {
-    UIController::switchPlayers(leader);
-    SubMove s = SubMove(leader, target, attack);
+int GameManager::getDefenseFromPlayer(std::shared_ptr<Player> target, int attack) {
+    UIController::switchPlayers(target);
+    SubMove s = SubMove(target, attack);
     s.init();
     return s.getDefenseValue(*this);
 }
 
 int
-GameManager::getAttackDefenseFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<Player> target, int attack) {
-    UIController::switchPlayers(leader);
-    SubMove s = SubMove(leader, target, attack);
+GameManager::getAttackDefenseFromPlayer(std::shared_ptr<Player> target, int attack) {
+    UIController::switchPlayers(target);
+    SubMove s = SubMove(target, attack);
     s.init();
     return s.getAttackValue(*this);
 }
 
 
 std::shared_ptr<PlayCard>
-GameManager::getCardFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<Player> target) {
-    UIController::switchPlayers(leader);
-    SubMove s = SubMove(leader, target, 0);
+GameManager::getCardFromPlayer(std::shared_ptr<Player> target) {
+    UIController::switchPlayers(target);
+    SubMove s = SubMove(target, 0);
     s.init();
     return s.getCardFromLeader();
 

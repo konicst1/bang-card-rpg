@@ -89,7 +89,7 @@ public:
      * @param target = smart pointer of the second player
      * @returns defense power as int
      * */
-    int getDefenseFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<Player> target, int attack);
+    int getDefenseFromPlayer(std::shared_ptr<Player> target, int attack);
 
     /**
     * Gets attack power from the player that is being attacked.
@@ -98,7 +98,7 @@ public:
     * @param target = smart pointer of the second player
     * @returns atack power as int
     * */
-    int getAttackDefenseFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<Player> target, int attack);
+    int getAttackDefenseFromPlayer(std::shared_ptr<Player> target, int attack);
 
     /**
      * Some cards can take cards from players. This function realizes that.
@@ -106,7 +106,7 @@ public:
      * @param target = smart pointer of the second player
      * @returns Smart pointer of PlayCard that lead player gave up
      * */
-    std::shared_ptr<PlayCard> getCardFromPlayer(std::shared_ptr<Player> leader, std::shared_ptr<Player> target);
+    std::shared_ptr<PlayCard> getCardFromPlayer(std::shared_ptr<Player> target);
 
     /**
      * Persist the current gameplay. This overwrites any other saved gameplays.

@@ -1,9 +1,3 @@
 playdef.png
 Bang!
-attack
-0
-0
-1
-0
-targetDefendDefense
-decreaseTargetHealth
+attack-1-target-defense

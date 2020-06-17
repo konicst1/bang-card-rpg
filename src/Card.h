@@ -9,6 +9,7 @@
 #include <memory>
 #include <utility>
 #include "Action.h"
+#include "Instruction.h"
 
 
 /**
@@ -17,18 +18,19 @@
 class Card {
     std::string image;                  //path to graphics for the card
     std::string name;                   //name of the card
-    std::shared_ptr<Action> action;     //special power of the card
+    std::vector<std::shared_ptr<Instruction>> instructions;     //special power of the card
+
 
 public:
 
-    Card(const std::string& image, const std::string& name, std::shared_ptr<Action> action)  {
+    Card(const std::string &image, const std::string &name, std::vector<std::shared_ptr<Instruction>> instructions) {
         this->image = image;
         this->name = name;
-        this->action = std::move(action);
+        this->instructions = std::move(instructions);
     }
 
-    const std::shared_ptr<Action> &getAction() const {
-        return action;
+    std::vector<std::shared_ptr<Instruction>> getInstructions() const {
+        return instructions;
     }
 
 

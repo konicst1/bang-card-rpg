@@ -31,10 +31,10 @@ public:
      * Persist gameplay.
      * */
     static int saveGame(std::string player1Name, int player1Health, std::string player1Image,
-                        std::vector<std::string> player1Instructions,
+                        std::vector<std::shared_ptr<Instruction>> player1Instructions,
                         std::vector<std::shared_ptr<PlayCard>> player1Cards,
                         std::string player2Name, int player2Health, std::string player2Image,
-                        std::vector<std::string> player2Instructions,
+                        std::vector<std::shared_ptr<Instruction>> player2Instructions,
                         std::vector<std::shared_ptr<PlayCard>> player2Cards,
                         std::vector<std::shared_ptr<PlayCard>> gameStack);
 
@@ -80,6 +80,7 @@ private:
     /**
      * Helper function to find type of the card.
      * @returns attack/defense/donor/other
+     * @obsolete
      * */
     static std::string getPlayCardType(std::shared_ptr<PlayCard> card);
 

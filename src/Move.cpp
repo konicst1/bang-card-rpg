@@ -29,9 +29,16 @@ void Move::startMove(GameManager &m) {
     cardNumber--; //make it an index
     //  leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
 
-    int continueFlag = 1, power = 0;
+    int continueFlag = 1;
 
-    for (const std::string &ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
+    for(const auto& instruction : leader->getCards()[cardNumber]->getInstructions()){
+        if(continueFlag){
+            instruction->perform(m, leader, target);
+        }
+        continueFlag = 1;
+    }
+
+    /*for (const std::string &ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
         if (!ins.compare("decreaseTargetHealth")) {
             if (continueFlag) {
                 target->decreaseHealth(power);
@@ -142,7 +149,7 @@ void Move::startMove(GameManager &m) {
             }
             m.putCardInStack(nCard);
         }
-    }
+    }*/
     //put card back to stack
     m.putCardInStack(leader->getCards()[cardNumber]);
     leader->removeCard(cardNumber);

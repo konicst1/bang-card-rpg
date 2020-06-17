@@ -19,7 +19,7 @@ class PlayCard : public Card {
 public:
 
 
-    PlayCard(const std::string &image, const std::string &symbol, const std::string &name, int number, std::shared_ptr<Action> action)  : Card(image, name, std::move(action)) {
+    PlayCard(const std::string &image, const std::string &symbol, const std::string &name, int number, std::vector<std::shared_ptr<Instruction>> instructions)  : Card(image, name, instructions) {
         this->number = number;
         this->symbol = symbol;
     }

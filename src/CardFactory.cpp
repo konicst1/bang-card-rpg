@@ -6,11 +6,13 @@
 #include <algorithm>
 #include <memory>
 #include <random>
+#include <sstream>
 #include "CardFactory.h"
 #include "AttackAction.h"
 #include "DefenseAction.h"
 #include "DonorAction.h"
 #include "Player.h"
+#include "AttackInstruction.h"
 
 
 std::vector<std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
@@ -37,46 +39,26 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadPlayCards(std::vector<st
     std::vector<std::shared_ptr<PlayCard> > cards;
 
     /*Format of play card in the file
- * image path
- * name
-     * type (attack/defense/donor)
-     * attack - decreaseHealthLeader, decreaseManaLeader, decreaseHealthTarget, decreaseManaTarget
-     * defense - healthDefensePower, manaDefensePower
- * instructions
+ * image path 0
+ * name       1                 obsolete
+                             * type (attack/defense/donor)
+                             * attack - decreaseHealthLeader, decreaseManaLeader, decreaseHealthTarget, decreaseManaTarget
+                             * defense - healthDefensePower, manaDefensePower
+ * instructions 2
  * */
 
     for (auto a : data) {
-        std::vector<std::string> ins;
+        std::vector<std::shared_ptr<Instruction>> ins;
 
-        std::shared_ptr<Action> b;
-
-        if (!a[2].compare("attack")) {
-            for (unsigned int i = 7; i < a.size(); i++) {
-                ins.push_back(a[i]);
-            }
-            b = std::make_shared<AttackAction>(
-                    AttackAction(ins, std::stoi(a[3]), std::stoi(a[4]), std::stoi(a[5]), std::stoi(a[6])));
-        } else if (!a[2].compare("defense")) {
-            for (unsigned int i = 5; i < a.size(); i++) {
-                ins.push_back(a[i]);
-            }
-            b = std::make_shared<DefenseAction>(DefenseAction(ins, std::stoi(a[3]), std::stoi(a[4])));
-        } else if (!a[2].compare("donor")) {
-            for (unsigned int i = 3; i < a.size(); i++) {
-                ins.push_back(a[i]);
-            }
-            b = std::make_shared<Action>(Action(ins));
-        } else {
-            for (unsigned int i = 3; i < a.size(); i++) {
-                ins.push_back(a[i]);
-            }
-            b = std::make_shared<Action>(Action(ins));
+        for (unsigned int i = 2; i < a.size(); i++) {
+            ins.push_back(buildInstruction(a[i]));
         }
 
-        PlayCard card = PlayCard(a[0], "spades", a[1], 9, b);
-        PlayCard card1 = PlayCard(a[0], "heart", a[1], 9, b);
-        PlayCard card2 = PlayCard(a[0], "diamond", a[1], 9, b);
-        PlayCard card3 = PlayCard(a[0], "club", a[1], 9, b);
+
+        PlayCard card = PlayCard(a[0], "spades", a[1], 9, ins);
+        PlayCard card1 = PlayCard(a[0], "heart", a[1], 9, ins);
+        PlayCard card2 = PlayCard(a[0], "diamond", a[1], 9, ins);
+        PlayCard card3 = PlayCard(a[0], "club", a[1], 9, ins);
 
         cards.push_back(std::make_shared<PlayCard>(card));
         cards.push_back(std::make_shared<PlayCard>(card1));
@@ -139,13 +121,13 @@ std::vector<std::shared_ptr<RoleCard> > CardFactory::loadRoleCards(std::vector<s
      * */
 
     for (auto a : data) {
-        std::vector<std::string> ins;
+        std::vector<std::shared_ptr<Instruction>> ins;
         for (unsigned int i = 3; i < a.size(); i++) {
-            ins.push_back(a[i]);
+            ins.push_back(buildInstruction(a[i]));
         }
-        Action b = Action(ins);
+
         int health = std::stoi(a[2]);
-        RoleCard role = RoleCard(/*image*/ a[0], /*name*/ a[1],/*health count*/ health, std::make_shared<Action>(b));
+        RoleCard role = RoleCard(/*image*/ a[0], /*name*/ a[1],/*health count*/ health, ins);
 
         cards.push_back(std::make_shared<RoleCard>(role));
     }
@@ -159,48 +141,59 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadSavedPlayCards(std::vect
  * image path  0
  * symbol  1
  * name  2
- * number  3
-     * type (attack/defense/donor)  4
-     * attack - decreaseHealthLeader, decreaseManaLeader, decreaseHealthTarget, decreaseManaTarget
-     * defense - healthDefensePower, manaDefensePower
- * instructions
+ * number  3                            OBSOLETE
+                                    //     * type (attack/defense/donor)  4
+                                    //     * attack - decreaseHealthLeader, decreaseManaLeader, decreaseHealthTarget, decreaseManaTarget
+                                    //     * defense - healthDefensePower, manaDefensePower
+ * instructions 4
  * */
 
     for (auto a : data) {
-        std::vector<std::string> ins;
+        std::vector<std::shared_ptr<Instruction>> ins;
 
-        std::shared_ptr<Action> b;
-
-        if (!a[4].compare("attack")) {
-            for (unsigned int i = 9; i < a.size(); i++) {
-                ins.push_back(a[i]);
-            }
-            b = std::make_shared<AttackAction>(
-                    AttackAction(ins, std::stoi(a[5]), std::stoi(a[6]), std::stoi(a[7]), std::stoi(a[8])));
-        } else if (!a[4].compare("defense")) {
-            for (unsigned int i = 7; i < a.size(); i++) {
-                ins.push_back(a[i]);
-            }
-            b = std::make_shared<DefenseAction>(DefenseAction(ins, std::stoi(a[5]), std::stoi(a[6])));
-        } else if (!a[4].compare("donor")) {
-            for (unsigned int i = 5; i < a.size(); i++) {
-                ins.push_back(a[i]);
-            }
-            b = std::make_shared<Action>(Action(ins));
-        } else {
-            for (unsigned int i = 5; i < a.size(); i++) {
-                ins.push_back(a[i]);
-            }
-            b = std::make_shared<Action>(Action(ins));
+        for (unsigned int i = 4; i < a.size(); i++) {
+            ins.push_back(buildInstruction(a[i]));
         }
-
-        PlayCard card = PlayCard(a[0], a[1], a[2], std::stoi(a[3]), b);
+        PlayCard card = PlayCard(a[0], a[1], a[2], std::stoi(a[3]), ins);
 
         cards.push_back(std::make_shared<PlayCard>(card));
 
-
     }
 
-
     return cards;
+}
+
+std::shared_ptr<Instruction> CardFactory::buildInstruction(const std::string &ins) {
+    std::stringstream toSplit(ins);
+    std::string segment;
+    std::vector<std::string> segList;
+
+    std::shared_ptr<Instruction> i;
+
+    while (std::getline(toSplit, segment, '-')) {
+        segList.push_back(segment);
+    }
+
+    if (segList[0] == "attack") {
+        AttackInstruction::AffectedPlayer affectedPlayer;
+        AttackInstruction::DefenseType defenseType;
+
+        if (segList[2] == "leader") {
+            affectedPlayer = AttackInstruction::AffectedPlayer::LEADER;
+        } else if (segList[2] == "target") {
+            affectedPlayer = AttackInstruction::AffectedPlayer::TARGET;
+        }
+
+        if (segList[3] == "defense") {
+            defenseType = AttackInstruction::DefenseType::DEFENSE;
+        } else if (segList[3] == "attack") {
+            defenseType = AttackInstruction::DefenseType::ATTACK;
+        } else if (segList[3] == "none") {
+            defenseType = AttackInstruction::DefenseType::NONE;
+        }
+
+        i = std::make_shared<AttackInstruction>(AttackInstruction(ins, std::stoi(segList[1]), affectedPlayer, defenseType));
+        return i;
+    }
+
 }
