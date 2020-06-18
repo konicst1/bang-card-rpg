@@ -1,6 +1,4 @@
 playdef.png
 Barile
-defense
-1
-0
-nextCardIsHeart
+ifNextCardIs-heart
+defense-1

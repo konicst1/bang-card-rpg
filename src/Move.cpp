@@ -31,33 +31,11 @@ void Move::startMove(GameManager &m) {
 
     for(const auto& instruction : leader->getCards()[cardNumber]->getInstructions()){
         if(continueFlag){
-            instruction->perform(m, leader, target);
+            continueFlag = instruction->perform(m, leader, target);
         }
-        continueFlag = 1;
     }
 
-    /*for (const std::string &ins : leader->getCards()[cardNumber]->getAction()->getInstructions()) {
 
-        } else if (!ins.compare("takeCardFromTarget")) {
-            if (continueFlag) {
-                m.putCardInStack(m.getCardFromPlayer(target, leader));
-            }
-            continueFlag = 1;
-        } else if (!ins.compare("robCardFromTarget")) {
-            if (continueFlag) {
-                leader->giveCard(m.getCardFromPlayer(target, leader));
-            }
-            continueFlag = 1;
-        }
-        if (!ins.compare("nextCardIsHeart")) {
-            std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
-            if (!nCard->getSymbol().compare("heart")) {
-                continueFlag = 1;
-            }else{
-                continueFlag = 0;
-
-        }
-    }*/
     //put card back to stack
     m.putCardInStack(leader->getCards()[cardNumber]);
     leader->removeCard(cardNumber);

@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "GameManager.h"
 
-void AttackInstruction::perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) {
+int AttackInstruction::perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) {
     std::shared_ptr<Player> victim;
     if (playerAffected == AffectedPlayer::LEADER) {
         victim = leader;
@@ -22,7 +22,7 @@ void AttackInstruction::perform(GameManager &m, std::shared_ptr<Player> leader, 
     if ((attackPower - defensePower) > 0) {
         victim->decreaseHealth(attackPower - defensePower);
     }
-
+    return 1;
 }
 
 AttackInstruction::AttackInstruction(const std::string &instructionRepresentation, int attackPower,
@@ -30,7 +30,7 @@ AttackInstruction::AttackInstruction(const std::string &instructionRepresentatio
         instructionRepresentation), attackPower(attackPower), playerAffected(playerAffected), defenseType(
         defenseType) {}
 
-InstructionResponse AttackInstruction::getResponse() {
+InstructionResponse AttackInstruction::getResponse(GameManager &m) {
     return {attackPower, -1, 1};
 }
 

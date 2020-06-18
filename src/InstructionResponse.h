@@ -17,11 +17,15 @@ public:
 
 
     InstructionResponse &operator+(const InstructionResponse &response) {
-        if(this->continueFlag){
-            this->attackPower += response.getAttackPower();
-            this->defensePower += response.getDefensePower();
+        if (this->continueFlag) {
+            if (response.getAttackPower() >= 0) {
+                this->attackPower += response.getAttackPower();
+            }
+            if (response.getDefensePower() >= 0) {
+                this->defensePower += response.getDefensePower();
+            }
             this->continueFlag = response.getContinueFlag();
-        }else{
+        } else {
             this->continueFlag = 1;
         }
         return *this;

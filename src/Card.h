@@ -45,10 +45,10 @@ public:
         return name;
     }
 
-    InstructionResponse getResponse() {
+    InstructionResponse getResponse(GameManager & m) {
         InstructionResponse res = InstructionResponse(0, 0, 1);
         for (auto i : instructions) {
-            res = res + i->getResponse();
+            res = res + i->getResponse(m);
         }
         return res;
     }

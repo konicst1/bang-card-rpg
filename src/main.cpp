@@ -1,6 +1,5 @@
 
-#include <iostream>
-#include "GameManager.h"
+
 #include "Application.h"
 
 using namespace std;

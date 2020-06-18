@@ -24,7 +24,7 @@ int SubMove::getDefenseValue(GameManager &m) {
         if (cardNumber == -1) {
             return defense;
         } else {
-            InstructionResponse res = target->getCards()[cardNumber]->getResponse();
+            InstructionResponse res = target->getCards()[cardNumber]->getResponse(m);
 
             if (res.getDefensePower() < 0) {
                 UIController::println("Not a defensive card.");
@@ -52,7 +52,7 @@ int SubMove::getAttackValue(GameManager &m) {
         if (cardNumber == -1) {
             return attack;
         } else {
-            InstructionResponse res = target->getCards()[cardNumber]->getResponse();
+            InstructionResponse res = target->getCards()[cardNumber]->getResponse(m);
 
             if (res.getAttackPower() < 0) {
                 UIController::println("Not an attack card.");

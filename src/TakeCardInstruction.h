@@ -15,15 +15,16 @@ public:
     TakeCardInstruction(const std::string &instructionRepresentation, AffectedPlayer playerAffected) : Instruction(
             instructionRepresentation), playerAffected(playerAffected) {}
 
-    void perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override {
+    int perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override {
         if (playerAffected == AffectedPlayer::LEADER) {
             m.putCardInStack(m.getCardFromPlayer(leader));
         } else {
             m.putCardInStack(m.getCardFromPlayer(target));
         }
+        return 1;
     }
 
-    InstructionResponse getResponse() override {
+    InstructionResponse getResponse(GameManager &m) override {
         return {-1, -1, 1};
     }
 };

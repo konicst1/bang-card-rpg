@@ -1,5 +1,4 @@
 playdef.png
 Emporio
-donor
-giveLeaderCardFromStack
-giveTargetCardFromStack
+giveCard-leader
+giveCard-target

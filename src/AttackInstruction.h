@@ -17,9 +17,9 @@ public:
     AttackInstruction(const std::string &instructionRepresentation, int attackPower, AffectedPlayer playerAffected,
                       DefenseType defenseType);
 
-    void perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override;
+    int perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override;
 
-    InstructionResponse getResponse() override;
+    InstructionResponse getResponse(GameManager &m) override;
 
 };
 

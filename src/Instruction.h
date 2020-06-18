@@ -24,13 +24,12 @@ public:
     };
 
 
-
     explicit Instruction(std::string instructionRepresentation) : instructionRepresentation(std::move(
             instructionRepresentation)) {}
 
-    virtual void perform(GameManager &, std::shared_ptr<Player> , std::shared_ptr<Player> ) {}
+    virtual int perform(GameManager &, std::shared_ptr<Player>, std::shared_ptr<Player>) { return 1; }
 
-    virtual InstructionResponse getResponse() {}
+    virtual InstructionResponse getResponse(GameManager &m) {}
 
     static AffectedPlayer getAffectedPlayerByName(std::string name) {
         if (name == "leader") {

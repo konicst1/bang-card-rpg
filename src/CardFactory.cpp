@@ -16,6 +16,7 @@
 #include "Instruction.h"
 #include "TakeCardInstruction.h"
 #include "RobCardInstruction.h"
+#include "IfNextCardIsInstruction.h"
 
 
 std::vector<std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
@@ -200,6 +201,9 @@ std::shared_ptr<Instruction> CardFactory::buildInstruction(const std::string &in
     }else if(segList[0] == "robCard"){
         Instruction::AffectedPlayer affectedPlayer = Instruction::getAffectedPlayerByName(segList[1]);
         i = std::make_shared<RobCardInstruction>(RobCardInstruction(ins, affectedPlayer));
+    }else if(segList[0] == "ifNextCardIs"){
+        PlayCard::CardSymbol symbol = PlayCard::getCardSymbolByName(segList[1]);
+        i = std::make_shared<IfNextCardIsInstruction>(IfNextCardIsInstruction(ins, symbol));
     }
 
     return i;
