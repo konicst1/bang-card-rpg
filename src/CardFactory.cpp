@@ -145,10 +145,7 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadSavedPlayCards(std::vect
  * image path  0
  * symbol  1
  * name  2
- * number  3                            OBSOLETE
-                                    //     * type (attack/defense/donor)  4
-                                    //     * attack - decreaseHealthLeader, decreaseManaLeader, decreaseHealthTarget, decreaseManaTarget
-                                    //     * defense - healthDefensePower, manaDefensePower
+ * number  3
  * instructions 4
  * */
 

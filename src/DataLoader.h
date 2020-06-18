@@ -75,14 +75,7 @@ private:
      * @param Input file stream to read from.
      * @returns Vector of strings with data.
      * */
-    static std::vector<std::string> loadCard(std::ifstream &file);
-
-    /**
-     * Helper function to find type of the card.
-     * @returns attack/defense/donor/other
-     * @obsolete
-     * */
-    static std::string getPlayCardType(std::shared_ptr<PlayCard> card);
+    static std::vector<std::string> loadCard(std::ifstream& file);
 
 
     /**

@@ -48,8 +48,9 @@ std::vector<std::vector<std::string>> DataLoader::loadSavedPlayer(const std::str
     f >> n;
 
     for (int i = 1; i <= n; i++) {
-        std::ifstream file1 = std::ifstream("../data/save/" + player + "Cards" + "/" + std::to_string(i));
-        res.push_back(loadCard(file));
+        std::string path = "../data/save/" + player + "Cards/" + std::to_string(i);
+        std::ifstream file1 = std::ifstream(path);
+        res.push_back(loadCard(file1));
     }
 
     return res;
