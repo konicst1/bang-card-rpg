@@ -19,24 +19,29 @@ public:
 
     int perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override {
         std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+        UIController::print("Next card symbol is: " + PlayCard::getCardSymbolAsString(nCard->getSymbol()));
         if(nCard->getSymbol() == symbol){
             m.putCardInStack(nCard);
+            UIController::println(". Nice!");
             return 1;
         }
-
+        UIController::println(". Bad luck.");
         m.putCardInStack(nCard);
         return 0;
     }
 
     InstructionResponse getResponse(GameManager &m) override {
         std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
+        UIController::print("Next card symbol is: " + PlayCard::getCardSymbolAsString(nCard->getSymbol()));
         if(nCard->getSymbol() == symbol){
             m.putCardInStack(nCard);
-            return InstructionResponse(-1,-1,1);
+            UIController::println(". Nice!");
+            return {0,0,1};
         }
 
         m.putCardInStack(nCard);
-        return InstructionResponse(-1,-1,0);
+        UIController::println(". Bad luck.");
+        return {0,0,0};
     }
 };
 

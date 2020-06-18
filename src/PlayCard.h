@@ -51,6 +51,18 @@ public:
             return CardSymbol::DIAMOND;
         }
     }
+
+    static std::string getCardSymbolAsString(CardSymbol symbol){
+        if (symbol == CardSymbol::HEART) {
+            return "heart";
+        } else if (symbol == CardSymbol::SPADES) {
+            return "spades";
+        } else if (symbol ==  CardSymbol::CLUB) {
+            return "club";
+        } else {
+            return "diamond";
+        }
+    }
 };
 
 

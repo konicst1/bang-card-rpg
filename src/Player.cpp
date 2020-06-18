@@ -37,7 +37,9 @@ const std::shared_ptr<RoleCard> &Player::getRole() const {
 }
 
 void Player::decreaseHealth(int h) {
-    this->health -= h;
+    if(h >= 0){
+        this->health -= h;
+    }
 }
 
 
@@ -47,17 +49,28 @@ void Player::removeCard(int index) {
 }
 
 void Player::increaseHealth(int h) {
-    this->health += 1;
+    if(h >= 0){
+        this->health += 1;
+    }
 }
 
 int Player::getDefenseChoice(int attackStrength) {
+    UIController::presentCards(this->getCards());
+    UIController::println("You are being attacked with power of " + std::to_string(attackStrength));
+    UIController::println("Play defend cards to defend yourself! Enter 0 when done.");
     return UIController::getChoice(this->cards.size(), 0);
+
 }
 
 int Player::getAttackChoice(int attackStrength) {
+    UIController::presentCards(this->getCards());
+    UIController::println("You are being attacked with power of " + std::to_string(attackStrength));
+    UIController::println("Play attack cards to defend yourself! Enter 0 when done.");
     return UIController::getChoice(this->cards.size(), 0);
 }
 
 int Player::getCardChoice() {
-    return UIController::getChoice(this->cards.size(), 0);
+    UIController::presentCards(this->getCards());
+    UIController::println("You need to give up one of your cards..choose which one will it be.");
+    return UIController::getChoice(this->cards.size(), 1);
 }
