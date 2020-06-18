@@ -49,6 +49,12 @@ public:
     void selectPlayersAndInitNewGame();
 
     /**
+     * Function that can start a new game from outside this class.
+     * Allows player to choose its role and calls inits new single player game.
+    * */
+    void selectPlayerAndInitSinglePlayerGame();
+
+    /**
      * Loads saved game and starts the game.
      * */
     void loadSavedGameAndPlay();

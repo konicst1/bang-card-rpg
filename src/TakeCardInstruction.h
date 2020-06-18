@@ -24,8 +24,12 @@ public:
         return 1;
     }
 
-    InstructionResponse getResponse(GameManager &m) override {
-        return {-1, -1, 1};
+    InstructionResponse getResponse(GameManager &) override {
+        return {-1, -1, 1, -1, -1};
+    }
+
+    InstructionResponse getPotentialResponse()override {
+        return {-1, -1, 1, -1, -1};
     }
 };
 

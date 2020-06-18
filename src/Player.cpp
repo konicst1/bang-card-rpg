@@ -74,3 +74,9 @@ int Player::getCardChoice() {
     UIController::println("You need to give up one of your cards..choose which one will it be.");
     return UIController::getChoice(this->cards.size(), 1);
 }
+
+int Player::getPlayChoice(Move &m) {
+    UIController::startMove(m);
+    UIController::presentCards(this->getCards());
+    return UIController::getChoice(this->getCards().size());
+}

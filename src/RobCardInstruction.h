@@ -8,7 +8,7 @@
 #include "Instruction.h"
 #include "GameManager.h"
 
-class RobCardInstruction : public Instruction{
+class RobCardInstruction : public Instruction {
     AffectedPlayer playerAffected;
 
 public:
@@ -24,8 +24,12 @@ public:
         return 1;
     }
 
-    InstructionResponse getResponse(GameManager &m) override {
-        return {-1, -1, 1};
+    InstructionResponse getResponse(GameManager &) override {
+        return {-1, -1, 1, -1, 1};
+    }
+
+    InstructionResponse getPotentialResponse() override {
+        return {-1, -1, 1, -1 ,1};
     }
 };
 

@@ -24,7 +24,6 @@ class Card {
 public:
 
 
-
     Card(const std::string &image, const std::string &name, std::vector<std::shared_ptr<Instruction>> instructions) {
         this->image = image;
         this->name = name;
@@ -45,10 +44,18 @@ public:
         return name;
     }
 
-    InstructionResponse getResponse(GameManager & m) {
-        InstructionResponse res = InstructionResponse(0, 0, 1);
-        for (auto i : instructions) {
+    InstructionResponse getResponse(GameManager &m) {
+        InstructionResponse res = InstructionResponse(0, 0, 1, 0, 0);
+        for (const auto &i : instructions) {
             res = res + i->getResponse(m);
+        }
+        return res;
+    }
+
+    InstructionResponse getPotentialResponse() {
+        InstructionResponse res = InstructionResponse(0, 0, 1, 0, 0);
+        for (const auto &i : instructions) {
+            res = res + i->getPotentialResponse();
         }
         return res;
     }

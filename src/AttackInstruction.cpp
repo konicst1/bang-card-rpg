@@ -30,8 +30,12 @@ AttackInstruction::AttackInstruction(const std::string &instructionRepresentatio
         instructionRepresentation), attackPower(attackPower), playerAffected(playerAffected), defenseType(
         defenseType) {}
 
-InstructionResponse AttackInstruction::getResponse(GameManager &m) {
-    return {attackPower, -1, 1};
+InstructionResponse AttackInstruction::getResponse(GameManager &) {
+    return {attackPower, -1, 1, -1, -1};
+}
+
+InstructionResponse AttackInstruction::getPotentialResponse() {
+    return {attackPower, -1, 1, -1, -1};
 }
 
 

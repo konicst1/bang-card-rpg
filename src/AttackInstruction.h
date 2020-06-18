@@ -21,6 +21,7 @@ public:
 
     InstructionResponse getResponse(GameManager &m) override;
 
+    InstructionResponse getPotentialResponse() override;
 };
 
 

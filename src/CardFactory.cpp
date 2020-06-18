@@ -33,7 +33,6 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::getNewStackOfCards() {
 
     cards = loadPlayCards(data);
     //shuffle
-    srand(unsigned(time(nullptr)));
     std::shuffle(cards.begin(), cards.end(), std::mt19937(std::random_device()()));
     return cards;
 

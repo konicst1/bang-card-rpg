@@ -6,6 +6,7 @@
 
 
 #include <string>
+#include <utility>
 #include "Player.h"
 
 class DefenseInstruction : public Instruction {
@@ -14,14 +15,18 @@ class DefenseInstruction : public Instruction {
 public:
 
     DefenseInstruction(std::string instructionRepresentation1,
-                       int defensePower) : Instruction(instructionRepresentation1) {
+                       int defensePower) : Instruction(std::move(instructionRepresentation1)) {
         this->defensePower = defensePower;
     }
 
     int perform(GameManager &, std::shared_ptr<Player> , std::shared_ptr<Player> ) override {return 1;}
 
-    InstructionResponse getResponse(GameManager &m) override {
-        return InstructionResponse(-1, defensePower, 1);
+    InstructionResponse getResponse(GameManager &) override {
+        return {-1, defensePower, 1, -1, -1};
+    }
+
+    InstructionResponse getPotentialResponse()override {
+        return {-1, defensePower, 1, -1, -1};
     }
 };
 

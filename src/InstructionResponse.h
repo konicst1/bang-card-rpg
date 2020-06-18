@@ -9,17 +9,21 @@ class InstructionResponse {
     int attackPower;
     int defensePower;
     int continueFlag;
+    int healthAddition;
+    int cardAddition;
 
 public:
-    InstructionResponse(int attackPower, int defensePower, int continueFlag) : attackPower(attackPower),
-                                                                               defensePower(defensePower),
-                                                                               continueFlag(continueFlag) {}
+    InstructionResponse(int attackPower, int defensePower, int continueFlag, int healthAddition, int cardAddition)
+            : attackPower(attackPower), defensePower(defensePower), continueFlag(continueFlag),
+              healthAddition(healthAddition), cardAddition(cardAddition) {}
 
 
     InstructionResponse &operator+(const InstructionResponse &response) {
         if (this->continueFlag) {
             this->attackPower += response.getAttackPower();
             this->defensePower += response.getDefensePower();
+            this->healthAddition += response.getHealthAddition();
+            this->cardAddition += response.getCardAddition();
             this->continueFlag = response.getContinueFlag();
         } else {
             this->continueFlag = 1;
@@ -31,24 +35,20 @@ public:
         return attackPower;
     }
 
-    void setAttackPower(int attackPower) {
-        InstructionResponse::attackPower = attackPower;
-    }
-
     int getDefensePower() const {
         return defensePower;
-    }
-
-    void setDefensePower(int defensePower) {
-        InstructionResponse::defensePower = defensePower;
     }
 
     int getContinueFlag() const {
         return continueFlag;
     }
 
-    void setContinueFlag(int continueFlag) {
-        InstructionResponse::continueFlag = continueFlag;
+    int getHealthAddition() const {
+        return healthAddition;
+    }
+
+    int getCardAddition() const {
+        return cardAddition;
     }
 };
 

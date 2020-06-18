@@ -21,9 +21,8 @@ const std::shared_ptr<Player> &Move::getTarget() const {
 }
 
 void Move::startMove(GameManager &m) {
-    UIController::startMove(*this);
-    UIController::presentCards(this->leader->getCards());
-    int cardNumber = UIController::getChoice(this->leader->getCards().size());
+
+    int cardNumber = leader->getPlayChoice(*this);
     cardNumber--; //make it an index
     //  leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
 

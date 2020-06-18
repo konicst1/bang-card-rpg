@@ -9,18 +9,17 @@
 #include "PlayCard.h"
 #include "GameManager.h"
 
-class IfNextCardIsInstruction : public Instruction{
-PlayCard::CardSymbol symbol;
+class IfNextCardIsInstruction : public Instruction {
+    PlayCard::CardSymbol symbol;
 public:
     IfNextCardIsInstruction(const std::string &instructionRepresentation, PlayCard::CardSymbol symbol) : Instruction(
             instructionRepresentation), symbol(symbol) {}
 
 
-
-    int perform(GameManager &m, std::shared_ptr<Player> leader, std::shared_ptr<Player> target) override {
+    int perform(GameManager &m, std::shared_ptr<Player>, std::shared_ptr<Player>) override {
         std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
         UIController::print("Next card symbol is: " + PlayCard::getCardSymbolAsString(nCard->getSymbol()));
-        if(nCard->getSymbol() == symbol){
+        if (nCard->getSymbol() == symbol) {
             m.putCardInStack(nCard);
             UIController::println(". Nice!");
             return 1;
@@ -33,15 +32,19 @@ public:
     InstructionResponse getResponse(GameManager &m) override {
         std::shared_ptr<PlayCard> nCard = m.getCardFromStack();
         UIController::print("Next card symbol is: " + PlayCard::getCardSymbolAsString(nCard->getSymbol()));
-        if(nCard->getSymbol() == symbol){
+        if (nCard->getSymbol() == symbol) {
             m.putCardInStack(nCard);
             UIController::println(". Nice!");
-            return {0,0,1};
+            return {0, 0, 1, 0, 0};
         }
 
         m.putCardInStack(nCard);
         UIController::println(". Bad luck.");
-        return {0,0,0};
+        return {0, 0, 0, 0, 0};
+    }
+
+    InstructionResponse getPotentialResponse() override {
+        return {0, 0, 1, 0, 0};
     }
 };
 

@@ -33,9 +33,12 @@ public:
         return instructionRepresentation;
     }
 
-    virtual InstructionResponse getResponse(GameManager &m) {}
+    virtual InstructionResponse getResponse(GameManager &) {return {-1, -1, 1, -1, -1};}
 
-    static AffectedPlayer getAffectedPlayerByName(std::string name) {
+    virtual InstructionResponse getPotentialResponse() { return {-1, -1, 1, -1, -1}; }
+
+
+    static AffectedPlayer getAffectedPlayerByName(const std::string& name) {
         if (name == "leader") {
             return AffectedPlayer::LEADER;
         } else {
@@ -43,7 +46,7 @@ public:
         }
     }
 
-    static DefenseType getDefenseTypeByName(std::string name) {
+    static DefenseType getDefenseTypeByName(const std::string& name) {
         if (name == "defense") {
             return DefenseType::DEFENSE;
         } else if (name == "attack") {

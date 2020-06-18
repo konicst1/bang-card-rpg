@@ -4,15 +4,17 @@
 
 #pragma once
 
-
+class Move;
 #include <memory>
 #include "PlayCard.h"
 #include "RoleCard.h"
+
 
 /**
  * Class that represents the player.
  * */
 class Player {
+protected:
     int health;                                         //number of health
     std::string name;                                   //name of the player (from role card)
     std::vector<std::shared_ptr<PlayCard>> cards;       //players play cards
@@ -88,9 +90,11 @@ public:
 
     /**
      * Player has to give up onr card.
-     * @returns index + 1of the card to give up
+     * @returns index + 1 of the card to give up
      * */
     virtual int getCardChoice();
+
+    virtual int getPlayChoice(Move &m);
 };
 
 

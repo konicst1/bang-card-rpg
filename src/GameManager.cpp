@@ -1,6 +1,4 @@
 //
-// Created by stepan on 5/3/20.
-//
 
 #include <memory>
 #include <algorithm>
@@ -10,6 +8,7 @@
 #include "GameManager.h"
 #include "Move.h"
 #include "SubMove.h"
+#include "AIPlayer.h"
 
 
 void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player> p2) {
@@ -36,6 +35,8 @@ void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player
 
 
 }
+
+
 
 std::shared_ptr<PlayCard> GameManager::getCardFromStack() {
     auto r = this->cardStack.front();
@@ -85,6 +86,7 @@ Move GameManager::nextMove() {
     }
 }
 
+
 void GameManager::selectPlayersAndInitNewGame() {
     //select roles
     std::vector<std::shared_ptr<RoleCard> > roles = CardFactory::getAllRoleCards();
@@ -104,14 +106,27 @@ void GameManager::selectPlayersAndInitNewGame() {
     Player a = Player(roles[roleA - 1]);
     Player b = Player(roles[roleB + 2]);
 
-    std::shared_ptr<Player> rt = std::make_shared<Player>(a);
-
-
     initNewGame(std::make_shared<Player>(a), std::make_shared<Player>(b));
-
-
 }
 
+void GameManager::selectPlayerAndInitSinglePlayerGame() {
+    //select roles
+    std::vector<std::shared_ptr<RoleCard> > roles = CardFactory::getAllRoleCards();
+
+    //shuffle roles
+    std::shuffle(roles.begin(), roles.end(), std::mt19937(std::random_device()()));
+
+    UIController::clearScreen();
+    //give each player 3 roles to choose from
+    UIController::println("Player A, please, select your character:");
+    int roleA = ui.selectRole(roles[0]->getName(), roles[1]->getName(), roles[2]->getName());
+
+    std::shared_ptr<Player> a = std::make_shared<Player>(Player(roles[roleA - 1]));
+    std::shared_ptr<Player> b = std::make_shared<AIPlayer>(roles[3]);
+
+    initNewGame(a, b);
+
+}
 
 void GameManager::saveGame() {
     std::vector<std::shared_ptr<PlayCard>> stack = std::vector<std::shared_ptr<PlayCard>>(cardStack.begin(),
@@ -145,6 +160,7 @@ int GameManager::getDefenseFromPlayer(const std::shared_ptr<Player> &target, int
     return s.getDefenseValue(*this);
 }
 
+
 int
 GameManager::getAttackDefenseFromPlayer(const std::shared_ptr<Player> &target, int attack) {
     UIController::switchPlayers(target);
@@ -162,7 +178,6 @@ GameManager::getCardFromPlayer(const std::shared_ptr<Player> &target) {
     return s.getCardFromPlayer();
 
 }
-
 
 void GameManager::loadSavedGameAndPlay() {
     auto x = cardFactory.getSavedPlayers();
