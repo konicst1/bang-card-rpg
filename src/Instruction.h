@@ -29,6 +29,10 @@ public:
 
     virtual int perform(GameManager &, std::shared_ptr<Player>, std::shared_ptr<Player>) { return 1; }
 
+    const std::string &getInstructionRepresentation() const {
+        return instructionRepresentation;
+    }
+
     virtual InstructionResponse getResponse(GameManager &m) {}
 
     static AffectedPlayer getAffectedPlayerByName(std::string name) {

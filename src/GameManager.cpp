@@ -43,7 +43,7 @@ std::shared_ptr<PlayCard> GameManager::getCardFromStack() {
     return r;
 }
 
-bool GameManager::givePlayerCardFromStack(std::shared_ptr<Player> player) {
+bool GameManager::givePlayerCardFromStack(const std::shared_ptr<Player> &player) {
     player->giveCard(this->getCardFromStack());
     return true;
 }
@@ -87,8 +87,8 @@ Move GameManager::nextMove() {
 
 void GameManager::selectPlayersAndInitNewGame() {
     //select roles
-    std::vector<std::shared_ptr<RoleCard> > roles = cardFactory.getAllRoleCards();
-    srand(unsigned(time(nullptr)));
+    std::vector<std::shared_ptr<RoleCard> > roles = CardFactory::getAllRoleCards();
+
     //shuffle roles
     std::shuffle(roles.begin(), roles.end(), std::mt19937(std::random_device()()));
 
@@ -114,21 +114,31 @@ void GameManager::selectPlayersAndInitNewGame() {
 
 
 void GameManager::saveGame() {
-    std::vector<std::shared_ptr<PlayCard>> stack = std::vector<std::shared_ptr<PlayCard>>(cardStack.begin(),cardStack.end());
-                    //todo
-  /*  DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
-                         this->playerA->getRole()->getInstructions(), this->playerA->getCards(),
-                         this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(),
-                         this->playerB.get()->getRole()->getInstructions(), this->playerB->getCards(),
-                         stack);*/
+    std::vector<std::shared_ptr<PlayCard>> stack = std::vector<std::shared_ptr<PlayCard>>(cardStack.begin(),
+                                                                                          cardStack.end());
+    if (turn) {
+        DataLoader::saveGame(this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(),
+                             this->playerB->getRole()->getInstructions(), this->playerB->getCards(),
+                             this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
+                             this->playerA->getRole()->getInstructions(), this->playerA->getCards(),
+                             stack);
+    } else {
+
+        DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
+                             this->playerA->getRole()->getInstructions(), this->playerA->getCards(),
+                             this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(),
+                             this->playerB->getRole()->getInstructions(), this->playerB->getCards(),
+                             stack);
+    }
+
 
 }
 
-void GameManager::putCardInStack(std::shared_ptr<PlayCard> card) {
+void GameManager::putCardInStack(const std::shared_ptr<PlayCard> &card) {
     this->cardStack.push_back(card);
 }
 
-int GameManager::getDefenseFromPlayer(std::shared_ptr<Player> target, int attack) {
+int GameManager::getDefenseFromPlayer(const std::shared_ptr<Player> &target, int attack) {
     UIController::switchPlayers(target);
     SubMove s = SubMove(target, attack);
     s.init();
@@ -136,7 +146,7 @@ int GameManager::getDefenseFromPlayer(std::shared_ptr<Player> target, int attack
 }
 
 int
-GameManager::getAttackDefenseFromPlayer(std::shared_ptr<Player> target, int attack) {
+GameManager::getAttackDefenseFromPlayer(const std::shared_ptr<Player> &target, int attack) {
     UIController::switchPlayers(target);
     SubMove s = SubMove(target, attack);
     s.init();
@@ -145,7 +155,7 @@ GameManager::getAttackDefenseFromPlayer(std::shared_ptr<Player> target, int atta
 
 
 std::shared_ptr<PlayCard>
-GameManager::getCardFromPlayer(std::shared_ptr<Player> target) {
+GameManager::getCardFromPlayer(const std::shared_ptr<Player> &target) {
     UIController::switchPlayers(target);
     SubMove s = SubMove(target, 0);
     s.init();
@@ -161,7 +171,7 @@ void GameManager::loadSavedGameAndPlay() {
     this->playerB = x[1];
 
     cardStack.clear();
-    for (auto c : cardFactory.getSavedStack()) {
+    for (const auto &c : cardFactory.getSavedStack()) {
         cardStack.push_back(c);
     }
 

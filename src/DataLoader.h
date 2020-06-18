@@ -30,11 +30,11 @@ public:
     /**
      * Persist gameplay.
      * */
-    static int saveGame(std::string player1Name, int player1Health, std::string player1Image,
-                        std::vector<std::shared_ptr<Instruction>> player1Instructions,
+    static int saveGame(const std::string& player1Name, int player1Health, const std::string& player1Image,
+                        const std::vector<std::shared_ptr<Instruction>>& player1Instructions,
                         std::vector<std::shared_ptr<PlayCard>> player1Cards,
-                        std::string player2Name, int player2Health, std::string player2Image,
-                        std::vector<std::shared_ptr<Instruction>> player2Instructions,
+                        const std::string& player2Name, int player2Health, const std::string& player2Image,
+                        const std::vector<std::shared_ptr<Instruction>>& player2Instructions,
                         std::vector<std::shared_ptr<PlayCard>> player2Cards,
                         std::vector<std::shared_ptr<PlayCard>> gameStack);
 
@@ -43,7 +43,7 @@ public:
      * @returns Vector of vectors of strings in this format: Player, PlayerStack
      * @param string: "player1" or "player2"
      * */
-    static std::vector<std::vector<std::string>> loadSavedPlayer(std::string player);
+    static std::vector<std::vector<std::string>> loadSavedPlayer(const std::string& player);
 
 
     /**
@@ -54,20 +54,20 @@ public:
     static std::vector<std::vector<std::string>> loadGameStack();
 
     /**Persists role card by given information. */
-    static void persistRoleCard(std::string image, std::string name, int health, std::vector<std::string> instructions);
+    static void persistRoleCard(const std::string& image, const std::string& name, int health, const std::vector<std::string>& instructions);
 
     /**Persists play attack card by given information. */
     static void
-    persistAttackCard(std::string image, std::string name, int leaderHealth, int leaderMana, int targetHealth,
-                      int targetMana, std::vector<std::string> instructions);
+    persistAttackCard(const std::string& image, const std::string& name, int leaderHealth, int leaderMana, int targetHealth,
+                      int targetMana, const std::vector<std::string>& instructions);
 
     /**Persists play defense card by given information. */
-    static void persistDefenseCard(std::string image, std::string name, int healthDefense, int manaDefense,
-                                   std::vector<std::string> instructions);
+    static void persistDefenseCard(const std::string& image, const std::string& name, int healthDefense, int manaDefense,
+                                   const std::vector<std::string>& instructions);
 
     /**Persists play card of other type by given information. */
-    static void persistOtherPlayCard(std::string image, std::string name,
-                                     std::vector<std::string> instructions);
+    static void persistOtherPlayCard(const std::string& image, const std::string& name,
+                                     const std::vector<std::string>& instructions);
 
 private:
     /**
