@@ -23,6 +23,8 @@ public:
         DEFENSE, ATTACK, NONE
     };
 
+
+
     explicit Instruction(std::string instructionRepresentation) : instructionRepresentation(std::move(
             instructionRepresentation)) {}
 

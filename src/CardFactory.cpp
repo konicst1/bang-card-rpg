@@ -12,6 +12,10 @@
 #include "AttackInstruction.h"
 #include "DefenseInstruction.h"
 #include "GiveCardInstruction.h"
+#include "AddHealthInstruction.h"
+#include "Instruction.h"
+#include "TakeCardInstruction.h"
+#include "RobCardInstruction.h"
 
 
 std::vector<std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
@@ -54,10 +58,10 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadPlayCards(std::vector<st
         }
 
 
-        PlayCard card = PlayCard(a[0], "spades", a[1], 9, ins);
-        PlayCard card1 = PlayCard(a[0], "heart", a[1], 9, ins);
-        PlayCard card2 = PlayCard(a[0], "diamond", a[1], 9, ins);
-        PlayCard card3 = PlayCard(a[0], "club", a[1], 9, ins);
+        PlayCard card = PlayCard(a[0], PlayCard::CardSymbol::HEART, a[1], 9, ins);
+        PlayCard card1 = PlayCard(a[0], PlayCard::CardSymbol::SPADES, a[1], 9, ins);
+        PlayCard card2 = PlayCard(a[0], PlayCard::CardSymbol::DIAMOND, a[1], 9, ins);
+        PlayCard card3 = PlayCard(a[0], PlayCard::CardSymbol::CLUB, a[1], 9, ins);
 
         cards.push_back(std::make_shared<PlayCard>(card));
         cards.push_back(std::make_shared<PlayCard>(card1));
@@ -153,7 +157,7 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadSavedPlayCards(std::vect
         for (unsigned int i = 4; i < a.size(); i++) {
             ins.push_back(buildInstruction(a[i]));
         }
-        PlayCard card = PlayCard(a[0], a[1], a[2], std::stoi(a[3]), ins);
+        PlayCard card = PlayCard(a[0], PlayCard::getCardSymbolByName(a[1]), a[2], std::stoi(a[3]), ins);
 
         cards.push_back(std::make_shared<PlayCard>(card));
 
@@ -184,9 +188,18 @@ std::shared_ptr<Instruction> CardFactory::buildInstruction(const std::string &in
                 AttackInstruction(ins, std::stoi(segList[1]), affectedPlayer, defenseType));
     } else if (segList[0] == "defense") {
         i = std::make_shared<DefenseInstruction>(DefenseInstruction(ins, std::stoi(segList[1])));
-    }else if(segList[0] == "giveCard"){
-        GiveCardInstruction::AffectedPlayer affectedPlayer = GiveCardInstruction::getAffectedPlayerByName(segList[1]);
+    } else if (segList[0] == "giveCard") {
+        Instruction::AffectedPlayer affectedPlayer = Instruction::getAffectedPlayerByName(segList[1]);
         i = std::make_shared<GiveCardInstruction>(GiveCardInstruction(ins, affectedPlayer));
+    } else if (segList[0] == "addHealth") {
+        Instruction::AffectedPlayer affectedPlayer = Instruction::getAffectedPlayerByName(segList[2]);
+        i = std::make_shared<AddHealthInstruction>(AddHealthInstruction(ins, std::stoi(segList[1]), affectedPlayer));
+    }else if(segList[0] == "takeCard"){
+        Instruction::AffectedPlayer affectedPlayer = Instruction::getAffectedPlayerByName(segList[1]);
+        i = std::make_shared<TakeCardInstruction>(TakeCardInstruction(ins, affectedPlayer));
+    }else if(segList[0] == "robCard"){
+        Instruction::AffectedPlayer affectedPlayer = Instruction::getAffectedPlayerByName(segList[1]);
+        i = std::make_shared<RobCardInstruction>(RobCardInstruction(ins, affectedPlayer));
     }
 
     return i;

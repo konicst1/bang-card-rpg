@@ -23,6 +23,8 @@ class Card {
 
 public:
 
+
+
     Card(const std::string &image, const std::string &name, std::vector<std::shared_ptr<Instruction>> instructions) {
         this->image = image;
         this->name = name;
@@ -45,7 +47,7 @@ public:
 
     InstructionResponse getResponse() {
         InstructionResponse res = InstructionResponse(0, 0, 1);
-        for(auto i : instructions){
+        for (auto i : instructions) {
             res = res + i->getResponse();
         }
         return res;

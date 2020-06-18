@@ -26,7 +26,7 @@ int SubMove::getDefenseValue(GameManager &m) {
         } else {
             InstructionResponse res = target->getCards()[cardNumber]->getResponse();
 
-            if(res.getDefensePower() < 0){
+            if (res.getDefensePower() < 0) {
                 UIController::println("Not a defensive card.");
                 continue;
             }
@@ -54,7 +54,7 @@ int SubMove::getAttackValue(GameManager &m) {
         } else {
             InstructionResponse res = target->getCards()[cardNumber]->getResponse();
 
-            if(res.getAttackPower() < 0){
+            if (res.getAttackPower() < 0) {
                 UIController::println("Not an attack card.");
                 continue;
             }
@@ -68,15 +68,15 @@ int SubMove::getAttackValue(GameManager &m) {
     }
 }
 
-std::shared_ptr<PlayCard> SubMove::getCardFromLeader() {
-  //  UIController::presentCards(this->leader->getCards());
-  //  UIController::println("You need to give up one of your cards..choose which one will it be.");
-  //  int cardNumber = leader->getCardChoice();
- //   cardNumber--; //make it an index
+std::shared_ptr<PlayCard> SubMove::getCardFromPlayer() {
+    UIController::presentCards(this->target->getCards());
+    UIController::println("You need to give up one of your cards..choose which one will it be.");
+    int cardNumber = target->getCardChoice();
+    cardNumber--; //make it an index
 
-  //  std::shared_ptr<PlayCard> res = leader->getCards()[cardNumber];
-  //  leader->removeCard(cardNumber);
-    return nullptr;
+    std::shared_ptr<PlayCard> res = target->getCards()[cardNumber];
+    target->removeCard(cardNumber);
+    return res;
 
 }
 

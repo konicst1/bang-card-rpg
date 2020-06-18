@@ -149,7 +149,7 @@ GameManager::getCardFromPlayer(std::shared_ptr<Player> target) {
     UIController::switchPlayers(target);
     SubMove s = SubMove(target, 0);
     s.init();
-    return s.getCardFromLeader();
+    return s.getCardFromPlayer();
 
 }
 

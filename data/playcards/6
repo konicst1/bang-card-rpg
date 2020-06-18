@@ -1,5 +1,4 @@
 playdef.png
 Saloon
-donor
-addHealthTarget
-addHealthLeader
+addHealth-1-leader
+addHealth-1-target

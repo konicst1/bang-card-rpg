@@ -43,7 +43,7 @@ public:
      * Get card from player.
      * @returns smart pointer of the card that has been given up
      * */
-    std::shared_ptr<PlayCard> getCardFromLeader();
+    std::shared_ptr<PlayCard> getCardFromPlayer();
 };
 
 
