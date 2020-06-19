@@ -5,6 +5,10 @@
 #include "AIPlayer.h"
 
 int AIPlayer::getDefenseChoice(int attackStrength) {
+    if(attackStrength <= 0){
+        return 0;
+    }
+
     //try to find the best defense
     for(unsigned int i = 0 ; i < getCards().size(); i++){
         if(getCards()[i]->getPotentialResponse().getDefensePower() >= attackStrength){
@@ -13,7 +17,7 @@ int AIPlayer::getDefenseChoice(int attackStrength) {
     }
     //do at least some defense
     for(unsigned int i = 0 ; i < getCards().size(); i++){
-        if(getCards()[i]->getPotentialResponse().getDefensePower() >= 0){
+        if(getCards()[i]->getPotentialResponse().getDefensePower() > 0){
             return (int)(i + 1);
         }
     }
@@ -22,6 +26,10 @@ int AIPlayer::getDefenseChoice(int attackStrength) {
 }
 
 int AIPlayer::getAttackChoice(int attackStrength) {
+    if(attackStrength <= 0){
+        return 0;
+    }
+
     //try to find the best defense
     for(unsigned int i = 0 ; i < getCards().size(); i++){
         if(getCards()[i]->getPotentialResponse().getAttackPower() >= attackStrength){
@@ -30,7 +38,7 @@ int AIPlayer::getAttackChoice(int attackStrength) {
     }
     //do at least some defense
     for(unsigned int i = 0 ; i < getCards().size(); i++){
-        if(getCards()[i]->getPotentialResponse().getAttackPower() >= 0){
+        if(getCards()[i]->getPotentialResponse().getAttackPower() > 0){
             return (int)(i + 1);
         }
     }
@@ -39,14 +47,14 @@ int AIPlayer::getAttackChoice(int attackStrength) {
 }
 
 int AIPlayer::getCardChoice() {
-    return 1; //todo
+    return 1;
 }
 
 int AIPlayer::getPlayChoice(Move &) {
     //first check for health
     if(health <= 2){
         for(unsigned int i = 0 ; i < getCards().size(); i++){
-            if(getCards()[i]->getPotentialResponse().getHealthAddition() >= 0){
+            if(getCards()[i]->getPotentialResponse().getHealthAddition() > 0){
                 return (int)(i + 1);
             }
         }
@@ -54,14 +62,14 @@ int AIPlayer::getPlayChoice(Move &) {
     //second check for card count
     if(cards.size() <= 4){
         for(unsigned int i = 0 ; i < getCards().size(); i++){
-            if(getCards()[i]->getPotentialResponse().getCardAddition() >= 0){
+            if(getCards()[i]->getPotentialResponse().getCardAddition() > 0){
                 return (int)(i + 1);
             }
         }
     }
     //third try to attack
     for(unsigned int i = 0 ; i < getCards().size(); i++){
-        if(getCards()[i]->getPotentialResponse().getAttackPower() >= 0){
+        if(getCards()[i]->getPotentialResponse().getAttackPower() > 0){
             return (int)(i + 1);
         }
     }

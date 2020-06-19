@@ -1,3 +1,5 @@
-default.png
-Lucky Duke
-4
+If next card is club, looses one life every move.
+Slab the Killer
+7
+ifNextCardIs-club
+attack-1-leader-none

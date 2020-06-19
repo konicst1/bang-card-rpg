@@ -28,11 +28,11 @@ int UIController::selectRole(const std::shared_ptr<RoleCard>&  a, const std::sha
 }
 
 
-void UIController::print(std::string a) {
+void UIController::print(const std::string& a) {
     std::cout << a;
 }
 
-void UIController::println(std::string b) {
+void UIController::println(const std::string& b) {
     std::cout << b << std::endl;
 }
 
@@ -71,6 +71,9 @@ int UIController::getChoice(int range, int lower) {
     //std::cout << std::endl << "What card would ya like to play?" << std::endl;
 
     while (true) {
+        if(std::cin.fail() || std::cin.eof()){
+            return 5; // todo kill application
+        }
         int r;
         std::cin >> r;
 
@@ -92,7 +95,7 @@ void UIController::clearScreen() {
     std::cout << std::string(100, '\n');
 }
 
-void UIController::switchPlayers(std::shared_ptr<Player> player) {
+void UIController::switchPlayers(const std::shared_ptr<Player>& player) {
     clearScreen();
     std::cout << "Switching to: " << player->getName() << std::endl;
     std::cout << "Enter any value to start switch." << std::endl;

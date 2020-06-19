@@ -29,13 +29,13 @@ public:
     /** Change control for another player
      * @param player = smart pointer of the player to control the game
      * */
-    static void switchPlayers(std::shared_ptr<Player> player);
+    static void switchPlayers(const std::shared_ptr<Player>& player);
 
     /** Show message to player*/
-    static void print(std::string a);
+    static void print(const std::string& a);
 
     /** Show message to player with new line.*/
-    static void println(std::string b);
+    static void println(const std::string& b);
 
     /**
      * Present string options.

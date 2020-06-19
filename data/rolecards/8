@@ -1,4 +1,5 @@
-Plays double-bang for free every move.
+If next card is diamond, plays double-bang for free every move.
 Willy the Kid
 4
+ifNextCardIs-diamond
 attack-2-target-defense

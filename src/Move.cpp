@@ -22,31 +22,36 @@ const std::shared_ptr<Player> &Move::getTarget() const {
 
 void Move::startMove(GameManager &m) {
     int continueFlag = 1;
-
     //perform players role special ability
     for(const auto& instruction : leader->getRole()->getInstructions()){
         if(continueFlag){
             continueFlag = instruction->perform(m, leader, target);
         }
     }
-
+    //check if ability killed anyone
+    if ((leader->getHealth() <= 0) || (target->getHealth() <= 0)) {
+        return;
+    }
 
     int cardNumber = leader->getPlayChoice(*this);
     cardNumber--; //make it an index
-    //  leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
+
+    auto c = leader->getCards()[cardNumber];
+
+    //put card back to stack
+    m.putCardInStack(leader->getCards()[cardNumber]);
+    leader->removeCard(cardNumber);
 
     continueFlag = 1;
 
-    for(const auto& instruction : leader->getCards()[cardNumber]->getInstructions()){
+    for(const auto& instruction : c->getInstructions()){
         if(continueFlag){
             continueFlag = instruction->perform(m, leader, target);
         }
     }
 
 
-    //put card back to stack
-    m.putCardInStack(leader->getCards()[cardNumber]);
-    leader->removeCard(cardNumber);
+
 
 
     m.givePlayerCardFromStack(leader);
