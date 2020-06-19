@@ -38,7 +38,7 @@ std::vector<std::vector<std::string>> DataLoader::loadAllPlayCards() {
     return res;
 }
 
-std::vector<std::vector<std::string>> DataLoader::loadSavedPlayer(const std::string& player) {
+std::vector<std::vector<std::string>> DataLoader::loadSavedPlayer(const std::string &player) {
     std::vector<std::vector<std::string> > res;
     std::ifstream file = std::ifstream("../data/save/" + player);
     res.push_back(loadCard(file));
@@ -85,11 +85,11 @@ std::vector<std::vector<std::string>> DataLoader::loadGameStack() {
 }
 
 ////    PlayCard role = RoleCard(/*image*/ a[0], /*name*/ a[1],/*health count*/ std::stoi(a[2]), b);
-int DataLoader::saveGame(const std::string& player1Name, int player1Health, const std::string& player1Image,
-                         const std::vector<std::shared_ptr<Instruction>>& player1Instructions,
+int DataLoader::saveGame(const std::string &player1Name, int player1Health, const std::string &player1Image,
+                         const std::vector<std::shared_ptr<Instruction>> &player1Instructions,
                          std::vector<std::shared_ptr<PlayCard>> player1Cards,
-                         const std::string& player2Name, int player2Health, const std::string& player2Image,
-                         const std::vector<std::shared_ptr<Instruction>>& player2Instructions,
+                         const std::string &player2Name, int player2Health, const std::string &player2Image,
+                         const std::vector<std::shared_ptr<Instruction>> &player2Instructions,
                          std::vector<std::shared_ptr<PlayCard>> player2Cards,
                          std::vector<std::shared_ptr<PlayCard>> gameStack) {
     std::ofstream f = std::ofstream("../data/save/player1");
@@ -108,7 +108,7 @@ int DataLoader::saveGame(const std::string& player1Name, int player1Health, cons
         return 0;
     }
     f << player1Image << std::endl << player1Name << std::endl << player1Health << std::endl;
-    for (const auto& s : player1Instructions) {
+    for (const auto &s : player1Instructions) {
         f << s->getInstructionRepresentation() << std::endl;
     }
     if (!f.good()) {
@@ -122,7 +122,7 @@ int DataLoader::saveGame(const std::string& player1Name, int player1Health, cons
 
     f = std::ofstream("../data/save/player2");
     f << player2Image << std::endl << player2Name << std::endl << player2Health << std::endl;
-    for (const auto& s : player2Instructions) {
+    for (const auto &s : player2Instructions) {
         f << s->getInstructionRepresentation() << std::endl;
     }
     f.close();
@@ -147,10 +147,11 @@ int DataLoader::saveGame(const std::string& player1Name, int player1Health, cons
     for (unsigned int i = 0; i < player1Cards.size(); i++) {
         f = std::ofstream("../data/save/player1Cards/" + std::to_string(i + 1));
         auto s = player1Cards[i];
-        f << s->getImage() << std::endl << PlayCard::getCardSymbolAsString(s->getSymbol()) << std::endl << s->getName() << std::endl << s->getNumber()
+        f << s->getImage() << std::endl << PlayCard::getCardSymbolAsString(s->getSymbol()) << std::endl << s->getName()
+          << std::endl << s->getNumber()
           << std::endl;
 
-        for (const auto& j : s->getInstructions()) {
+        for (const auto &j : s->getInstructions()) {
             f << j->getInstructionRepresentation() << std::endl;
         }
     }
@@ -165,11 +166,12 @@ int DataLoader::saveGame(const std::string& player1Name, int player1Health, cons
     for (unsigned int i = 0; i < player2Cards.size(); i++) {
         auto s = player2Cards[i];
         f = std::ofstream("../data/save/player2Cards/" + std::to_string(i + 1));
-        f << s->getImage() << std::endl << PlayCard::getCardSymbolAsString(s->getSymbol()) << std::endl << s->getName() << std::endl << s->getNumber()
+        f << s->getImage() << std::endl << PlayCard::getCardSymbolAsString(s->getSymbol()) << std::endl << s->getName()
+          << std::endl << s->getNumber()
           << std::endl;
 
 
-        for (const auto& j : s->getInstructions()) {
+        for (const auto &j : s->getInstructions()) {
             f << j->getInstructionRepresentation() << std::endl;
         }
     }
@@ -185,11 +187,12 @@ int DataLoader::saveGame(const std::string& player1Name, int player1Health, cons
     for (unsigned int i = 0; i < gameStack.size(); i++) {
         auto s = gameStack[i];
         f = std::ofstream("../data/save/gameStack/" + std::to_string(i + 1));
-        f << s->getImage() << std::endl << PlayCard::getCardSymbolAsString(s->getSymbol()) << std::endl << s->getName() << std::endl << s->getNumber()
-          << std::endl ;
+        f << s->getImage() << std::endl << PlayCard::getCardSymbolAsString(s->getSymbol()) << std::endl << s->getName()
+          << std::endl << s->getNumber()
+          << std::endl;
 
 
-        for (const auto& j : s->getInstructions()) {
+        for (const auto &j : s->getInstructions()) {
             f << j->getInstructionRepresentation() << std::endl;
         }
     }
@@ -203,9 +206,9 @@ int DataLoader::saveGame(const std::string& player1Name, int player1Health, cons
 }
 
 
-
 void
-DataLoader::persistRoleCard(const std::string& image, const std::string& name, int health, const std::vector<std::string>& instructions) {
+DataLoader::persistRoleCard(const std::string &image, const std::string &name, int health,
+                            const std::vector<std::string> &instructions) {
     std::ifstream f = std::ifstream("../data/rolecards/rolesTotal");
     int n;
     f >> n;
@@ -217,32 +220,15 @@ DataLoader::persistRoleCard(const std::string& image, const std::string& name, i
     o = std::ofstream("../data/rolecards/" + std::to_string(n));
 
     o << image << std::endl << name << std::endl << health << std::endl;
-    for (const auto& i : instructions) {
+    for (const auto &i : instructions) {
         o << i << std::endl;
     }
     o.close();
 
 }
 
-void
-DataLoader::persistAttackCard(const std::string& image, const std::string& name, int leaderHealth, int leaderMana, int targetHealth,
-                              int targetMana, const std::vector<std::string>& instructions) {
-
-    int n = persistPlayCard();
-    std::ofstream o = std::ofstream("../data/playcards/" + std::to_string(n));
-
-    o << image << std::endl << name << std::endl << "attack" << std::endl << leaderHealth << std::endl << leaderMana
-      << std::endl << targetHealth
-      << std::endl << targetMana << std::endl;
-    for (const auto& i : instructions) {
-        o << i << std::endl;
-    }
-    o.close();
-
-
-}
-
-int DataLoader::persistPlayCard() {
+int DataLoader::persistPlayCard(const std::string &image, const std::string &name,
+                                const std::vector<std::string> &instructions) {
     std::ifstream f = std::ifstream("../data/playcards/cardsTotal");
     int n;
     f >> n;
@@ -251,33 +237,17 @@ int DataLoader::persistPlayCard() {
 
     std::ofstream o = std::ofstream("../data/playcards/cardsTotal");
     o << n;
+    o.close();
+    o = std::ofstream("../data/playcards/" + std::to_string(n));
 
-    return n;
-}
-
-void DataLoader::persistDefenseCard(const std::string& image, const std::string& name, int healthDefense, int manaDefense,
-                                    const std::vector<std::string>& instructions) {
-    int n = persistPlayCard();
-    std::ofstream o = std::ofstream("../data/playcards/" + std::to_string(n));
-
-    o << image << std::endl << name << std::endl << "defense" << std::endl
-     << healthDefense << std::endl << manaDefense << std::endl;
-    for (const auto& i : instructions) {
+    o << image << std::endl << name << std::endl;
+    for (const auto &i : instructions) {
         o << i << std::endl;
     }
     o.close();
-
+    return 1;
 }
 
-void DataLoader::persistOtherPlayCard(const std::string& image, const std::string& name, const std::vector<std::string>& instructions) {
-    int n = persistPlayCard();
-    std::ofstream o = std::ofstream("../data/playcards/" + std::to_string(n));
 
-    o << image << std::endl << name << std::endl << "other" << std::endl;
-    for (const auto& i : instructions) {
-        o << i << std::endl;
-    }
-    o.close();
 
-}
 

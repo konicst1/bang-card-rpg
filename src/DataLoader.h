@@ -56,18 +56,13 @@ public:
     /**Persists role card by given information. */
     static void persistRoleCard(const std::string& image, const std::string& name, int health, const std::vector<std::string>& instructions);
 
-    /**Persists play attack card by given information. */
-    static void
-    persistAttackCard(const std::string& image, const std::string& name, int leaderHealth, int leaderMana, int targetHealth,
-                      int targetMana, const std::vector<std::string>& instructions);
 
-    /**Persists play defense card by given information. */
-    static void persistDefenseCard(const std::string& image, const std::string& name, int healthDefense, int manaDefense,
-                                   const std::vector<std::string>& instructions);
+    /**
+     * Persist Play Card
+     * @returns name of the new file for tha play card
+     * */
+    static int persistPlayCard(const std::string& image, const std::string& name, const std::vector<std::string>& instructions);
 
-    /**Persists play card of other type by given information. */
-    static void persistOtherPlayCard(const std::string& image, const std::string& name,
-                                     const std::vector<std::string>& instructions);
 
 private:
     /**
@@ -78,10 +73,6 @@ private:
     static std::vector<std::string> loadCard(std::ifstream& file);
 
 
-    /**
-     * @returns name of the new file for tha play card
-     * */
-    static int persistPlayCard();
 
 };
 

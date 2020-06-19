@@ -50,38 +50,15 @@ void CardBuilderPersister::createPlayCard() {
     image = UIController::getStringInput();
     UIController::println("Enter name of the card.");
     name = UIController::getStringInput();
-    UIController::println("Enter type of the card (defense/attack/other).");
-    type = UIController::getStringInput();
 
-    if (type == "attack") {
-        int leaderHealth, leaderMana, targetHealth, targetMana;
-        UIController::println("Enter leader health decrease.");
-        leaderHealth = UIController::getIntInput();
-        UIController::println("Enter leader mana decrease.");
-        leaderMana = UIController::getIntInput();
-        UIController::println("Enter target health decrease.");
-        targetHealth = UIController::getIntInput();
-        UIController::println("Enter target mana decrease.");
-        targetMana = UIController::getIntInput();
-        DataLoader::persistAttackCard(image, name, leaderHealth, leaderMana, targetHealth, targetMana,
-                                      loadInstructions());
-    } else if (type == "defense") {
-        int healthDef, manaDef;
-        UIController::println("Enter health defense.");
-        healthDef = UIController::getIntInput();
-        UIController::println("Enter mana defense.");
-        manaDef = UIController::getIntInput();
-        DataLoader::persistDefenseCard(image, name, healthDef, manaDef, loadInstructions());
-    } else {
-        DataLoader::persistOtherPlayCard(image, name, loadInstructions());
-    }
+    UIController::println("Enter instructions to define ability. Enter \"done\" when done.");
 
-
+    DataLoader::persistPlayCard(image, name, loadInstructions());
 }
 
-bool CardBuilderPersister::instructionExists(std::string s) {
-    for (auto i : instructionSet) {
-        if (i == s) {
+bool CardBuilderPersister::instructionExists(const std::string& s) {
+    for (const auto& i : instructionRegexSet) {
+        if (std::regex_match(s, i)) {
             return true;
         }
     }
@@ -91,7 +68,7 @@ bool CardBuilderPersister::instructionExists(std::string s) {
 std::vector<std::string> CardBuilderPersister::loadInstructions() {
 
     UIController::println("Valid instructions are: ");
-    UIController::presentOptions(instructionSet);
+    UIController::presentOptions(instructionStringSet);
     std::vector<std::string> instructions;
     UIController::println("Enter instructions to define ability. Enter \"done\" when done.");
     while (true) {

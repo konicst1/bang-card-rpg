@@ -45,6 +45,9 @@ std::shared_ptr<PlayCard> GameManager::getCardFromStack() {
 }
 
 bool GameManager::givePlayerCardFromStack(const std::shared_ptr<Player> &player) {
+    if(cardStack.empty()){
+        return false;
+    }
     player->giveCard(this->getCardFromStack());
     return true;
 }
