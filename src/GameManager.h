@@ -27,6 +27,8 @@ class GameManager {
 
     int turn = 1;                                       //int that declares which player is on the move (0 or 1)
 
+    bool singlePlayer = false;
+
 
 public:
     /** Default constructor */
@@ -112,12 +114,14 @@ public:
      * @param target = smart pointer of the second player
      * @returns Smart pointer of PlayCard that lead player gave up
      * */
-    static std::shared_ptr<PlayCard> getCardFromPlayer(const std::shared_ptr<Player>& target);
+    std::shared_ptr<PlayCard> getCardFromPlayer(const std::shared_ptr<Player>& target);
 
     /**
      * Persist the current gameplay. This overwrites any other saved gameplays.
      * */
     void saveGame();
+
+
 
 
 };

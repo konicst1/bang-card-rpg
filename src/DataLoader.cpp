@@ -91,7 +91,7 @@ int DataLoader::saveGame(const std::string &player1Name, int player1Health, cons
                          const std::string &player2Name, int player2Health, const std::string &player2Image,
                          const std::vector<std::shared_ptr<Instruction>> &player2Instructions,
                          std::vector<std::shared_ptr<PlayCard>> player2Cards,
-                         std::vector<std::shared_ptr<PlayCard>> gameStack) {
+                         std::vector<std::shared_ptr<PlayCard>> gameStack, bool singlePlayer) {
     std::ofstream f = std::ofstream("../data/save/player1");
 
     /*
@@ -201,6 +201,15 @@ int DataLoader::saveGame(const std::string &player1Name, int player1Health, cons
         return 0;
     }
 
+    f = std::ofstream("../data/save/singlePlayer");
+    f<< singlePlayer;
+    f.close();
+    if (!f.good()) {
+        return 0;
+    }
+
+
+
 
     return 1;
 }
@@ -246,6 +255,14 @@ int DataLoader::persistPlayCard(const std::string &image, const std::string &nam
     }
     o.close();
     return 1;
+}
+
+int DataLoader::savedGameSingleplayer() {
+    std::ifstream f = std::ifstream("../data/save/singlePlayer");
+    int n;
+    f >> n;
+    f.close();
+    return n;
 }
 
 

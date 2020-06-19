@@ -36,7 +36,7 @@ public:
                         const std::string& player2Name, int player2Health, const std::string& player2Image,
                         const std::vector<std::shared_ptr<Instruction>>& player2Instructions,
                         std::vector<std::shared_ptr<PlayCard>> player2Cards,
-                        std::vector<std::shared_ptr<PlayCard>> gameStack);
+                        std::vector<std::shared_ptr<PlayCard>> gameStack, bool singlePlayer);
 
     /**
      * Load saved player data from previous gameplay.
@@ -56,6 +56,10 @@ public:
     /**Persists role card by given information. */
     static void persistRoleCard(const std::string& image, const std::string& name, int health, const std::vector<std::string>& instructions);
 
+    /**
+     * @returns 1 if saved game is single playe, else return 0
+     * **/
+    static int savedGameSingleplayer();
 
     /**
      * Persist Play Card

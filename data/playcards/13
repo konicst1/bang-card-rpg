@@ -1,4 +1,4 @@
-playdef.png
+if next card in pack is spades, then enemy looses 4 lifes
 Dinamite
 ifNextCardIs-spades
 attack-4-target-none

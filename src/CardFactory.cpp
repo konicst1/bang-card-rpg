@@ -17,6 +17,7 @@
 #include "TakeCardInstruction.h"
 #include "RobCardInstruction.h"
 #include "IfNextCardIsInstruction.h"
+#include "AIPlayer.h"
 
 
 std::vector<std::shared_ptr<RoleCard> > CardFactory::getAllRoleCards() {
@@ -105,10 +106,17 @@ std::vector<std::shared_ptr<Player> > CardFactory::getSavedPlayers() {
     for (unsigned int i = 1; i < data.size(); i++) {
         ins2.push_back(data[i]);
     }
-    Player p2 = Player(loadSavedPlayCards(ins2), loadRoleCards(ins)[0]);
+    std::shared_ptr<Player> p2;
+
+    if(DataLoader::savedGameSingleplayer()){
+         p2 = std::make_shared<AIPlayer>(AIPlayer(loadSavedPlayCards(ins2), loadRoleCards(ins)[0]));
+    }else{
+         p2 = std::make_shared<Player>(Player(loadSavedPlayCards(ins2), loadRoleCards(ins)[0]));
+    }
+
 
     result.push_back(std::make_shared<Player>(p1));
-    result.push_back(std::make_shared<Player>(p2));
+    result.push_back(p2);
 
     return result;
 

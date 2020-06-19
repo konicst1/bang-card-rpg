@@ -57,13 +57,17 @@ void GameManager::startGame() {
     while (true) {
         UIController::clearScreen();
         Move move = nextMove();
-        int con = move.init();
-        if (con == 2) {
-            saveGame();
-            break;
-        } else if (con == 3) {
-            break;
+        if(!singlePlayer || !turn){
+            int con = move.init();
+            if (con == 2) {
+                saveGame();
+                break;
+            } else if (con == 3) {
+                break;
+            }
         }
+
+
         move.startMove(*this);
 
         if ((playerA->getHealth() <= 0) || (playerB->getHealth() <= 0)) {
@@ -108,6 +112,7 @@ void GameManager::selectPlayersAndInitNewGame() {
 
     Player a = Player(roles[roleA - 1]);
     Player b = Player(roles[roleB + 2]);
+    this->singlePlayer = false;
 
     initNewGame(std::make_shared<Player>(a), std::make_shared<Player>(b));
 }
@@ -127,6 +132,8 @@ void GameManager::selectPlayerAndInitSinglePlayerGame() {
     std::shared_ptr<Player> a = std::make_shared<Player>(Player(roles[roleA - 1]));
     std::shared_ptr<Player> b = std::make_shared<AIPlayer>(roles[3]);
 
+    this->singlePlayer = true;
+
     initNewGame(a, b);
 
 }
@@ -139,14 +146,14 @@ void GameManager::saveGame() {
                              this->playerB->getRole()->getInstructions(), this->playerB->getCards(),
                              this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
                              this->playerA->getRole()->getInstructions(), this->playerA->getCards(),
-                             stack);
+                             stack, singlePlayer);
     } else {
 
         DataLoader::saveGame(this->playerA->getName(), this->playerA->getHealth(), this->playerA->getRole()->getImage(),
                              this->playerA->getRole()->getInstructions(), this->playerA->getCards(),
                              this->playerB->getName(), this->playerB->getHealth(), this->playerB->getRole()->getImage(),
                              this->playerB->getRole()->getInstructions(), this->playerB->getCards(),
-                             stack);
+                             stack, singlePlayer);
     }
 
 
@@ -157,27 +164,33 @@ void GameManager::putCardInStack(const std::shared_ptr<PlayCard> &card) {
 }
 
 int GameManager::getDefenseFromPlayer(const std::shared_ptr<Player> &target, int attack) {
-    UIController::switchPlayers(target);
     SubMove s = SubMove(target, attack);
-    s.init();
+    if(!singlePlayer){
+        UIController::switchPlayers(target);
+        s.init();
+    }
     return s.getDefenseValue(*this);
 }
 
 
 int
 GameManager::getAttackDefenseFromPlayer(const std::shared_ptr<Player> &target, int attack) {
-    UIController::switchPlayers(target);
     SubMove s = SubMove(target, attack);
-    s.init();
+    if(!singlePlayer){
+        UIController::switchPlayers(target);
+        s.init();
+    }
     return s.getAttackValue(*this);
 }
 
 
 std::shared_ptr<PlayCard>
 GameManager::getCardFromPlayer(const std::shared_ptr<Player> &target) {
-    UIController::switchPlayers(target);
     SubMove s = SubMove(target, 0);
-    s.init();
+    if(!singlePlayer){
+        UIController::switchPlayers(target);
+        s.init();
+    }
     return s.getCardFromPlayer();
 
 }
@@ -187,6 +200,8 @@ void GameManager::loadSavedGameAndPlay() {
 
     this->playerA = x[0];
     this->playerB = x[1];
+
+    this->singlePlayer = DataLoader::savedGameSingleplayer();
 
     cardStack.clear();
     for (const auto &c : cardFactory.getSavedStack()) {
