@@ -1,3 +1,5 @@
-default.png
+If next card is heart, gets and extra life.
 Bart Cassidy
-4
+3
+ifNextCardIs-heart
+addHealth-1-leader

@@ -1,3 +1,5 @@
-default.png
+If next card is club, looses one life every move.
 Slab the Killer
-4
+8
+ifNextCardIs-club
+attack-1-leader-none

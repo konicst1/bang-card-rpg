@@ -37,7 +37,6 @@ void GameManager::initNewGame(std::shared_ptr<Player> p1, std::shared_ptr<Player
 }
 
 
-
 std::shared_ptr<PlayCard> GameManager::getCardFromStack() {
     auto r = this->cardStack.front();
     this->cardStack.pop_front();
@@ -45,7 +44,7 @@ std::shared_ptr<PlayCard> GameManager::getCardFromStack() {
 }
 
 bool GameManager::givePlayerCardFromStack(const std::shared_ptr<Player> &player) {
-    if(cardStack.empty()){
+    if (cardStack.empty()) {
         return false;
     }
     player->giveCard(this->getCardFromStack());
@@ -57,7 +56,7 @@ void GameManager::startGame() {
     while (true) {
         UIController::clearScreen();
         Move move = nextMove();
-        if(!singlePlayer || !turn){
+        if (!singlePlayer || !turn) {
             int con = move.init();
             if (con == 2) {
                 saveGame();
@@ -105,9 +104,13 @@ void GameManager::selectPlayersAndInitNewGame() {
 
     //give each player 3 roles to choose from
     UIController::println("Player A, please, select your character:");
-    int roleA = ui.selectRole(roles[0]->getName(), roles[1]->getName(), roles[2]->getName());
+    int roleA = ui.selectRole(roles[0],
+                              roles[1],
+                              roles[2]);
     UIController::println("Player B, please, select your character:");
-    int roleB = ui.selectRole(roles[3]->getName(), roles[4]->getName(), roles[5]->getName());
+    int roleB = ui.selectRole(roles[3],
+                              roles[4],
+                              roles[5]);
 
 
     Player a = Player(roles[roleA - 1]);
@@ -127,7 +130,9 @@ void GameManager::selectPlayerAndInitSinglePlayerGame() {
     UIController::clearScreen();
     //give each player 3 roles to choose from
     UIController::println("Player A, please, select your character:");
-    int roleA = ui.selectRole(roles[0]->getName(), roles[1]->getName(), roles[2]->getName());
+    int roleA = ui.selectRole(roles[0],
+                              roles[1],
+                              roles[2]);
 
     std::shared_ptr<Player> a = std::make_shared<Player>(Player(roles[roleA - 1]));
     std::shared_ptr<Player> b = std::make_shared<AIPlayer>(roles[3]);
@@ -165,7 +170,7 @@ void GameManager::putCardInStack(const std::shared_ptr<PlayCard> &card) {
 
 int GameManager::getDefenseFromPlayer(const std::shared_ptr<Player> &target, int attack) {
     SubMove s = SubMove(target, attack);
-    if(!singlePlayer){
+    if (!singlePlayer) {
         UIController::switchPlayers(target);
         s.init();
     }
@@ -176,7 +181,7 @@ int GameManager::getDefenseFromPlayer(const std::shared_ptr<Player> &target, int
 int
 GameManager::getAttackDefenseFromPlayer(const std::shared_ptr<Player> &target, int attack) {
     SubMove s = SubMove(target, attack);
-    if(!singlePlayer){
+    if (!singlePlayer) {
         UIController::switchPlayers(target);
         s.init();
     }
@@ -187,7 +192,7 @@ GameManager::getAttackDefenseFromPlayer(const std::shared_ptr<Player> &target, i
 std::shared_ptr<PlayCard>
 GameManager::getCardFromPlayer(const std::shared_ptr<Player> &target) {
     SubMove s = SubMove(target, 0);
-    if(!singlePlayer){
+    if (!singlePlayer) {
         UIController::switchPlayers(target);
         s.init();
     }

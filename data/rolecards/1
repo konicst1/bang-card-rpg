@@ -1,3 +1,5 @@
-default.png
+If next card is club, enemy looses one life every move
 El Gringo
 3
+ifNextCardIs-club
+attack-1-target-none

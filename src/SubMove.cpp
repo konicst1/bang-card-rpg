@@ -24,12 +24,14 @@ int SubMove::getDefenseValue(GameManager &m) {
         if (cardNumber == -1) {
             return defense;
         } else {
-            InstructionResponse res = target->getCards()[cardNumber]->getResponse(m);
+            InstructionResponse res = target->getCards()[cardNumber]->getPotentialResponse();
 
-            if (res.getDefensePower() < 0) {
+            if (res.getDefensePower() <= 0) {
                 UIController::println("Not a defensive card.");
                 continue;
             }
+
+            res = target->getCards()[cardNumber]->getResponse(m);
 
             //put card back to stack
             m.putCardInStack(target->getCards()[cardNumber]);
@@ -57,12 +59,14 @@ int SubMove::getAttackValue(GameManager &m) {
         if (cardNumber == -1) {
             return attack;
         } else {
-            InstructionResponse res = target->getCards()[cardNumber]->getResponse(m);
+            InstructionResponse res = target->getCards()[cardNumber]->getPotentialResponse();
 
-            if (res.getAttackPower() < 0) {
+            if (res.getAttackPower() <= 0) {
                 UIController::println("Not an attack card.");
                 continue;
             }
+            res = target->getCards()[cardNumber]->getResponse(m);
+
             //put card back to stack
             m.putCardInStack(target->getCards()[cardNumber]);
             target->removeCard(cardNumber);

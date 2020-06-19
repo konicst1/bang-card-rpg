@@ -31,11 +31,11 @@ AttackInstruction::AttackInstruction(const std::string &instructionRepresentatio
         defenseType) {}
 
 InstructionResponse AttackInstruction::getResponse(GameManager &) {
-    return {attackPower, -1, 1, -1, -1};
+    return {attackPower, 0, 1, 0, 0};
 }
 
 InstructionResponse AttackInstruction::getPotentialResponse() {
-    return {attackPower, -1, 1, -1, -1};
+    return {attackPower, 0, 1, 0, 0};
 }
 
 

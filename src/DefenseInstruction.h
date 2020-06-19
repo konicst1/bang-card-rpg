@@ -22,11 +22,11 @@ public:
     int perform(GameManager &, std::shared_ptr<Player> , std::shared_ptr<Player> ) override {return 1;}
 
     InstructionResponse getResponse(GameManager &) override {
-        return {-1, defensePower, 1, -1, -1};
+        return {0, defensePower, 1, 0, 0};
     }
 
     InstructionResponse getPotentialResponse()override {
-        return {-1, defensePower, 1, -1, -1};
+        return {0, defensePower, 1, 0, 0};
     }
 };
 

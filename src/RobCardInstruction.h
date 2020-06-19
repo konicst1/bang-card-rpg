@@ -25,14 +25,12 @@ public:
     }
 
     InstructionResponse getResponse(GameManager &) override {
-        return {-1, -1, 1, -1, 1};
+        return {0, 0, 1, 0, 1};
     }
 
     InstructionResponse getPotentialResponse() override {
-        return {-1, -1, 1, -1 ,1};
+        return {0, 0, 1, 0 ,1};
     }
 };
-
-
 
 

@@ -21,12 +21,21 @@ const std::shared_ptr<Player> &Move::getTarget() const {
 }
 
 void Move::startMove(GameManager &m) {
+    int continueFlag = 1;
+
+    //perform players role special ability
+    for(const auto& instruction : leader->getRole()->getInstructions()){
+        if(continueFlag){
+            continueFlag = instruction->perform(m, leader, target);
+        }
+    }
+
 
     int cardNumber = leader->getPlayChoice(*this);
     cardNumber--; //make it an index
     //  leader->getCards()[cardNumber-1]->getAction()->perform(this->leader, this->target);
 
-    int continueFlag = 1;
+    continueFlag = 1;
 
     for(const auto& instruction : leader->getCards()[cardNumber]->getInstructions()){
         if(continueFlag){

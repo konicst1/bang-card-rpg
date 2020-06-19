@@ -16,12 +16,12 @@ public:
     /**
      * Starts the game.
      * */
-    void startGame();
+    static void startGame();
 
     /**
      * @returns int in range {1 - 3} that stands for index+1 of name of selected role offered to player
      * */
-    int selectRole(std::string a, std::string b, std::string c);
+    int selectRole(const std::shared_ptr<RoleCard>&  a, const std::shared_ptr<RoleCard>&  b, const std::shared_ptr<RoleCard>&  c);
 
     /** Clear the screen.*/
     static void clearScreen();

@@ -8,11 +8,11 @@
 #include "UIController.h"
 
 
-int UIController::selectRole(std::string a, std::string b, std::string c) {
+int UIController::selectRole(const std::shared_ptr<RoleCard>&  a, const std::shared_ptr<RoleCard>&  b, const std::shared_ptr<RoleCard>&  c) {
 
-    std::cout << "(1) " << a << std::endl;
-    std::cout << "(2) " << b << std::endl;
-    std::cout << "(3) " << c << std::endl;
+    std::cout << "(1) " << a->getName() << "  -  " << a->getHealthCount() << "hp     " << "(" << a->getImage() << ")" << std::endl;
+    std::cout << "(2) " << b->getName() << "  -  " << b->getHealthCount() << "hp     " << "(" << b->getImage() << ")" << std::endl;
+    std::cout << "(3) " << c->getName() << "  -  " << c->getHealthCount() << "hp     " << "(" << c->getImage() << ")" << std::endl;
     int r;
     while (true) {
         std::cin >> r;
