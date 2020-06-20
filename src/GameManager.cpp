@@ -105,22 +105,19 @@ void GameManager::selectPlayersAndInitNewGame() {
     UIController::clearScreen();
     int roleA, roleB;
 
-        //give each player 3 roles to choose from
-        UIController::println("Player A, please, select your character:");
+    //give each player 3 roles to choose from
+    UIController::println("Player A, please, select your character:");
     try {
         roleA = ui.selectRole(roles[0],
-                                  roles[1],
-                                  roles[2]);
-    }catch (std::invalid_argument& e){
+                              roles[1],
+                              roles[2]);
+    } catch (std::invalid_argument &e) {
         return;
     }
-        UIController::println("Player B, please, select your character:");
-        roleB = ui.selectRole(roles[3],
-                                  roles[4],
-                                  roles[5]);
-
-
-
+    UIController::println("Player B, please, select your character:");
+    roleB = ui.selectRole(roles[3],
+                          roles[4],
+                          roles[5]);
 
 
     Player a = Player(roles[roleA - 1]);
@@ -131,24 +128,29 @@ void GameManager::selectPlayersAndInitNewGame() {
 }
 
 void GameManager::selectPlayerAndInitSinglePlayerGame() {
-    //select roles
-    std::vector<std::shared_ptr<RoleCard> > roles = CardFactory::getAllRoleCards();
+    std::shared_ptr<Player> a;
+    std::shared_ptr<Player> b;
+    try {
+        //select roles
+        std::vector<std::shared_ptr<RoleCard> > roles = CardFactory::getAllRoleCards();
 
-    //shuffle roles
-    std::shuffle(roles.begin(), roles.end(), std::mt19937(std::random_device()()));
+        //shuffle roles
+        std::shuffle(roles.begin(), roles.end(), std::mt19937(std::random_device()()));
 
-    UIController::clearScreen();
-    //give each player 3 roles to choose from
-    UIController::println("Player A, please, select your character:");
-    int roleA = ui.selectRole(roles[0],
-                              roles[1],
-                              roles[2]);
+        UIController::clearScreen();
+        //give each player 3 roles to choose from
+        UIController::println("Player A, please, select your character:");
+        int roleA = ui.selectRole(roles[0],
+                                  roles[1],
+                                  roles[2]);
 
-    std::shared_ptr<Player> a = std::make_shared<Player>(Player(roles[roleA - 1]));
-    std::shared_ptr<Player> b = std::make_shared<AIPlayer>(roles[3]);
+        a = std::make_shared<Player>(Player(roles[roleA - 1]));
+        b = std::make_shared<AIPlayer>(roles[3]);
 
-    this->singlePlayer = true;
-
+        this->singlePlayer = true;
+    } catch (std::invalid_argument &e) {
+        UIController::println("Error loading data.");
+    }
     initNewGame(a, b);
 
 }
@@ -211,17 +213,23 @@ GameManager::getCardFromPlayer(const std::shared_ptr<Player> &target) {
 }
 
 void GameManager::loadSavedGameAndPlay() {
-    auto x = cardFactory.getSavedPlayers();
+    try {
+        auto x = CardFactory::getSavedPlayers();
 
-    this->playerA = x[0];
-    this->playerB = x[1];
+        this->playerA = x[0];
+        this->playerB = x[1];
 
-    this->singlePlayer = DataLoader::savedGameSingleplayer();
+        this->singlePlayer = DataLoader::savedGameSingleplayer();
 
-    cardStack.clear();
-    for (const auto &c : cardFactory.getSavedStack()) {
-        cardStack.push_back(c);
+        cardStack.clear();
+        for (const auto &c : CardFactory::getSavedStack()) {
+            cardStack.push_back(c);
+        }
+    } catch (std::invalid_argument &e) {
+        UIController::println("Error loading data...");
+        return;
     }
+
 
     startGame();
 }

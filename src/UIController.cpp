@@ -24,9 +24,7 @@ int UIController::selectRole(const std::shared_ptr<RoleCard> &a, const std::shar
             throw std::exception();
         }
         std::cin >> r;
-        if (std::cin.fail() || std::cin.eof()) {
-            throw std::exception();
-        }
+
         if ((r >= 1) && (r <= 3)) {
             return r;
         }
@@ -83,9 +81,7 @@ int UIController::getChoice(int range, int lower) {
             throw std::exception();
         }
         std::cin >> r;
-        if (std::cin.fail() || std::cin.eof()) {
-            throw std::exception();
-        }
+
         if ((r >= lower) && (r <= range)) {
             return r;
         }
@@ -140,9 +136,7 @@ std::string UIController::getStringInput() {
     }
     std::string res;
     std::cin >> res;
-    if (std::cin.fail() || std::cin.eof()) {
-        throw std::exception();
-    }
+
     return res;
 }
 
@@ -153,9 +147,7 @@ int UIController::getIntInput() {
             throw std::exception();
         }
         std::cin >> r;
-        if (std::cin.fail() || std::cin.eof()) {
-            throw std::exception();
-        }
+
         if (std::cin.fail()) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

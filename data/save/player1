@@ -1,5 +1,5 @@
-If next card is club, enemy looses one life every move
-El Gringo
+If next card is heart, gets and extra life.
+Bart Cassidy
 3
-ifNextCardIs-club
-attack-1-target-none
+ifNextCardIs-heart
+addHealth-1-leader

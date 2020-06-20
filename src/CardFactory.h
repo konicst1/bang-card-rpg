@@ -35,12 +35,12 @@ public:
     /**
      * @returns List of PlayCards (as smart pointers) saved from previous game
      * */
-    std::vector<std::shared_ptr<PlayCard> > getSavedStack();
+    static std::vector<std::shared_ptr<PlayCard> > getSavedStack();
 
     /**
      * @returns Two players in vector loaded from previous saved game (with loaded card stack)
      * */
-    std::vector<std::shared_ptr<Player> > getSavedPlayers();
+    static std::vector<std::shared_ptr<Player> > getSavedPlayers();
 
 private:
 

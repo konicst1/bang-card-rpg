@@ -44,14 +44,14 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadPlayCards(std::vector<st
 
     /*Format of play card in the file
  * image path 0
- * name       1                 obsolete
-                             * type (attack/defense/donor)
-                             * attack - decreaseHealthLeader, decreaseManaLeader, decreaseHealthTarget, decreaseManaTarget
-                             * defense - healthDefensePower, manaDefensePower
+ * name       1
  * instructions 2
  * */
 
     for (auto a : data) {
+        if(a.size() < 2){
+            throw std::invalid_argument("Error loading data");
+        }
         std::vector<std::shared_ptr<Instruction>> ins;
 
         for (unsigned int i = 2; i < a.size(); i++) {
@@ -132,6 +132,10 @@ std::vector<std::shared_ptr<RoleCard> > CardFactory::loadRoleCards(std::vector<s
      * */
 
     for (auto a : data) {
+        if(a.size() < 3){
+            throw std::invalid_argument("Error loading data");
+        }
+
         std::vector<std::shared_ptr<Instruction>> ins;
         for (unsigned int i = 3; i < a.size(); i++) {
             ins.push_back(buildInstruction(a[i]));
@@ -157,6 +161,9 @@ std::vector<std::shared_ptr<PlayCard>> CardFactory::loadSavedPlayCards(std::vect
  * */
 
     for (auto a : data) {
+        if(a.size() < 3){
+            throw std::invalid_argument("Error loading data");
+        }
         std::vector<std::shared_ptr<Instruction>> ins;
 
         for (unsigned int i = 4; i < a.size(); i++) {
