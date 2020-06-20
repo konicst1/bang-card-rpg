@@ -21,7 +21,7 @@ public:
     /**
      * @returns int in range {1 - 3} that stands for index+1 of name of selected role offered to player
      * */
-    int selectRole(const std::shared_ptr<RoleCard>&  a, const std::shared_ptr<RoleCard>&  b, const std::shared_ptr<RoleCard>&  c);
+    static int selectRole(const std::shared_ptr<RoleCard>&  a, const std::shared_ptr<RoleCard>&  b, const std::shared_ptr<RoleCard>&  c);
 
     /** Clear the screen.*/
     static void clearScreen();
@@ -65,6 +65,11 @@ public:
 
     /** Show end game message and announce the winner.*/
     static void endGame(const std::string& winner);
+
+    /**
+     * End move. Present cards and wait for response.
+     * */
+    static void endMove(const std::shared_ptr<Player> &leader, const std::shared_ptr<Player> &target) ;
 
     /**Get string from input */
     static std::string getStringInput();

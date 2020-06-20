@@ -23,6 +23,7 @@ const std::shared_ptr<Player> &Move::getTarget() const {
 void Move::startMove(GameManager &m) {
     int continueFlag = 1;
     //perform players role special ability
+    UIController::println("Performing special ability.");
     for(const auto& instruction : leader->getRole()->getInstructions()){
         if(continueFlag){
             continueFlag = instruction->perform(m, leader, target);
@@ -43,19 +44,14 @@ void Move::startMove(GameManager &m) {
     leader->removeCard(cardNumber);
 
     continueFlag = 1;
-
+    UIController::println("Playing " + c->getName());
     for(const auto& instruction : c->getInstructions()){
         if(continueFlag){
             continueFlag = instruction->perform(m, leader, target);
         }
     }
 
-
-
-
-
     m.givePlayerCardFromStack(leader);
-
 
 }
 

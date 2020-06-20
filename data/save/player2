@@ -1,5 +1,3 @@
-If next card is club, looses one life every move.
-Slab the Killer
-7
-ifNextCardIs-club
-attack-1-leader-none
+Gets two extra cards every move if next card is diamond. If not, gets only one card.
+Lucky Duke
+4

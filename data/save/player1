@@ -1,4 +1,5 @@
-Gets one extra card every move.
-Calamity Janet
+If next card is club, enemy looses one life every move
+El Gringo
 3
-giveCard-leader
+ifNextCardIs-club
+attack-1-target-none

@@ -66,8 +66,10 @@ void GameManager::startGame() {
             }
         }
 
-
         move.startMove(*this);
+        if (!singlePlayer || !turn) {
+            UIController::endMove(move.getLeader(), move.getTarget());
+        }
 
         if ((playerA->getHealth() <= 0) || (playerB->getHealth() <= 0)) {
             break;
@@ -101,16 +103,24 @@ void GameManager::selectPlayersAndInitNewGame() {
     std::shuffle(roles.begin(), roles.end(), std::mt19937(std::random_device()()));
 
     UIController::clearScreen();
+    int roleA, roleB;
 
-    //give each player 3 roles to choose from
-    UIController::println("Player A, please, select your character:");
-    int roleA = ui.selectRole(roles[0],
-                              roles[1],
-                              roles[2]);
-    UIController::println("Player B, please, select your character:");
-    int roleB = ui.selectRole(roles[3],
-                              roles[4],
-                              roles[5]);
+        //give each player 3 roles to choose from
+        UIController::println("Player A, please, select your character:");
+    try {
+        roleA = ui.selectRole(roles[0],
+                                  roles[1],
+                                  roles[2]);
+    }catch (std::invalid_argument& e){
+        return;
+    }
+        UIController::println("Player B, please, select your character:");
+        roleB = ui.selectRole(roles[3],
+                                  roles[4],
+                                  roles[5]);
+
+
+
 
 
     Player a = Player(roles[roleA - 1]);
